@@ -1,0 +1,39 @@
+{
+  "name": "@sudopub/pub",
+  "version": "1.0.0",
+  "description": "An orchestration system that is suitable for any size, infrastructure, and preferences",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SudoPub/Pub.git"
+  },
+  "keywords": [
+    "Workflow",
+    "Orchestration",
+    "Marked"
+  ],
+  "author": "WMXPY",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SudoPub/Pub/issues"
+  },
+  "homepage": "https://sudo.pub",
+  "dependencies": {},
+  "devDependencies": {
+    "@sudoo/triforce": "^3.11.0"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/**/*.ts"
+    ],
+    "instrument": true,
+    "reporter": [
+      "json",
+      "text-summary"
+    ],
+    "report-dir": "coverage",
+    "sourceMap": true
+  }
+}
