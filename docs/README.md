@@ -1,5 +1,5 @@
 # Pub
 
-The ultimate distributed community &amp; forum that is actually useful.
+An orchestration system that is suitable for any size, infrastructure, and preferences
 
 Work in Progress.
