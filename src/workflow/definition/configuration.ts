@@ -1,14 +1,14 @@
 /**
  * @author WMXPY
  * @namespace Workflow_Definition
- * @description Workflow
+ * @description Configuration
  */
 
 import { PubEspial } from "../../espial/definition/espial";
 
-export type PubWorkflow = {
+export type PubWorkflowConfiguration = {
 
-    readonly workflowName: string;
+    readonly configurationName: string;
 
     readonly espials: PubEspial[];
 };
