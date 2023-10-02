@@ -11,4 +11,6 @@ export type PubWorkflowConfiguration = {
     readonly configurationName: string;
 
     readonly espials: PubEspial[];
+
+    readonly procedures: string[];
 };
