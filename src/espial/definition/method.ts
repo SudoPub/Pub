@@ -7,4 +7,6 @@
 export interface IEspialMethod {
 
     readonly methodName: string;
+
+    initialize(): Promise<boolean>;
 }

@@ -12,5 +12,10 @@ export class ExpressHttpEspialMethod implements IEspialMethod {
 
     private constructor() {
 
+        // Nothing here
+    }
+
+    public initialize(): Promise<boolean> {
+        throw new Error("Method not implemented.");
     }
 }
