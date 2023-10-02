@@ -1,10 +1,10 @@
 /**
  * @author WMXPY
  * @namespace Definition
- * @description Espial
+ * @description Configuration
  */
 
-export type PubEspial = {
+export type PubEspialConfiguration = {
 
     readonly methodName: string;
 

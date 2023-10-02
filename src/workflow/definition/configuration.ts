@@ -4,13 +4,14 @@
  * @description Configuration
  */
 
-import { PubEspial } from "../../espial/definition/espial";
+import { PubEspialConfiguration } from "../../espial/definition/configuration";
+import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
 
 export type PubWorkflowConfiguration = {
 
     readonly configurationName: string;
 
-    readonly espials: PubEspial[];
+    readonly espials: PubEspialConfiguration[];
 
-    readonly procedures: string[];
+    readonly procedures: PubProcedureConfiguration[];
 };
