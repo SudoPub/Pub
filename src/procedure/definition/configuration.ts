@@ -6,13 +6,6 @@
 
 import { Pattern } from "@sudoo/pattern";
 
-export enum PUB_PROCEDURE_TYPE {
-
-    START = "START",
-    DRIVER = "DRIVER",
-    END = "END",
-}
-
 export type PubProcedureConfigurationNext = {
 
     readonly procedureName: string;
@@ -22,24 +15,45 @@ export type PubProcedureConfigurationNext = {
     readonly mapping: Record<string, string>;
 };
 
+export enum PUB_PROCEDURE_TYPE {
+
+    START = "START",
+    DRIVER = "DRIVER",
+    END = "END",
+}
+
 export type PubProcedureConfiguration =
-    | {
+    & PubProcedureConfigurationCommon
+    & PubProcedureConfigurationSwitch;
 
-        readonly type: PUB_PROCEDURE_TYPE.START;
-    }
-    | {
+export type PubProcedureConfigurationCommon = {
 
-        readonly type: PUB_PROCEDURE_TYPE.DRIVER;
-        readonly procedureName: string;
+    readonly procedureName: string;
+};
 
-        readonly driverName: string;
+export type PubProcedureConfigurationSwitch =
+    | PubProcedureConfigurationStart
+    | PubProcedureConfigurationDriver
+    | PubProcedureConfigurationEnd;
 
-        readonly parameterPatterns: Record<string, Pattern>;
-        readonly outcomePatterns: Record<string, Pattern>;
+export type PubProcedureConfigurationStart = {
 
-        readonly nextProcedures: PubProcedureConfigurationNext[];
-    }
-    | {
+    readonly type: PUB_PROCEDURE_TYPE.START;
+};
 
-        readonly type: PUB_PROCEDURE_TYPE.END;
-    };
+export type PubProcedureConfigurationDriver = {
+
+    readonly type: PUB_PROCEDURE_TYPE.DRIVER;
+
+    readonly driverName: string;
+
+    readonly parameterPatterns: Record<string, Pattern>;
+    readonly outcomePatterns: Record<string, Pattern>;
+
+    readonly nextProcedures: PubProcedureConfigurationNext[];
+};
+
+export type PubProcedureConfigurationEnd = {
+
+    readonly type: PUB_PROCEDURE_TYPE.END;
+};
