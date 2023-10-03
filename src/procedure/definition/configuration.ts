@@ -17,7 +17,7 @@ export type PubProcedureConfigurationNext = {
 
 export enum PUB_PROCEDURE_TYPE {
 
-    START = "START",
+    ESPIAL = "ESPIAL",
     DRIVER = "DRIVER",
     END = "END",
 }
@@ -32,13 +32,13 @@ export type PubProcedureConfigurationCommon = {
 };
 
 export type PubProcedureConfigurationSwitch =
-    | PubProcedureConfigurationStart
+    | PubProcedureConfigurationEspial
     | PubProcedureConfigurationDriver
     | PubProcedureConfigurationEnd;
 
-export type PubProcedureConfigurationStart = {
+export type PubProcedureConfigurationEspial = {
 
-    readonly type: PUB_PROCEDURE_TYPE.START;
+    readonly type: PUB_PROCEDURE_TYPE.ESPIAL;
 };
 
 export type PubProcedureConfigurationDriver = {
