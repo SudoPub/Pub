@@ -5,22 +5,14 @@
  */
 
 import { PubWorkflowConfiguration } from "./configuration";
+import { PubWorkflowRecordMappingElement } from "./record-mapping";
 
-export enum PUB_WORKFLOW_RECORD_MAPPING_TYPE {
-
-    ESPIAL = "ESPIAL",
-    PROCEDURE = "PROCEDURE",
-}
-
-export type PubWorkflowRecordMappingElement = {
-
-    readonly type: PUB_WORKFLOW_RECORD_MAPPING_TYPE;
-    readonly procedureIdentifierNameMap: Record<string, string>;
-};
+export type PubWorkflowRecordOutcome = Record<string, any>;
 
 export type PubWorkflowRecord = {
 
     readonly configuration: PubWorkflowConfiguration;
 
-    readonly mapping: PubWorkflowRecordMapping;
+    readonly identifierMapping: Record<string, PubWorkflowRecordMappingElement>;
+    readonly outcomeMapping: Record<string, PubWorkflowRecordOutcome>;
 };
