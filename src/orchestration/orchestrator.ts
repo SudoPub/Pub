@@ -4,6 +4,8 @@
  * @description Orchestrator
  */
 
+import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
+import { PubExecuter } from "./execute/executer";
 import { OrchestrationResourceManager } from "./resource/manager";
 
 export class PubOrchestrator {
@@ -30,5 +32,12 @@ export class PubOrchestrator {
     ) {
 
         this._resourceManager = resourceManager;
+    }
+
+    public createExecuter(
+        configuration: PubWorkflowConfiguration,
+    ): PubExecuter {
+
+        return new PubExecuter(configuration, this._resourceManager);
     }
 }
