@@ -38,6 +38,6 @@ export class PubOrchestrator {
         configuration: PubWorkflowConfiguration,
     ): PubExecuter {
 
-        return new PubExecuter(configuration, this._resourceManager);
+        return PubExecuter.create(configuration, this._resourceManager);
     }
 }

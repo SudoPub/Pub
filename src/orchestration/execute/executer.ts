@@ -5,14 +5,24 @@
  */
 
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
+import { PubWorkflowRecord } from "../../workflow/definition/record";
+import { enrichWorkflowConfiguration } from "../../workflow/record/enrich";
 import { OrchestrationResourceManager } from "../resource/manager";
 
 export class PubExecuter {
 
+    public static create(
+        configuration: PubWorkflowConfiguration,
+        resourceManager: OrchestrationResourceManager,
+    ): PubExecuter {
+
+        return new PubExecuter(configuration, resourceManager);
+    }
+
     private readonly _resourceManager: OrchestrationResourceManager;
     private readonly _configuration: PubWorkflowConfiguration;
 
-    public constructor(
+    private constructor(
         configuration: PubWorkflowConfiguration,
         resourceManager: OrchestrationResourceManager,
     ) {
@@ -21,8 +31,10 @@ export class PubExecuter {
         this._resourceManager = resourceManager;
     }
 
-    public execute(): Promise<boolean> {
+    public async execute(): Promise<PubWorkflowRecord> {
 
-        return Promise.resolve(true);
+        const enriched: PubWorkflowRecord = enrichWorkflowConfiguration(this._configuration);
+
+        return enriched;
     }
 }
