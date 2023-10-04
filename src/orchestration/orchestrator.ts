@@ -4,14 +4,31 @@
  * @description Orchestrator
  */
 
-import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
+import { OrchestrationResourceManager } from "./resource/manager";
 
 export class PubOrchestrator {
 
-    private readonly _configuration: PubWorkflowConfiguration;
+    public static fromScratch(): PubOrchestrator {
 
-    public constructor(configuration: PubWorkflowConfiguration) {
+        const resourceManager: OrchestrationResourceManager =
+            OrchestrationResourceManager.fromScratch();
 
-        this._configuration = configuration;
+        return new PubOrchestrator(resourceManager);
+    }
+
+    public static fromResourceManager(
+        resourceManager: OrchestrationResourceManager,
+    ): PubOrchestrator {
+
+        return new PubOrchestrator(resourceManager);
+    }
+
+    private readonly _resourceManager: OrchestrationResourceManager;
+
+    private constructor(
+        resourceManager: OrchestrationResourceManager
+    ) {
+
+        this._resourceManager = resourceManager;
     }
 }
