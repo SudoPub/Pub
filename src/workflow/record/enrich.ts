@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Record
+ * @namespace Workflow_Record
  * @description Enrich
  */
 

@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Workflow
+ * @namespace Workflow_Workflow
  * @description Validate
  */
 
