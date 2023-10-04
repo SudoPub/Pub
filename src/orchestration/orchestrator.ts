@@ -1,12 +1,12 @@
 /**
  * @author WMXPY
- * @namespace Workflow
- * @description Workflow
+ * @namespace Orchestration
+ * @description Orchestrator
  */
 
-import { PubWorkflowConfiguration } from "./definition/configuration";
+import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
 
-export class PubWorkflow {
+export class PubOrchestrator {
 
     private readonly _configuration: PubWorkflowConfiguration;
 
