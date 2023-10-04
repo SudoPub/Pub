@@ -16,7 +16,7 @@ export type PubWorkflowRecordMappingElement =
 
 export type PubWorkflowRecordMappingElementCommon = {
 
-    readonly procedureName: string;
+    readonly identifier: string;
 };
 
 export type PubWorkflowRecordMappingElementSwitch =
