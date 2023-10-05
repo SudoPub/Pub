@@ -38,5 +38,7 @@ export const enrichWorkflowConfiguration = (configuration: PubWorkflowConfigurat
     return {
 
         configuration,
+
+        ticks: [],
     };
 };
