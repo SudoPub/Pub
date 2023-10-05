@@ -5,7 +5,7 @@
  */
 
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
-import { PubWorkflowRecord } from "../../workflow/definition/record";
+import { PubWorkflowRecord } from "../../record/definition/record";
 import { enrichWorkflowConfiguration } from "../../workflow/record/enrich";
 import { OrchestrationResourceManager } from "../resource/manager";
 
