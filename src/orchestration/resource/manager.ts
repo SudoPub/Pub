@@ -4,8 +4,8 @@
  * @description Manager
  */
 
-import { IEspialMethod } from "../../espial/definition/method";
-import { IProcedureDriver } from "../../procedure/definition/driver";
+import { BaseEspialResolver } from "./espial-resolver";
+import { BaseProcedureResolver } from "./procedure-resolver";
 
 export class OrchestrationResourceManager {
 
@@ -14,12 +14,24 @@ export class OrchestrationResourceManager {
         return new OrchestrationResourceManager();
     }
 
-    private readonly _espialMethods: Map<string, IEspialMethod>;
-    private readonly _procedureDrivers: Map<string, IProcedureDriver>;
+    private readonly _espialResolvers: Set<BaseEspialResolver>;
+    private readonly _procedureResolvers: Set<BaseProcedureResolver>;
 
     private constructor() {
 
-        this._espialMethods = new Map<string, IEspialMethod>();
-        this._procedureDrivers = new Map<string, IProcedureDriver>();
+        this._espialResolvers = new Set<BaseEspialResolver>();
+        this._procedureResolvers = new Set<BaseProcedureResolver>();
+    }
+
+    public addEspialResolver(resolver: BaseEspialResolver): this {
+
+        this._espialResolvers.add(resolver);
+        return this;
+    }
+
+    public addProcedureResolver(resolver: BaseProcedureResolver): this {
+
+        this._procedureResolvers.add(resolver);
+        return this;
     }
 }
