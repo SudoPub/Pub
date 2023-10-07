@@ -10,7 +10,7 @@ export type PubWorkflowRecordTick =
 
 export enum PUB_WORKFLOW_RECORD_TICK_TYPE {
 
-    ESPIAL = "ESPIAL",
+    ESPIAL_TRIGGERED = "ESPIAL_TRIGGERED",
 }
 
 export type PubWorkflowRecordTickCommon = {
@@ -20,10 +20,10 @@ export type PubWorkflowRecordTickCommon = {
 };
 
 export type PubWorkflowRecordTickSwitch =
-    | PubWorkflowRecordTickEspial;
+    | PubWorkflowRecordTickEspialTriggered;
 
-export type PubWorkflowRecordTickEspial = {
+export type PubWorkflowRecordTickEspialTriggered = {
 
-    readonly type: PUB_WORKFLOW_RECORD_TICK_TYPE.ESPIAL;
+    readonly type: PUB_WORKFLOW_RECORD_TICK_TYPE.ESPIAL_TRIGGERED;
     readonly espial: string;
 };

@@ -5,11 +5,11 @@
  */
 
 import { UUIDVersion1 } from "@sudoo/uuid";
+import { PubRecord } from "../../record/definition/record";
 import { PubWorkflowConfiguration } from "../definition/configuration";
-import { PubWorkflowRecord } from "../../record/definition/record";
 import { PUB_WORKFLOW_RECORD_MAPPING_TYPE, PubWorkflowRecordMappingElement } from "../definition/record-mapping";
 
-export const enrichWorkflowConfiguration = (configuration: PubWorkflowConfiguration): PubWorkflowRecord => {
+export const enrichWorkflowConfiguration = (configuration: PubWorkflowConfiguration): PubRecord => {
 
     const identifierMapping: Record<string, PubWorkflowRecordMappingElement> = {};
 
