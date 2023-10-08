@@ -7,6 +7,7 @@
 import { PubRecord } from "../../record/definition/record";
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
 import { enrichWorkflowConfiguration } from "../../workflow/record/enrich";
+import { PubExecuteParameters } from "../definition/execute";
 import { OrchestrationResourceManager } from "../resource/manager";
 
 export class PubExecuter {
@@ -31,7 +32,9 @@ export class PubExecuter {
         this._resourceManager = resourceManager;
     }
 
-    public async execute(): Promise<PubRecord> {
+    public async execute(
+        parameters: PubExecuteParameters,
+    ): Promise<PubRecord> {
 
         const enriched: PubRecord = enrichWorkflowConfiguration(this._configuration);
 
