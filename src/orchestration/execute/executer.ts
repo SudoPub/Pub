@@ -39,11 +39,12 @@ export class PubExecuter {
         const record: PubRecord =
             PubRecord.fromWorkflowConfiguration(this._configuration);
 
-        record.addTick({
-
-            type: PUB_WORKFLOW_RECORD_TICK_TYPE.EXECUTE_PARAMETERS,
-            parameters,
-        });
+        record.addTick(
+            PUB_WORKFLOW_RECORD_TICK_TYPE.EXECUTE_PARAMETERS,
+            {
+                parameters,
+            },
+        );
 
         return record;
     }
