@@ -4,7 +4,7 @@
  * @description Serialize
  */
 
-import { PubRecord } from "../definition/record";
+import { PubRecord } from "../record";
 
 export const serializePubRecord = (record: PubRecord): string => {
 

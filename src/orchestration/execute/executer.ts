@@ -4,9 +4,8 @@
  * @description Executer
  */
 
-import { PubRecord } from "../../record/definition/record";
+import { PubRecord } from "../../record/record";
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
-import { enrichWorkflowConfiguration } from "../../workflow/record/enrich";
 import { PubExecuteParameters } from "../definition/execute";
 import { OrchestrationResourceManager } from "../resource/manager";
 
@@ -36,8 +35,9 @@ export class PubExecuter {
         parameters: PubExecuteParameters,
     ): Promise<PubRecord> {
 
-        const enriched: PubRecord = enrichWorkflowConfiguration(this._configuration);
+        const record: PubRecord =
+            PubRecord.fromWorkflowConfiguration(this._configuration);
 
-        return enriched;
+        return record;
     }
 }

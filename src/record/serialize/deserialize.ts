@@ -4,7 +4,7 @@
  * @description Deserialize
  */
 
-import { PubRecord } from "../definition/record";
+import { PubRecord } from "../record";
 
 export const deserializePubRecord = (rawRecord: string): PubRecord => {
 

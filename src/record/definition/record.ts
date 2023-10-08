@@ -7,7 +7,7 @@
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
 import { PubWorkflowRecordTick } from "./tick";
 
-export type PubRecord = {
+export type PubSerializedRecord = {
 
     readonly configuration: PubWorkflowConfiguration;
 
