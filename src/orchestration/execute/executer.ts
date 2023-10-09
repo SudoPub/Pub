@@ -5,6 +5,7 @@
  */
 
 import { Verifier } from "@sudoo/verify";
+import { PubExecuteVerifyInvalidParametersError } from "../../error/execute/verify/invalid-parameters";
 import { PUB_WORKFLOW_RECORD_TICK_TYPE } from "../../record/definition/tick";
 import { PubRecord } from "../../record/record";
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
@@ -40,7 +41,7 @@ export class PubExecuter {
         const verifyResult: boolean = this.verifyParameters(parameters);
 
         if (!verifyResult) {
-            throw new Error('[Sudoo-Orchestration] Invalid Parameters');
+            throw PubExecuteVerifyInvalidParametersError.create();
         }
 
         return await this.executeWithoutVerify(parameters);
