@@ -1,16 +1,16 @@
 /**
  * @author WMXPY
- * @namespace Orchestration_Execute
+ * @namespace Execute
  * @description Executer
  */
 
 import { Verifier } from "@sudoo/verify";
-import { PubExecuteVerifyInvalidParametersError } from "../../error/execute/verify/invalid-parameters";
-import { PUB_WORKFLOW_RECORD_TICK_TYPE } from "../../record/definition/tick";
-import { PubRecord } from "../../record/record";
-import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
-import { PubExecuteParameters } from "../definition/execute";
-import { OrchestrationResourceManager } from "../resource/manager";
+import { PubExecuteVerifyInvalidParametersError } from "../error/execute/verify/invalid-parameters";
+import { PUB_WORKFLOW_RECORD_TICK_TYPE } from "../record/definition/tick";
+import { PubRecord } from "../record/record";
+import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
+import { PubExecuteParameters } from "../orchestration/definition/execute";
+import { OrchestrationResourceManager } from "../orchestration/resource/manager";
 
 export class PubExecuter {
 
@@ -41,7 +41,10 @@ export class PubExecuter {
         const verifyResult: boolean = this.verifyParameters(parameters);
 
         if (!verifyResult) {
-            throw PubExecuteVerifyInvalidParametersError.create();
+            throw PubExecuteVerifyInvalidParametersError.create(
+                this._configuration.parametersPattern,
+                parameters,
+            );
         }
 
         return await this.executeWithoutVerify(parameters);
@@ -78,5 +81,4 @@ export class PubExecuter {
 
         return true;
     }
-
 }
