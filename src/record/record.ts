@@ -18,6 +18,8 @@ export class PubRecord {
     }
 
     private readonly _configuration: PubWorkflowConfiguration;
+
+    private readonly _identifier: string;
     private readonly _ticks: Array<PubWorkflowRecordTick<PUB_WORKFLOW_RECORD_TICK_TYPE>>;
 
     private constructor(
@@ -25,13 +27,17 @@ export class PubRecord {
     ) {
 
         this._configuration = configuration;
+
+        this._identifier = this._generateIdentifier();
         this._ticks = [];
     }
 
     public get configuration(): PubWorkflowConfiguration {
         return this._configuration;
     }
-
+    public get identifier(): string {
+        return this._identifier;
+    }
     public get ticks(): Array<PubWorkflowRecordTick<PUB_WORKFLOW_RECORD_TICK_TYPE>> {
         return this._ticks;
     }
@@ -43,7 +49,7 @@ export class PubRecord {
 
         const enrichedTick: PubWorkflowRecordTick<T> = {
 
-            identifier: UUIDVersion1.generateString(),
+            identifier: this._generateIdentifier(),
             type,
 
             payload: tickPayload,
@@ -53,5 +59,10 @@ export class PubRecord {
 
         this._ticks.push(enrichedTick);
         return this;
+    }
+
+    private _generateIdentifier(): string {
+
+        return UUIDVersion1.generateString();
     }
 }

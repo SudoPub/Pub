@@ -4,6 +4,7 @@
  * @description Executer
  */
 
+import { Verifier } from "@sudoo/verify";
 import { PUB_WORKFLOW_RECORD_TICK_TYPE } from "../../record/definition/tick";
 import { PubRecord } from "../../record/record";
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
@@ -36,6 +37,19 @@ export class PubExecuter {
         parameters: PubExecuteParameters,
     ): Promise<PubRecord> {
 
+        const verifyResult: boolean = this.verifyParameters(parameters);
+
+        if (!verifyResult) {
+            throw new Error('[Sudoo-Orchestration] Invalid Parameters');
+        }
+
+        return await this.executeWithoutVerify(parameters);
+    }
+
+    public async executeWithoutVerify(
+        parameters: PubExecuteParameters,
+    ): Promise<PubRecord> {
+
         const record: PubRecord =
             PubRecord.fromWorkflowConfiguration(this._configuration);
 
@@ -48,4 +62,20 @@ export class PubExecuter {
 
         return record;
     }
+
+    public verifyParameters(
+        parameters: PubExecuteParameters,
+    ): boolean {
+
+        const verifier: Verifier = Verifier.create(
+            this._configuration.parametersPattern,
+        );
+
+        if (!verifier.verify(parameters)) {
+            return false;
+        }
+
+        return true;
+    }
+
 }
