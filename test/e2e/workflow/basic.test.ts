@@ -6,8 +6,8 @@
  */
 
 import { expect } from 'chai';
+import { PubExecuter } from '../../../src/execute/executer';
 import { createMockResourceManager } from '../../mock/resource-manager';
-import { PubExecuter } from '../../../src/orchestration/execute/executer';
 
 describe('Given (Workflow Basic) Use Case', (): void => {
 
