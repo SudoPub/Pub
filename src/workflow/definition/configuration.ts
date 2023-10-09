@@ -5,7 +5,7 @@
  */
 
 import { Pattern } from "@sudoo/pattern";
-import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 
 export type PubWorkflowConfiguration = {
 
@@ -13,5 +13,5 @@ export type PubWorkflowConfiguration = {
     readonly configurationDescription?: string;
 
     readonly parametersPattern: Pattern;
-    readonly procedures: PubProcedureConfiguration[];
+    readonly procedures: Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>>;
 };
