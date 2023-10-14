@@ -5,6 +5,7 @@
  */
 
 import { UUIDVersion1 } from "@sudoo/uuid";
+import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
 import { PubRecordProjection } from "./definition/projection";
 import { PubRecordRealizationMap } from "./definition/realization";
@@ -18,7 +19,7 @@ export class PubRecord {
         return new PubRecord(configuration);
     }
 
-    private readonly _configuration: PubWorkflowConfiguration;
+    private readonly _cachedConfiguration: PubCachedWorkflowConfiguration;
 
     private readonly _identifier: string;
 
@@ -29,7 +30,7 @@ export class PubRecord {
         configuration: PubWorkflowConfiguration
     ) {
 
-        this._configuration = configuration;
+        this._cachedConfiguration = PubCachedWorkflowConfiguration.fromWorkflowConfiguration(configuration);
 
         this._identifier = this._generateIdentifier();
 
