@@ -4,15 +4,14 @@
  * @description Executer
  */
 
+import { createStrictMapPattern } from "@sudoo/pattern";
 import { Verifier } from "@sudoo/verify";
 import { PubExecuteVerifyInvalidParametersError } from "../error/execute/verify/invalid-parameters";
-import { PUB_WORKFLOW_RECORD_TICK_TYPE } from "../record/definition/tick";
-import { PubRecord } from "../record/record";
-import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
 import { PubExecuteParameters } from "../orchestration/definition/execute";
 import { OrchestrationResourceManager } from "../orchestration/resource/manager";
+import { PubRecord } from "../record/record";
+import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
 import { resumeExecute } from "./resume-execute";
-import { createStrictMapPattern } from "@sudoo/pattern";
 
 export class PubExecuter {
 
@@ -56,18 +55,11 @@ export class PubExecuter {
     }
 
     public async executeWithoutVerify(
-        parameters: PubExecuteParameters,
+        _parameters: PubExecuteParameters,
     ): Promise<PubRecord> {
 
         const record: PubRecord =
             PubRecord.fromWorkflowConfiguration(this._configuration);
-
-        record.addTick(
-            PUB_WORKFLOW_RECORD_TICK_TYPE.EXECUTE_PARAMETERS,
-            {
-                parameters,
-            },
-        );
 
         return await resumeExecute(record, this._resourceManager);
     }

@@ -1,10 +1,10 @@
 /**
  * @author WMXPY
- * @namespace Definition
+ * @namespace Record_Definition
  * @description Projection
  */
 
-export type PubProjection = {
+export type PubRecordProjection = {
 
     readonly triggerConnections: string[];
     readonly iteration?: number;

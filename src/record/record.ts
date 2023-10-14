@@ -5,8 +5,9 @@
  */
 
 import { UUIDVersion1 } from "@sudoo/uuid";
-import { PubProjection } from "../projection/definition/projection";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
+import { PubRecordProjection } from "./definition/projection";
+import { PubRecordRealizationMap } from "./definition/realization";
 
 export class PubRecord {
 
@@ -21,7 +22,8 @@ export class PubRecord {
 
     private readonly _identifier: string;
 
-    private readonly _projections: PubProjection[];
+    private readonly _realizationMap: PubRecordRealizationMap;
+    private readonly _projections: PubRecordProjection[];
 
     private constructor(
         configuration: PubWorkflowConfiguration
@@ -31,6 +33,7 @@ export class PubRecord {
 
         this._identifier = this._generateIdentifier();
 
+        this._realizationMap = new Map();
         this._projections = [];
     }
 
