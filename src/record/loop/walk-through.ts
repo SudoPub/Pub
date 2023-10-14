@@ -4,10 +4,10 @@
  * @description Walk Through
  */
 
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PUB_WORKFLOW_RECORD_TICK_TYPE, PubWorkflowRecordTick, PubWorkflowRecordTickExecuteParameters } from "../definition/tick";
 import { PubRecord } from "../record";
 import { PubRecordSnapshot } from "../snapshot/snapshot";
+import { sortPubTicks } from "../util/sort-tick";
 
 export const walkThroughRecord = (
     record: PubRecord,
@@ -16,24 +16,7 @@ export const walkThroughRecord = (
     const snapshot: PubRecordSnapshot = PubRecordSnapshot.fromScratch();
 
     const ticks: Array<PubWorkflowRecordTick<PUB_WORKFLOW_RECORD_TICK_TYPE>>
-        = record.ticks.sort(
-            (
-                a: PubWorkflowRecordTick<PUB_WORKFLOW_RECORD_TICK_TYPE>,
-                b: PubWorkflowRecordTick<PUB_WORKFLOW_RECORD_TICK_TYPE>,
-            ) => {
-
-                const aTimestamp: number = a.timestamp.getTime();
-                const bTimestamp: number = b.timestamp.getTime();
-
-                if (aTimestamp > bTimestamp) {
-                    return 1;
-                }
-                if (aTimestamp < bTimestamp) {
-                    return -1;
-                }
-                return 0;
-            },
-        );
+        = sortPubTicks(record.ticks);
 
     for (const tick of ticks) {
 
@@ -44,23 +27,10 @@ export const walkThroughRecord = (
                 const payload: PubWorkflowRecordTickExecuteParameters
                     = tick.payload as PubWorkflowRecordTickExecuteParameters;
 
-                snapshot.setCurrentParameters(payload.parameters);
+                snapshot.setStartParameters(payload.parameters);
                 break;
             }
         }
-    }
-
-    if (snapshot.nextProcedure === null) {
-
-        const firstProcedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE> | null
-            = null;
-
-        if (!firstProcedure) {
-
-            throw new Error('[Sudoo-Workflow] No Start Procedure');
-        }
-
-        snapshot.setNextProcedure(firstProcedure);
     }
 
     return snapshot;

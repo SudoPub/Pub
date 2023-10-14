@@ -12,6 +12,6 @@ export type PubWorkflowConfiguration = {
     readonly configurationName: string;
     readonly configurationDescription?: string;
 
-    readonly startParametersPattern: Pattern;
+    readonly startParametersPattern: Record<string, Pattern>;
     readonly procedures: Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>>;
 };
