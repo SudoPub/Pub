@@ -13,6 +13,8 @@ export enum PUB_CONNECTION_TYPE {
 
 export type PubConnectionConfiguration<T extends PUB_CONNECTION_TYPE> = {
 
+    readonly identifier: string;
+
     readonly triggerProcedure: PubConnectionProcedureReference<
         PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE
     >;

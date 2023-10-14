@@ -37,11 +37,14 @@ export class PubRecord {
         this._projections = [];
     }
 
-    public get configuration(): PubWorkflowConfiguration {
-        return this._configuration;
-    }
     public get identifier(): string {
         return this._identifier;
+    }
+    public get realizationMap(): PubRecordRealizationMap {
+        return this._realizationMap;
+    }
+    public get projections(): PubRecordProjection[] {
+        return this._projections;
     }
 
     private _generateIdentifier(): string {
