@@ -12,6 +12,7 @@ import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
 import { PubExecuteParameters } from "../orchestration/definition/execute";
 import { OrchestrationResourceManager } from "../orchestration/resource/manager";
 import { resumeExecute } from "./resume-execute";
+import { createStrictMapPattern } from "@sudoo/pattern";
 
 export class PubExecuter {
 
@@ -44,7 +45,9 @@ export class PubExecuter {
         if (!verifyResult) {
 
             throw PubExecuteVerifyInvalidParametersError.create(
-                this._configuration.startParametersPattern,
+                createStrictMapPattern(
+                    this._configuration.startParametersPattern,
+                ),
                 parameters,
             );
         }
@@ -74,7 +77,9 @@ export class PubExecuter {
     ): boolean {
 
         const verifier: Verifier = Verifier.create(
-            this._configuration.startParametersPattern,
+            createStrictMapPattern(
+                this._configuration.startParametersPattern,
+            ),
         );
 
         if (!verifier.verify(parameters)) {
