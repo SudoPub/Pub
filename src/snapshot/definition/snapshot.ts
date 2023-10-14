@@ -8,7 +8,14 @@ import { PubWorkflowConfiguration } from "../../workflow/definition/configuratio
 
 export type PubSnapshot = {
 
-    readonly _workflowConfiguration: PubWorkflowConfiguration;
+    readonly workflowConfiguration: PubWorkflowConfiguration;
 
     readonly startParameters: Record<string, any>;
+
+    readonly pendingProcedures: PubSnapshotPendingProcedure[];
+};
+
+export type PubSnapshotPendingProcedure = {
+
+    readonly identifier: string;
 };
