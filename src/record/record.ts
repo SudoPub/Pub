@@ -7,6 +7,7 @@
 import { UUIDVersion1 } from "@sudoo/uuid";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
 import { PUB_WORKFLOW_RECORD_TICK_TYPE, PubWorkflowRecordTick, PubWorkflowRecordTickPayloadSwitch } from "./definition/tick";
+import { PubProjection } from "../projection/definition/projection";
 
 export class PubRecord {
 
@@ -20,6 +21,8 @@ export class PubRecord {
     private readonly _configuration: PubWorkflowConfiguration;
 
     private readonly _identifier: string;
+
+    private readonly _projections: PubProjection[];
     private readonly _ticks: Array<PubWorkflowRecordTick<PUB_WORKFLOW_RECORD_TICK_TYPE>>;
 
     private constructor(
@@ -29,6 +32,8 @@ export class PubRecord {
         this._configuration = configuration;
 
         this._identifier = this._generateIdentifier();
+
+        this._projections = [];
         this._ticks = [];
     }
 
