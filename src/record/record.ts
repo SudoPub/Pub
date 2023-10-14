@@ -38,6 +38,9 @@ export class PubRecord {
         this._projections = [];
     }
 
+    public get cachedConfiguration(): PubCachedWorkflowConfiguration {
+        return this._cachedConfiguration;
+    }
     public get identifier(): string {
         return this._identifier;
     }
