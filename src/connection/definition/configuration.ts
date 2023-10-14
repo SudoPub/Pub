@@ -4,6 +4,8 @@
  * @description Configuration
  */
 
+import { PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE, PubConnectionProcedureReference } from "./procedure-reference";
+
 export enum PUB_CONNECTION_TYPE {
 
     CONDITIONAL = "CONDITIONAL",
@@ -11,8 +13,8 @@ export enum PUB_CONNECTION_TYPE {
 
 export type PubConnectionConfiguration<T extends PUB_CONNECTION_TYPE> = {
 
-    readonly triggerProcedure: string;
-    readonly nextProcedure: string;
+    readonly triggerProcedure: PubConnectionProcedureReference<PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE>;
+    readonly nextProcedure: PubConnectionProcedureReference<PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE>;
 
     readonly parametersMapping: Record<string, string>;
 
