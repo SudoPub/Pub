@@ -8,7 +8,7 @@ import { PubExecuteConfigurationError } from "./configuration-error";
 
 export class PubExecuteConfigurationConnectionNotFoundError extends PubExecuteConfigurationError {
 
-    public static create(
+    public static withIdentifier(
         connectionIdentifier: string,
     ): PubExecuteConfigurationConnectionNotFoundError {
 
