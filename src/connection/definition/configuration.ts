@@ -8,6 +8,7 @@ import { PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE, PubConnectionProcedureReferenc
 
 export enum PUB_CONNECTION_TYPE {
 
+    DIRECT = "DIRECT",
     CONDITIONAL = "CONDITIONAL",
 }
 
@@ -30,8 +31,14 @@ export type PubConnectionConfiguration<T extends PUB_CONNECTION_TYPE> = {
 };
 
 export type PubConnectionConfigurationPayloadSwitch<T extends PUB_CONNECTION_TYPE> =
+    T extends PUB_CONNECTION_TYPE.DIRECT ? PubConnectionConfiguration_Direct :
     T extends PUB_CONNECTION_TYPE.CONDITIONAL ? PubConnectionConfiguration_Conditional :
     never;
+
+export type PubConnectionConfiguration_Direct = {
+
+    // No Payload
+};
 
 export type PubConnectionConfiguration_Conditional = {
 

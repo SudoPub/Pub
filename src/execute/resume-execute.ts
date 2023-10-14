@@ -5,8 +5,10 @@
  */
 
 import { PUB_CONNECTION_TYPE, PubConnectionConfiguration } from "../connection/definition/configuration";
+import { PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE, PubConnectionProcedureReference } from "../connection/definition/procedure-reference";
 import { PubExecuteConfigurationConnectionNotFoundError } from "../error/execute/configuration/connection-not-found";
 import { OrchestrationResourceManager } from "../orchestration/resource/manager";
+import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../procedure/definition/configuration";
 import { PubRecordProjection } from "../record/definition/projection";
 import { PubRecord } from "../record/record";
 
@@ -17,11 +19,7 @@ export const resumeExecute = async (
 
     const projections: PubRecordProjection[] = record.projections;
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     for (const projection of projections) {
-
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const dependencyProcedures = [];
 
         const connections: Array<PubConnectionConfiguration<PUB_CONNECTION_TYPE>> =
             projection.triggerConnections.map((
@@ -37,7 +35,28 @@ export const resumeExecute = async (
                 return connection;
             });
 
-        console.log(connections);
+        const dependencyProcedures = connections
+            .filter((connection: PubConnectionConfiguration<PUB_CONNECTION_TYPE>) => connection.nextProcedure.type === PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE.PROCEDURE)
+            .map((connection: PubConnectionConfiguration<PUB_CONNECTION_TYPE>) => {
+
+                const nextProcedure: PubConnectionProcedureReference<
+                    PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE.PROCEDURE
+                > = connection.nextProcedure as PubConnectionProcedureReference<
+                    PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE.PROCEDURE
+                >;
+
+                const procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE> | null = record.cachedConfiguration.getProcedureByIdentifier(
+                    nextProcedure.payload.procedureIdentifier,
+                );
+
+                if (!procedure) {
+                    throw PubExecuteConfigurationConnectionNotFoundError.create(nextProcedure.payload.procedureIdentifier);
+                }
+
+                return procedure;
+            });
+
+        console.log(connections, dependencyProcedures);
     }
 
     return record;

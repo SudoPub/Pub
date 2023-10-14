@@ -30,7 +30,7 @@ export type PubConnectionProcedureReferencePayload_Start = {
 
 export type PubConnectionProcedureReferencePayload_Procedure = {
 
-    readonly procedureName: string;
+    readonly procedureIdentifier: string;
 };
 
 export type PubConnectionProcedureReferencePayload_End = {

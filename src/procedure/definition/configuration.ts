@@ -14,7 +14,7 @@ export enum PUB_PROCEDURE_TYPE {
 
 export type PubProcedureConfiguration<T extends PUB_PROCEDURE_TYPE> = {
 
-    readonly procedureName: string;
+    readonly identifier: string;
     readonly type: T;
 
     readonly payload: PubProcedureConfigurationPayloadSwitch<T>;

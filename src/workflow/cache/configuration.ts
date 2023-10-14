@@ -5,7 +5,7 @@
  */
 
 import { PUB_CONNECTION_TYPE, PubConnectionConfiguration } from "../../connection/definition/configuration";
-import { PubProcedureConfiguration, PUB_PROCEDURE_TYPE } from "../../procedure/definition/configuration";
+import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubWorkflowConfiguration } from "../definition/configuration";
 
 export class PubCachedWorkflowConfiguration {
@@ -42,21 +42,21 @@ export class PubCachedWorkflowConfiguration {
         return this._configuration;
     }
 
-    public getProcedureByProcedureName(
-        procedureName: string,
+    public getProcedureByIdentifier(
+        identifier: string,
     ): PubProcedureConfiguration<PUB_PROCEDURE_TYPE> | null {
 
-        if (!this._proceduresCache.has(procedureName)) {
+        if (!this._proceduresCache.has(identifier)) {
 
             for (const procedure of this._configuration.procedures) {
 
-                if (procedure.procedureName === procedureName) {
-                    this._proceduresCache.set(procedureName, procedure);
+                if (procedure.identifier === identifier) {
+                    this._proceduresCache.set(identifier, procedure);
                 }
             }
         }
 
-        return this._proceduresCache.get(procedureName) as PubProcedureConfiguration<PUB_PROCEDURE_TYPE> ?? null;
+        return this._proceduresCache.get(identifier) as PubProcedureConfiguration<PUB_PROCEDURE_TYPE> ?? null;
     }
 
     public getConnectionByIdentifier(
