@@ -5,9 +5,8 @@
  */
 
 import { UUIDVersion1 } from "@sudoo/uuid";
-import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
-import { PUB_WORKFLOW_RECORD_TICK_TYPE, PubWorkflowRecordTick, PubWorkflowRecordTickPayloadSwitch } from "./definition/tick";
 import { PubProjection } from "../projection/definition/projection";
+import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
 
 export class PubRecord {
 
@@ -23,7 +22,6 @@ export class PubRecord {
     private readonly _identifier: string;
 
     private readonly _projections: PubProjection[];
-    private readonly _ticks: Array<PubWorkflowRecordTick<PUB_WORKFLOW_RECORD_TICK_TYPE>>;
 
     private constructor(
         configuration: PubWorkflowConfiguration
@@ -34,7 +32,6 @@ export class PubRecord {
         this._identifier = this._generateIdentifier();
 
         this._projections = [];
-        this._ticks = [];
     }
 
     public get configuration(): PubWorkflowConfiguration {
@@ -42,28 +39,6 @@ export class PubRecord {
     }
     public get identifier(): string {
         return this._identifier;
-    }
-    public get ticks(): Array<PubWorkflowRecordTick<PUB_WORKFLOW_RECORD_TICK_TYPE>> {
-        return this._ticks;
-    }
-
-    public addTick<T extends PUB_WORKFLOW_RECORD_TICK_TYPE>(
-        type: T,
-        tickPayload: PubWorkflowRecordTickPayloadSwitch<T>,
-    ): this {
-
-        const enrichedTick: PubWorkflowRecordTick<T> = {
-
-            identifier: this._generateIdentifier(),
-            type,
-
-            payload: tickPayload,
-
-            timestamp: new Date(),
-        };
-
-        this._ticks.push(enrichedTick);
-        return this;
     }
 
     private _generateIdentifier(): string {
