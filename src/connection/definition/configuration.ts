@@ -13,8 +13,12 @@ export enum PUB_CONNECTION_TYPE {
 
 export type PubConnectionConfiguration<T extends PUB_CONNECTION_TYPE> = {
 
-    readonly triggerProcedure: PubConnectionProcedureReference<PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE>;
-    readonly nextProcedure: PubConnectionProcedureReference<PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE>;
+    readonly triggerProcedure: PubConnectionProcedureReference<
+        PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE
+    >;
+    readonly nextProcedure: PubConnectionProcedureReference<
+        PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE
+    >;
 
     readonly parametersMapping: Record<string, string>;
 
