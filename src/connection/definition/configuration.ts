@@ -25,7 +25,6 @@ export type PubConnectionConfigurationPayloadSwitch<T extends PUB_CONNECTION_TYP
     T extends PUB_CONNECTION_TYPE.CONDITIONAL ? PubConnectionConfiguration_Conditional :
     never;
 
-
 export type PubConnectionConfiguration_Conditional = {
 
     // No Payload
