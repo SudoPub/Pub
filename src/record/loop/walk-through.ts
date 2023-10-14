@@ -5,7 +5,6 @@
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { findStartProcedure } from "../../workflow/configuration/find-start";
 import { PUB_WORKFLOW_RECORD_TICK_TYPE, PubWorkflowRecordTick, PubWorkflowRecordTickExecuteParameters } from "../definition/tick";
 import { PubRecord } from "../record";
 import { PubRecordSnapshot } from "../snapshot/snapshot";
@@ -53,8 +52,8 @@ export const walkThroughRecord = (
 
     if (snapshot.nextProcedure === null) {
 
-        const firstProcedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START> | null
-            = findStartProcedure(record.configuration);
+        const firstProcedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE> | null
+            = null;
 
         if (!firstProcedure) {
 

@@ -44,7 +44,7 @@ export class PubExecuter {
         if (!verifyResult) {
 
             throw PubExecuteVerifyInvalidParametersError.create(
-                this._configuration.parametersPattern,
+                this._configuration.startParametersPattern,
                 parameters,
             );
         }
@@ -74,7 +74,7 @@ export class PubExecuter {
     ): boolean {
 
         const verifier: Verifier = Verifier.create(
-            this._configuration.parametersPattern,
+            this._configuration.startParametersPattern,
         );
 
         if (!verifier.verify(parameters)) {
