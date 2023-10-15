@@ -7,10 +7,10 @@
 import { createStrictMapPattern } from "@sudoo/pattern";
 import { Verifier } from "@sudoo/verify";
 import { PubExecuteVerifyInvalidParametersError } from "../error/execute/verify/invalid-parameters";
-import { PubExecuteParameters } from "../orchestration/definition/execute";
 import { OrchestrationResourceManager } from "../orchestration/resource/manager";
 import { PubRecord } from "../record/record";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
+import { PubExecuteParameters } from "./definition/execute";
 import { resumeExecute } from "./resume-execute";
 
 export class PubExecuter {

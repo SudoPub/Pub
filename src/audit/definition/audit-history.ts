@@ -4,7 +4,7 @@
  * @description Audit History
  */
 
-import { PubExecuteParameters } from "../../orchestration/definition/execute";
+import { PubExecuteParameters } from "../../execute/definition/execute";
 
 export enum PUB_WORKFLOW_RECORD_TICK_TYPE {
 
