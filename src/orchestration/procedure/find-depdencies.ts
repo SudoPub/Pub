@@ -16,10 +16,13 @@ export const findProcedureDependencies = (
 ): Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> => {
 
     const dependencyProcedures: Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> =
-        connections
-            .filter((connection: PubConnectionConfiguration<PUB_CONNECTION_TYPE>) =>
-                connection.nextProcedure.type === PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE.PROCEDURE,
-            )
+        record.cachedConfiguration.configuration.connections
+            .filter((connection: PubConnectionConfiguration<PUB_CONNECTION_TYPE>) => {
+                return connection.type === PUB_CONNECTION_TYPE.DIRECT;
+            })
+            .filter((connection: PubConnectionConfiguration<PUB_CONNECTION_TYPE>) => {
+                return connection.nextProcedure.type === PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE.PROCEDURE;
+            })
             .map((connection: PubConnectionConfiguration<PUB_CONNECTION_TYPE>) => {
 
                 const nextProcedure: PubConnectionProcedureReference<
@@ -28,18 +31,24 @@ export const findProcedureDependencies = (
                     PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE.PROCEDURE
                 >;
 
-                const procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE> | null =
+                return nextProcedure.payload.procedureIdentifier;
+            })
+            .filter((nextProcedureIdentifier: string) => {
+                return nextProcedureIdentifier === procedure.identifier;
+            })
+            .map((nextProcedureIdentifier: string) => {
+
+                const dependencyProcedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE> | null =
                     record.cachedConfiguration.getProcedureByIdentifier(
-                        nextProcedure.payload.procedureIdentifier,
+                        nextProcedureIdentifier,
                     );
 
-                if (!procedure) {
+                if (dependencyProcedure === null) {
                     throw PubExecuteConfigurationProcedureNotFoundError.withIdentifier(
-                        nextProcedure.payload.procedureIdentifier,
+                        nextProcedureIdentifier,
                     );
                 }
-
-                return procedure;
+                return dependencyProcedure;
             });
 
     return dependencyProcedures;
