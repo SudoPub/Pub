@@ -1,6 +1,6 @@
 /**
  * @author WMXPY
- * @namespace Orchestration_Connection
+ * @namespace Orchestration_Procedure
  * @description Find Dependencies
  */
 
@@ -10,11 +10,10 @@ import { PubExecuteConfigurationProcedureNotFoundError } from "../../error/execu
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubRecord } from "../../record/record";
 
-export const findConnectionDependencies = (
+export const findProcedureDependencies = (
     record: PubRecord,
-    connection: PubConnectionConfiguration<PUB_CONNECTION_TYPE>,
+    procedure: PubConnectionConfiguration<PUB_CONNECTION_TYPE>,
 ): Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> => {
-
 
     const dependencyProcedures: Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> =
         connections
