@@ -39,7 +39,7 @@ export const resumeExecute = async (
                     return connection;
                 });
 
-        const dependencyProcedures =
+        const dependencyProcedures: Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> =
             connections
                 .filter((connection: PubConnectionConfiguration<PUB_CONNECTION_TYPE>) =>
                     connection.nextProcedure.type === PUB_CONNECTION_PROCEDURE_REFERENCE_TYPE.PROCEDURE,
