@@ -7,8 +7,9 @@
 import { generateIdentifier } from "../util/identifier";
 import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
-import { PubRecordProcedureEnrichMap } from "./definition/procedure-enrich";
+import { PubRecordProcedureEnrich, PubRecordProcedureEnrichMap } from "./definition/procedure-enrich";
 import { PubRecordRealizationMap } from "./definition/realization";
+import { recordInitEnrichProcedureMap } from "./enrich/init-procedure";
 
 export class PubRecord {
 
@@ -35,7 +36,9 @@ export class PubRecord {
 
         this._identifier = generateIdentifier();
 
-        this._procedureEnrichMap = new Map();
+        this._procedureEnrichMap = recordInitEnrichProcedureMap(
+            configuration.procedures,
+        );
 
         this._realizationMap = new Map();
     }
@@ -45,5 +48,14 @@ export class PubRecord {
     }
     public get identifier(): string {
         return this._identifier;
+    }
+
+    public getProcedureEnrich(procedureIdentifier: string): PubRecordProcedureEnrich | null {
+
+        const enrich: PubRecordProcedureEnrich | undefined = this._procedureEnrichMap.get(procedureIdentifier);
+        if (enrich) {
+            return enrich;
+        }
+        return null;
     }
 }
