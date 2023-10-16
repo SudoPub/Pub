@@ -4,51 +4,44 @@
  * @description Snapshot
  */
 
+import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
+import { PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
+import { PubRecordRealizationMap } from "../definition/realization";
+import { recordInitEnrichProcedureMap } from "../enrich/init-procedure";
+
 export class PubRecordSnapshot {
 
-    public static fromScratch(): PubRecordSnapshot {
+    public static fromConfiguration(
+        configuration: PubWorkflowConfiguration,
+    ): PubRecordSnapshot {
 
-        return new PubRecordSnapshot();
+        const procedureEnrichMap = recordInitEnrichProcedureMap(
+            configuration.procedures,
+        );
+        const realizationMap = new Map();
+
+        return new PubRecordSnapshot(
+            procedureEnrichMap,
+            realizationMap,
+        );
     }
 
-    private _startParameters: Record<string, any> | null;
-    private readonly _previousProcedureOutcomes: Map<string, Record<string, any>>;
+    private readonly _procedureEnrichMap: PubRecordProcedureEnrichMap;
+    private readonly _realizationMap: PubRecordRealizationMap;
 
-    private constructor() {
+    private constructor(
+        procedureEnrichMap: PubRecordProcedureEnrichMap,
+        realizationMap: PubRecordRealizationMap,
+    ) {
 
-        this._startParameters = null;
-        this._previousProcedureOutcomes = new Map();
+        this._procedureEnrichMap = procedureEnrichMap;
+        this._realizationMap = realizationMap;
     }
 
-    public get startParameters(): Record<string, any> | null {
-        return this._startParameters;
+    public get procedureEnrichMap(): PubRecordProcedureEnrichMap {
+        return this._procedureEnrichMap;
     }
-    public get previousProcedureOutcomes(): Map<string, Record<string, any>> {
-        return this._previousProcedureOutcomes;
-    }
-
-    public setStartParameters(parameters: Record<string, any>): this {
-
-        this._startParameters = parameters;
-        return this;
-    }
-
-    public setPreviousProcedureOutcome(procedureName: string, outcome: Record<string, any>): this {
-
-        this._previousProcedureOutcomes.set(procedureName, outcome);
-        return this;
-    }
-
-    public serialize(): string {
-
-        return JSON.stringify({
-            startParameters: this._startParameters,
-            previousProcedureOutcomes: [
-                ...this._previousProcedureOutcomes.entries(),
-            ].map((entry: [string, Record<string, any>]) => ({
-                procedureName: entry[0],
-                outcome: entry[1],
-            })),
-        });
+    public get realizationMap(): PubRecordRealizationMap {
+        return this._realizationMap;
     }
 }

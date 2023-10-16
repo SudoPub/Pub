@@ -11,7 +11,6 @@ import { OrchestrationResourceManager } from "../orchestration/resource/manager"
 import { PubRecord } from "../record/record";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
 import { PubExecuteParameters } from "./definition/execute";
-import { resumeExecute } from "./resume-execute";
 
 export class PubExecuter {
 
@@ -61,7 +60,7 @@ export class PubExecuter {
         const record: PubRecord =
             PubRecord.fromWorkflowConfiguration(this._configuration);
 
-        return await resumeExecute(record, this._resourceManager);
+        return record;
     }
 
     public verifyParameters(
