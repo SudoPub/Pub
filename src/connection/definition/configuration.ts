@@ -8,8 +8,8 @@ export type PubConnectionConfiguration = {
 
     readonly identifier: string;
 
-    readonly triggerWaypoint: string;
-    readonly targetWaypoint: string;
+    readonly triggerProcedure: string;
+    readonly nextProcedure: string;
 
     readonly parametersMapping: Record<string, string>;
 };
