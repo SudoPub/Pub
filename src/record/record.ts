@@ -4,9 +4,10 @@
  * @description Record
  */
 
-import { UUIDVersion1 } from "@sudoo/uuid";
+import { generateIdentifier } from "../util/identifier";
 import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
+import { PubRecordProcedureEnrichMap } from "./definition/procedure-enrich";
 import { PubRecordRealizationMap } from "./definition/realization";
 
 export class PubRecord {
@@ -22,6 +23,8 @@ export class PubRecord {
 
     private readonly _identifier: string;
 
+    private readonly _procedureEnrichMap: PubRecordProcedureEnrichMap;
+
     private readonly _realizationMap: PubRecordRealizationMap;
 
     private constructor(
@@ -30,7 +33,9 @@ export class PubRecord {
 
         this._cachedConfiguration = PubCachedWorkflowConfiguration.fromWorkflowConfiguration(configuration);
 
-        this._identifier = this._generateIdentifier();
+        this._identifier = generateIdentifier();
+
+        this._procedureEnrichMap = new Map();
 
         this._realizationMap = new Map();
     }
@@ -40,13 +45,5 @@ export class PubRecord {
     }
     public get identifier(): string {
         return this._identifier;
-    }
-    public get realizationMap(): PubRecordRealizationMap {
-        return this._realizationMap;
-    }
-
-    private _generateIdentifier(): string {
-
-        return UUIDVersion1.generateString();
     }
 }
