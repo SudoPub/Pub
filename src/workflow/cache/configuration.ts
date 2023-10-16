@@ -4,7 +4,7 @@
  * @description Configuration
  */
 
-import { PUB_CONNECTION_TYPE, PubConnectionConfiguration } from "../../connection/definition/configuration";
+import { PubConnectionConfiguration } from "../../connection/definition/configuration";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubWorkflowConfiguration } from "../definition/configuration";
 
@@ -25,7 +25,7 @@ export class PubCachedWorkflowConfiguration {
     >;
     private readonly _connectionsCache: Map<
         string,
-        PubConnectionConfiguration<PUB_CONNECTION_TYPE>
+        PubConnectionConfiguration
     >;
 
     private constructor(
@@ -61,7 +61,7 @@ export class PubCachedWorkflowConfiguration {
 
     public getConnectionByIdentifier(
         identifier: string,
-    ): PubConnectionConfiguration<PUB_CONNECTION_TYPE> | null {
+    ): PubConnectionConfiguration | null {
 
         if (!this._connectionsCache.has(identifier)) {
 
@@ -73,6 +73,6 @@ export class PubCachedWorkflowConfiguration {
             }
         }
 
-        return this._connectionsCache.get(identifier) as PubConnectionConfiguration<PUB_CONNECTION_TYPE> ?? null;
+        return this._connectionsCache.get(identifier) as PubConnectionConfiguration ?? null;
     }
 }
