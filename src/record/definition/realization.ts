@@ -8,6 +8,7 @@ export type PubRecordRealizationMap = Map<string, PubRecordRealization>;
 
 export type PubRecordRealization = {
 
-    readonly triggerConnections: string[];
+    readonly procedureIdentifier: string;
+
     readonly iteration?: number;
 };
