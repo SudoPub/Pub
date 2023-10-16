@@ -4,7 +4,8 @@
  * @description Plan Next Step
  */
 
-import { PubRecord } from "../record/record";
+import { PubRecordSnapshot } from "../record/snapshot/snapshot";
+import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
 
 export type ExecutePlanNextStepResult = {
 
@@ -12,7 +13,8 @@ export type ExecutePlanNextStepResult = {
 };
 
 export const executePlanNextStep = (
-    _record: PubRecord,
+    _cachedConfiguration: PubCachedWorkflowConfiguration,
+    _snapshot: PubRecordSnapshot,
 ): ExecutePlanNextStepResult => {
 
     return {};
