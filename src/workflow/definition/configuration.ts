@@ -10,8 +10,8 @@ import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/d
 
 export type PubWorkflowConfiguration = {
 
-    readonly configurationName: string;
-    readonly configurationDescription?: string;
+    readonly workflowName: string;
+    readonly workflowDescription?: string;
 
     readonly startParametersPattern: Record<string, Pattern>;
     readonly procedures: Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>>;
