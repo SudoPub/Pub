@@ -5,7 +5,7 @@
  */
 
 import { PubConnectionConfiguration } from "../../connection/definition/configuration";
-import { generateIdentifier } from "../../util/identifier";
+import { PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError } from "../../error/record/enrich/procedure-identifier-not-found-during-enrich";
 import { PubRecordConnectionEnrich, PubRecordConnectionEnrichMap } from "../definition/connection-enrich";
 import { PubRecordProcedureEnrich, PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
 
@@ -34,14 +34,22 @@ export const recordInitEnrichConnection = (
     const triggerEnrich: PubRecordProcedureEnrich<any> | undefined =
         enrichProcedureMap.get(connection.triggerProcedureIdentifier);
 
+    if (!triggerEnrich) {
+        throw PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError.create(connection.triggerProcedureIdentifier);
+    }
+
     const nextEnrich: PubRecordProcedureEnrich<any> | undefined =
         enrichProcedureMap.get(connection.nextProcedureIdentifier);
+
+    if (!nextEnrich) {
+        throw PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError.create(connection.nextProcedureIdentifier);
+    }
 
     return {
 
         connectionIdentifier: connection.identifier,
 
-        triggerWaypoint: triggerEnrich ? triggerEnrich.exitWaypoint : generateIdentifier(),
-        nextWaypoint: nextEnrich ? nextEnrich.enterWaypoint : generateIdentifier(),
+        triggerWaypoint: triggerEnrich.enterWaypoint,
+        nextWaypoint: nextEnrich.enterWaypoint,
     };
 };
