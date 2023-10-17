@@ -9,7 +9,7 @@ import { PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError } from "../
 import { PubRecordConnectionEnrich, PubRecordConnectionEnrichMap } from "../definition/connection-enrich";
 import { PubRecordProcedureEnrich, PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
 
-export const recordInitEnrichProcedureMap = (
+export const recordInitEnrichConnectionMap = (
     connections: PubConnectionConfiguration[],
     enrichProcedureMap: PubRecordProcedureEnrichMap,
 ): PubRecordConnectionEnrichMap => {
