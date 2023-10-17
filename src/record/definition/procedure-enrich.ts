@@ -9,6 +9,9 @@ import { PUB_PROCEDURE_TYPE } from "../../procedure/definition/configuration";
 export type PubRecordProcedureEnrichMap =
     Map<string, PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE>>;
 
+export type PubRecordProcedureEnrichRecord =
+    Record<string, PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE>>;
+
 export type PubRecordProcedureEnrich<T extends PUB_PROCEDURE_TYPE> =
     & PubRecordProcedureEnrichCommon
     & PubRecordProcedureEnrichSwitch<T>;

@@ -7,6 +7,7 @@
 import { generateIdentifier } from "../util/identifier";
 import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
+import { PubSerializedRecord } from "./definition/record";
 import { PubRecordSnapshot } from "./snapshot/snapshot";
 
 export class PubRecord {
@@ -45,5 +46,12 @@ export class PubRecord {
     }
     public get identifier(): string {
         return this._identifier;
+    }
+
+    public serialize(): PubSerializedRecord {
+
+        return {
+            configuration: this._cachedConfiguration.configuration,
+        };
     }
 }

@@ -6,6 +6,8 @@
 
 export type PubRecordRealizationMap = Map<string, PubRecordRealization>;
 
+export type PubRecordRealizationRecord = Record<string, PubRecordRealization>;
+
 export type PubRecordRealization = {
 
     readonly procedureIdentifier: string;

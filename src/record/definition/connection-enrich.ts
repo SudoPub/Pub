@@ -7,6 +7,9 @@
 export type PubRecordConnectionEnrichMap =
     Map<string, PubRecordConnectionEnrich>;
 
+export type PubRecordConnectionEnrichRecord =
+    Record<string, PubRecordConnectionEnrich>;
+
 export type PubRecordConnectionEnrich = {
 
     readonly connectionIdentifier: string;
