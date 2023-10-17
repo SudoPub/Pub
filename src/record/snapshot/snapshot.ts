@@ -4,10 +4,12 @@
  * @description Snapshot
  */
 
+import { convertMapToRecord } from "../../util/map-to-record";
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
 import { PubRecordConnectionEnrichMap } from "../definition/connection-enrich";
 import { PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
 import { PubRecordRealizationMap } from "../definition/realization";
+import { PubSerializedRecordSnapshot } from "../definition/record";
 import { recordInitEnrichConnectionMap } from "../enrich/init-connection";
 import { recordInitEnrichProcedureMap } from "../enrich/init-procedure";
 
@@ -56,5 +58,14 @@ export class PubRecordSnapshot {
     }
     public get realizationMap(): PubRecordRealizationMap {
         return this._realizationMap;
+    }
+
+    public serialize(): PubSerializedRecordSnapshot {
+
+        return {
+            procedureEnrich: convertMapToRecord(this._procedureEnrichMap),
+            connectionEnrich: convertMapToRecord(this._connectionEnrichMap),
+            realizationMap: convertMapToRecord(this._realizationMap),
+        };
     }
 }

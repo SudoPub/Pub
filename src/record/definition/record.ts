@@ -19,4 +19,5 @@ export type PubSerializedRecordSnapshot = {
 export type PubSerializedRecord = {
 
     readonly configuration: PubWorkflowConfiguration;
+    readonly snapshot: PubSerializedRecordSnapshot;
 };

@@ -52,6 +52,7 @@ export class PubRecord {
 
         return {
             configuration: this._cachedConfiguration.configuration,
+            snapshot: this._snapshot.serialize(),
         };
     }
 }
