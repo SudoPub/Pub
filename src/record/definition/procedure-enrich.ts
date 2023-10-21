@@ -24,9 +24,21 @@ export type PubRecordProcedureEnrichCommon = {
 };
 
 export type PubRecordProcedureEnrichSwitch<T extends PUB_PROCEDURE_TYPE> =
+    T extends PUB_PROCEDURE_TYPE.START ? PubRecordProcedureEnrich_Start :
+    T extends PUB_PROCEDURE_TYPE.END ? PubRecordProcedureEnrich_End :
     T extends PUB_PROCEDURE_TYPE.DRIVER ? PubRecordProcedureEnrich_Driver :
     T extends PUB_PROCEDURE_TYPE.MAP ? PubRecordProcedureEnrich_Map :
     never;
+
+export type PubRecordProcedureEnrich_Start = {
+
+    readonly exitWaypoint: string;
+};
+
+export type PubRecordProcedureEnrich_End = {
+
+    // No exit waypoint
+};
 
 export type PubRecordProcedureEnrich_Driver = {
 

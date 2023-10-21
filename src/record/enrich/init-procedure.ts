@@ -35,10 +35,20 @@ export const recordInitEnrichProcedure = <T extends PUB_PROCEDURE_TYPE>(
 
     switch (procedure.type) {
 
+        case PUB_PROCEDURE_TYPE.START: return {
+            ...common,
+            exitWaypoint: generateIdentifier(),
+        } as PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START> as any;
+
+        case PUB_PROCEDURE_TYPE.END: return {
+            ...common,
+        } as PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.END> as any;
+
         case PUB_PROCEDURE_TYPE.DRIVER: return {
             ...common,
             exitWaypoint: generateIdentifier(),
         } as PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.DRIVER> as any;
+
         case PUB_PROCEDURE_TYPE.MAP: return {
             ...common,
             iterationStartWaypoint: generateIdentifier(),
