@@ -4,10 +4,18 @@
  * @description Serialize
  */
 
-import { PubSerializedRecord } from "../definition/record";
+import { PubSerializedRecord, PubSerializedRecordSnapshot } from "../definition/record";
 import { PubRecord } from "../record";
 
 export const serializePubRecord = (record: PubRecord): PubSerializedRecord => {
+
+    const snapshot: PubSerializedRecordSnapshot = {
+
+        procedureEnrich: record.procedureEnrich,
+        connectionEnrich: record.connectionEnrich,
+        realizationMap: record.realizationMap,
+    };
+
 
     return record as any;
 };
