@@ -35,5 +35,8 @@ export type PubRecordProcedureEnrich_Driver = {
 
 export type PubRecordProcedureEnrich_Map = {
 
+    readonly iterationStartWaypoint: string;
+    readonly iterationEndWaypoint: string;
+
     readonly exitWaypoint: string;
 };

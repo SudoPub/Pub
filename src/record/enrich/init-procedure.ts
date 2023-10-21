@@ -41,6 +41,8 @@ export const recordInitEnrichProcedure = <T extends PUB_PROCEDURE_TYPE>(
         } as PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.DRIVER> as any;
         case PUB_PROCEDURE_TYPE.MAP: return {
             ...common,
+            iterationStartWaypoint: generateIdentifier(),
+            iterationEndWaypoint: generateIdentifier(),
             exitWaypoint: generateIdentifier(),
         } as PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.MAP> as any;
     }
