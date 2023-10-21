@@ -13,12 +13,13 @@ export type PubRecordProcedureEnrichRecord =
     Record<string, PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE>>;
 
 export type PubRecordProcedureEnrich<T extends PUB_PROCEDURE_TYPE> =
-    & PubRecordProcedureEnrichCommon
+    & PubRecordProcedureEnrichCommon<T>
     & PubRecordProcedureEnrichSwitch<T>;
 
-export type PubRecordProcedureEnrichCommon = {
+export type PubRecordProcedureEnrichCommon<T extends PUB_PROCEDURE_TYPE> = {
 
     readonly procedureIdentifier: string;
+    readonly procedureType: T;
 
     readonly enterWaypoint: string;
 };

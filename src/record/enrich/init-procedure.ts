@@ -28,8 +28,9 @@ export const recordInitEnrichProcedure = <T extends PUB_PROCEDURE_TYPE>(
     procedure: PubProcedureConfiguration<T>,
 ): PubRecordProcedureEnrich<T> => {
 
-    const common: PubRecordProcedureEnrichCommon = {
+    const common: PubRecordProcedureEnrichCommon<T> = {
         procedureIdentifier: procedure.identifier,
+        procedureType: procedure.type,
         enterWaypoint: generateIdentifier(),
     };
 
