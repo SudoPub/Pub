@@ -18,10 +18,10 @@ export type PubConnectionConfiguration = {
     readonly identifier: string;
 
     readonly triggerProcedureIdentifier: string;
-    readonly triggerProcedureType: CONNECTION_WAYPOINT_TYPE;
+    readonly triggerProcedureWaypointType: CONNECTION_WAYPOINT_TYPE;
 
     readonly nextProcedureIdentifier: string;
-    readonly nextProcedureType: CONNECTION_WAYPOINT_TYPE;
+    readonly nextProcedureWaypointType: CONNECTION_WAYPOINT_TYPE;
 
     readonly parametersMapping: Record<string, string>;
 };

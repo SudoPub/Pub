@@ -6,6 +6,7 @@
 
 import { PubConnectionConfiguration } from "../../connection/definition/configuration";
 import { PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError } from "../../error/record/enrich/procedure-identifier-not-found-during-enrich";
+import { PUB_PROCEDURE_TYPE } from "../../procedure/definition/configuration";
 import { PubRecordConnectionEnrich, PubRecordConnectionEnrichMap } from "../definition/connection-enrich";
 import { PubRecordProcedureEnrich, PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
 
@@ -31,14 +32,14 @@ export const recordInitEnrichConnection = (
     enrichProcedureMap: PubRecordProcedureEnrichMap,
 ): PubRecordConnectionEnrich => {
 
-    const triggerEnrich: PubRecordProcedureEnrich<any> | undefined =
+    const triggerEnrich: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE> | undefined =
         enrichProcedureMap.get(connection.triggerProcedureIdentifier);
 
     if (!triggerEnrich) {
         throw PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError.create(connection.triggerProcedureIdentifier);
     }
 
-    const nextEnrich: PubRecordProcedureEnrich<any> | undefined =
+    const nextEnrich: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE> | undefined =
         enrichProcedureMap.get(connection.nextProcedureIdentifier);
 
     if (!nextEnrich) {
