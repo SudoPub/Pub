@@ -8,7 +8,14 @@ import { Pattern } from "@sudoo/pattern";
 
 export enum PUB_PROCEDURE_TYPE {
 
+    // Procedure Control
+    START = "START",
+    END = "END",
+
+    // Action Taking
     DRIVER = "DRIVER",
+
+    // Data Manipulation
     MAP = "MAP",
 }
 
@@ -21,9 +28,21 @@ export type PubProcedureConfiguration<T extends PUB_PROCEDURE_TYPE> = {
 };
 
 export type PubProcedureConfigurationPayloadSwitch<T extends PUB_PROCEDURE_TYPE> =
+    T extends PUB_PROCEDURE_TYPE.START ? PubProcedureConfiguration_Start :
+    T extends PUB_PROCEDURE_TYPE.END ? PubProcedureConfiguration_End :
     T extends PUB_PROCEDURE_TYPE.DRIVER ? PubProcedureConfiguration_Driver :
     T extends PUB_PROCEDURE_TYPE.MAP ? PubProcedureConfiguration_Map :
     never;
+
+export type PubProcedureConfiguration_Start = {
+
+    readonly patterns: Record<string, Pattern>;
+};
+
+export type PubProcedureConfiguration_End = {
+
+    readonly patterns: Record<string, Pattern>;
+};
 
 export type PubProcedureConfiguration_Driver = {
 
