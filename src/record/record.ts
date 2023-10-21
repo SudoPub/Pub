@@ -25,6 +25,19 @@ export class PubRecord {
         );
     }
 
+    public static fromSerializedRecord(
+        record: PubSerializedRecord,
+    ): PubRecord {
+
+        const snapshot: PubRecordSnapshot =
+            PubRecordSnapshot.fromSerializedSnapshot(record.snapshot);
+
+        return new PubRecord(
+            record.configuration,
+            snapshot,
+        );
+    }
+
     private readonly _identifier: string;
 
     private readonly _cachedConfiguration: PubCachedWorkflowConfiguration;

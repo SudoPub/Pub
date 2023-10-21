@@ -35,6 +35,24 @@ export class PubRecordSnapshot {
         );
     }
 
+    public static fromSerializedSnapshot(
+        snapshot: PubSerializedRecordSnapshot,
+    ): PubRecordSnapshot {
+
+        const procedureEnrichMap: PubRecordProcedureEnrichMap =
+            new Map(Object.entries(snapshot.procedureEnrich));
+        const connectionEnrichMap: PubRecordConnectionEnrichMap =
+            new Map(Object.entries(snapshot.connectionEnrich));
+        const realizationMap: PubRecordRealizationMap =
+            new Map(Object.entries(snapshot.realizationMap));
+
+        return new PubRecordSnapshot(
+            procedureEnrichMap,
+            connectionEnrichMap,
+            realizationMap,
+        );
+    }
+
     private readonly _procedureEnrichMap: PubRecordProcedureEnrichMap;
     private readonly _connectionEnrichMap: PubRecordConnectionEnrichMap;
     private readonly _realizationMap: PubRecordRealizationMap;
