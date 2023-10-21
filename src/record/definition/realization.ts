@@ -4,13 +4,13 @@
  * @description Realization
  */
 
-export type PubRecordRealizationMap = Map<string, PubRecordRealization>;
+export type PubRealizationOutcome = Record<string, any>;
 
-export type PubRecordRealizationRecord = Record<string, PubRecordRealization>;
+export type PubRecordRealizationMap = Map<string, PubRecordRealizationResult>;
 
-export type PubRecordRealization = {
+export type PubRecordRealizationRecord = Record<string, PubRecordRealizationResult>;
 
-    readonly procedureIdentifier: string;
+export type PubRecordRealizationResult = {
 
-    readonly iteration?: number;
+    readonly outcome: PubRealizationOutcome;
 };
