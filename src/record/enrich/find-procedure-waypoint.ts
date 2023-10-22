@@ -36,33 +36,34 @@ const findProcedureWaypoint = (
     enrichProcedure: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE>,
 ): string => {
 
-    if (procedureWaypointType === CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START) {
-        return enrichProcedure.enterWaypoint;
-    }
+    switch (procedureWaypointType) {
 
-    if (procedureWaypointType === CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END) {
-
-        const requiredTypes: PUB_PROCEDURE_TYPE[] = [
-            PUB_PROCEDURE_TYPE.START,
-            PUB_PROCEDURE_TYPE.DRIVER,
-            PUB_PROCEDURE_TYPE.MAP,
-        ];
-
-        if (!requiredTypes.includes(enrichProcedure.procedureType)) {
-            throw PubRecordEnrichProcedureTypeInvalidError.create(
-                procedureWaypointType,
-                requiredTypes,
-            );
+        case CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START: {
+            return enrichProcedure.enterWaypoint;
         }
+        case CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END: {
 
-        const fixedTypeEnrichProcedure: PubRecordProcedureEnrich<
-            | PUB_PROCEDURE_TYPE.START
-            | PUB_PROCEDURE_TYPE.DRIVER
-            | PUB_PROCEDURE_TYPE.MAP> =
-            enrichProcedure as any;
+            const requiredTypes: PUB_PROCEDURE_TYPE[] = [
+                PUB_PROCEDURE_TYPE.START,
+                PUB_PROCEDURE_TYPE.DRIVER,
+                PUB_PROCEDURE_TYPE.MAP,
+            ];
 
-        return fixedTypeEnrichProcedure.exitWaypoint;
+            if (!requiredTypes.includes(enrichProcedure.procedureType)) {
+                throw PubRecordEnrichProcedureTypeInvalidError.create(
+                    procedureWaypointType,
+                    requiredTypes,
+                );
+            }
+
+            const fixedTypeEnrichProcedure: PubRecordProcedureEnrich<
+                | PUB_PROCEDURE_TYPE.START
+                | PUB_PROCEDURE_TYPE.DRIVER
+                | PUB_PROCEDURE_TYPE.MAP> =
+                enrichProcedure as any;
+
+            return fixedTypeEnrichProcedure.exitWaypoint;
+        }
     }
-
     return "";
 };
