@@ -9,6 +9,7 @@ import { PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError } from "../
 import { PUB_PROCEDURE_TYPE } from "../../procedure/definition/configuration";
 import { PubRecordConnectionEnrich, PubRecordConnectionEnrichMap } from "../definition/connection-enrich";
 import { PubRecordProcedureEnrich, PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
+import { findNextProcedureWaypoint, findTriggerProcedureWaypoint } from "./find-procedure-waypoint";
 
 export const recordInitEnrichConnectionMap = (
     connections: PubConnectionConfiguration[],
@@ -39,6 +40,11 @@ export const recordInitEnrichConnection = (
         throw PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError.create(connection.triggerProcedureIdentifier);
     }
 
+    const triggerWaypoint: string = findTriggerProcedureWaypoint(
+        connection,
+        triggerEnrich,
+    );
+
     const nextEnrich: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE> | undefined =
         enrichProcedureMap.get(connection.nextProcedureIdentifier);
 
@@ -46,11 +52,16 @@ export const recordInitEnrichConnection = (
         throw PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError.create(connection.nextProcedureIdentifier);
     }
 
+    const nextWaypoint: string = findNextProcedureWaypoint(
+        connection,
+        nextEnrich,
+    );
+
     return {
 
         connectionIdentifier: connection.identifier,
 
-        triggerWaypoint: triggerEnrich.enterWaypoint,
-        nextWaypoint: nextEnrich.enterWaypoint,
+        triggerWaypoint,
+        nextWaypoint,
     };
 };

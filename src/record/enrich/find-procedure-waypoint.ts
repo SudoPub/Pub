@@ -39,6 +39,7 @@ const findProcedureWaypoint = (
     switch (procedureWaypointType) {
 
         case CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START: {
+
             return enrichProcedure.enterWaypoint;
         }
         case CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END: {
@@ -59,11 +60,47 @@ const findProcedureWaypoint = (
             const fixedTypeEnrichProcedure: PubRecordProcedureEnrich<
                 | PUB_PROCEDURE_TYPE.START
                 | PUB_PROCEDURE_TYPE.DRIVER
-                | PUB_PROCEDURE_TYPE.MAP> =
-                enrichProcedure as any;
+                | PUB_PROCEDURE_TYPE.MAP> = enrichProcedure as any;
 
             return fixedTypeEnrichProcedure.exitWaypoint;
         }
+        case CONNECTION_WAYPOINT_TYPE.PROCEDURE_ITERATE_START: {
+
+            const requiredTypes: PUB_PROCEDURE_TYPE[] = [
+                PUB_PROCEDURE_TYPE.MAP,
+            ];
+
+            if (!requiredTypes.includes(enrichProcedure.procedureType)) {
+                throw PubRecordEnrichProcedureTypeInvalidError.create(
+                    procedureWaypointType,
+                    requiredTypes,
+                );
+            }
+
+            const fixedTypeEnrichProcedure: PubRecordProcedureEnrich<
+                | PUB_PROCEDURE_TYPE.MAP
+            > = enrichProcedure as any;
+
+            return fixedTypeEnrichProcedure.iterationStartWaypoint;
+        }
+        case CONNECTION_WAYPOINT_TYPE.PROCEDURE_ITERATE_END: {
+
+            const requiredTypes: PUB_PROCEDURE_TYPE[] = [
+                PUB_PROCEDURE_TYPE.MAP,
+            ];
+
+            if (!requiredTypes.includes(enrichProcedure.procedureType)) {
+                throw PubRecordEnrichProcedureTypeInvalidError.create(
+                    procedureWaypointType,
+                    requiredTypes,
+                );
+            }
+
+            const fixedTypeEnrichProcedure: PubRecordProcedureEnrich<
+                | PUB_PROCEDURE_TYPE.MAP
+            > = enrichProcedure as any;
+
+            return fixedTypeEnrichProcedure.iterationEndWaypoint;
+        }
     }
-    return "";
 };
