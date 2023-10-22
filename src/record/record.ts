@@ -57,6 +57,9 @@ export class PubRecord {
     public get cachedConfiguration(): PubCachedWorkflowConfiguration {
         return this._cachedConfiguration;
     }
+    public get snapshot(): PubRecordSnapshot {
+        return this._snapshot;
+    }
     public get identifier(): string {
         return this._identifier;
     }
