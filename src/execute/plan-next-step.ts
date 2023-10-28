@@ -22,7 +22,8 @@ export const executePlanNextStep = (
     const procedureDependencyWaypoints: string[] = cachedConfiguration.configuration.procedures
         .map(<T extends PUB_PROCEDURE_TYPE>(procedure: PubProcedureConfiguration<T>) => {
 
-            const enrich: PubRecordProcedureEnrich<T> = snapshot.procedureEnrichMap.get(procedure.identifier) as PubRecordProcedureEnrich<T>;
+            const enrich: PubRecordProcedureEnrich<T> =
+                snapshot.procedureEnriches[procedure.identifier] as PubRecordProcedureEnrich<T>;
 
             return enrich.enterWaypoint;
         });

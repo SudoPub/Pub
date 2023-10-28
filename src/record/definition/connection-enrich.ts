@@ -4,9 +4,6 @@
  * @description Connection Enrich
  */
 
-export type PubRecordConnectionEnrichMap =
-    Map<string, PubRecordConnectionEnrich>;
-
 export type PubRecordConnectionEnrichRecord =
     Record<string, PubRecordConnectionEnrich>;
 

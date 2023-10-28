@@ -4,14 +4,13 @@
  * @description Snapshot
  */
 
-import { convertMapToRecord } from "../../util/convert/map-to-record";
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
-import { PubRecordConnectionEnrichMap } from "../definition/connection-enrich";
-import { PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
-import { PubRecordRealizationMap } from "../definition/realization";
+import { PubRecordConnectionEnrichRecord } from "../definition/connection-enrich";
+import { PubRecordProcedureEnrichRecord } from "../definition/procedure-enrich";
+import { PubRecordRealizationRecord } from "../definition/realization";
 import { PubSerializedRecordSnapshot } from "../definition/record";
-import { recordInitEnrichConnectionMap } from "../enrich/init-connection";
-import { recordInitEnrichProcedureMap } from "../enrich/init-procedure";
+import { recordInitEnrichConnectionRecord } from "../enrich/init-connection";
+import { recordInitEnrichProcedureRecord } from "../enrich/init-procedure";
 
 export class PubRecordSnapshot {
 
@@ -19,19 +18,19 @@ export class PubRecordSnapshot {
         configuration: PubWorkflowConfiguration,
     ): PubRecordSnapshot {
 
-        const procedureEnrichMap = recordInitEnrichProcedureMap(
+        const procedureEnrichRecord = recordInitEnrichProcedureRecord(
             configuration.procedures,
         );
-        const connectionEnrichMap = recordInitEnrichConnectionMap(
+        const connectionEnrichRecord = recordInitEnrichConnectionRecord(
             configuration.connections,
-            procedureEnrichMap,
+            procedureEnrichRecord,
         );
-        const realizationMap = new Map();
+        const realizations = {};
 
         return new PubRecordSnapshot(
-            procedureEnrichMap,
-            connectionEnrichMap,
-            realizationMap,
+            procedureEnrichRecord,
+            connectionEnrichRecord,
+            realizations,
         );
     }
 
@@ -39,51 +38,51 @@ export class PubRecordSnapshot {
         snapshot: PubSerializedRecordSnapshot,
     ): PubRecordSnapshot {
 
-        const procedureEnrichMap: PubRecordProcedureEnrichMap =
-            new Map(Object.entries(snapshot.procedureEnrich));
-        const connectionEnrichMap: PubRecordConnectionEnrichMap =
-            new Map(Object.entries(snapshot.connectionEnrich));
-        const realizationMap: PubRecordRealizationMap =
-            new Map(Object.entries(snapshot.realizationMap));
+        const procedureEnrichRecord: PubRecordProcedureEnrichRecord =
+            snapshot.procedureEnriches;
+        const connectionEnrichRecord: PubRecordConnectionEnrichRecord =
+            snapshot.connectionEnriches;
+        const realizationRecord: PubRecordRealizationRecord =
+            snapshot.realizations;
 
         return new PubRecordSnapshot(
-            procedureEnrichMap,
-            connectionEnrichMap,
-            realizationMap,
+            procedureEnrichRecord,
+            connectionEnrichRecord,
+            realizationRecord,
         );
     }
 
-    private readonly _procedureEnrichMap: PubRecordProcedureEnrichMap;
-    private readonly _connectionEnrichMap: PubRecordConnectionEnrichMap;
-    private readonly _realizationMap: PubRecordRealizationMap;
+    private readonly _procedureEnriches: PubRecordProcedureEnrichRecord;
+    private readonly _connectionEnriches: PubRecordConnectionEnrichRecord;
+    private readonly _realizations: PubRecordRealizationRecord;
 
     private constructor(
-        procedureEnrichMap: PubRecordProcedureEnrichMap,
-        connectionEnrichMap: PubRecordConnectionEnrichMap,
-        realizationMap: PubRecordRealizationMap,
+        procedureEnriches: PubRecordProcedureEnrichRecord,
+        connectionEnriches: PubRecordConnectionEnrichRecord,
+        realizations: PubRecordRealizationRecord,
     ) {
 
-        this._procedureEnrichMap = procedureEnrichMap;
-        this._connectionEnrichMap = connectionEnrichMap;
-        this._realizationMap = realizationMap;
+        this._procedureEnriches = procedureEnriches;
+        this._connectionEnriches = connectionEnriches;
+        this._realizations = realizations;
     }
 
-    public get procedureEnrichMap(): PubRecordProcedureEnrichMap {
-        return this._procedureEnrichMap;
+    public get procedureEnriches(): PubRecordProcedureEnrichRecord {
+        return this._procedureEnriches;
     }
-    public get connectionEnrichMap(): PubRecordConnectionEnrichMap {
-        return this._connectionEnrichMap;
+    public get connectionEnriches(): PubRecordConnectionEnrichRecord {
+        return this._connectionEnriches;
     }
-    public get realizationMap(): PubRecordRealizationMap {
-        return this._realizationMap;
+    public get realizations(): PubRecordRealizationRecord {
+        return this._realizations;
     }
 
     public serialize(): PubSerializedRecordSnapshot {
 
         return {
-            procedureEnrich: convertMapToRecord(this._procedureEnrichMap),
-            connectionEnrich: convertMapToRecord(this._connectionEnrichMap),
-            realizationMap: convertMapToRecord(this._realizationMap),
+            procedureEnriches: this._procedureEnriches,
+            connectionEnriches: this._connectionEnriches,
+            realizations: this._realizations,
         };
     }
 }

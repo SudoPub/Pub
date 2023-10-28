@@ -7,34 +7,34 @@
 import { PubConnectionConfiguration } from "../../connection/definition/configuration";
 import { PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError } from "../../error/record/enrich/procedure-identifier-not-found-during-enrich";
 import { PUB_PROCEDURE_TYPE } from "../../procedure/definition/configuration";
-import { PubRecordConnectionEnrich, PubRecordConnectionEnrichMap } from "../definition/connection-enrich";
-import { PubRecordProcedureEnrich, PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
+import { PubRecordConnectionEnrich, PubRecordConnectionEnrichRecord } from "../definition/connection-enrich";
+import { PubRecordProcedureEnrich, PubRecordProcedureEnrichRecord } from "../definition/procedure-enrich";
 import { findNextProcedureWaypoint, findTriggerProcedureWaypoint } from "./find-procedure-waypoint";
 
-export const recordInitEnrichConnectionMap = (
+export const recordInitEnrichConnectionRecord = (
     connections: PubConnectionConfiguration[],
-    enrichProcedureMap: PubRecordProcedureEnrichMap,
-): PubRecordConnectionEnrichMap => {
+    enrichProcedureRecord: PubRecordProcedureEnrichRecord,
+): PubRecordConnectionEnrichRecord => {
 
-    const map: PubRecordConnectionEnrichMap = new Map();
+    const record: PubRecordConnectionEnrichRecord = {};
 
     for (const connection of connections) {
 
         const enrich: PubRecordConnectionEnrich =
-            recordInitEnrichConnection(connection, enrichProcedureMap);
+            recordInitEnrichConnection(connection, enrichProcedureRecord);
 
-        map.set(enrich.connectionIdentifier, enrich);
+        record[enrich.connectionIdentifier] = enrich;
     }
-    return map;
+    return record;
 };
 
 export const recordInitEnrichConnection = (
     connection: PubConnectionConfiguration,
-    enrichProcedureMap: PubRecordProcedureEnrichMap,
+    enrichProcedureRecord: PubRecordProcedureEnrichRecord,
 ): PubRecordConnectionEnrich => {
 
     const triggerEnrich: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE> | undefined =
-        enrichProcedureMap.get(connection.triggerProcedureIdentifier);
+        enrichProcedureRecord[connection.triggerProcedureIdentifier];
 
     if (!triggerEnrich) {
         throw PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError.create(connection.triggerProcedureIdentifier);
@@ -46,7 +46,7 @@ export const recordInitEnrichConnection = (
     );
 
     const nextEnrich: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE> | undefined =
-        enrichProcedureMap.get(connection.nextProcedureIdentifier);
+        enrichProcedureRecord[connection.nextProcedureIdentifier];
 
     if (!nextEnrich) {
         throw PubRecordEnrichProcedureIdentifierNotFoundDuringEnrichError.create(connection.nextProcedureIdentifier);

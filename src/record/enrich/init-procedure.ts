@@ -7,21 +7,21 @@
 import { PubRecordEnrichProcedureEnrichFailedError } from "../../error/record/enrich/procedure-enrich-failed";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { generateIdentifier } from "../../util/identifier";
-import { PubRecordProcedureEnrich, PubRecordProcedureEnrichCommon, PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
+import { PubRecordProcedureEnrich, PubRecordProcedureEnrichCommon, PubRecordProcedureEnrichRecord } from "../definition/procedure-enrich";
 
-export const recordInitEnrichProcedureMap = (
+export const recordInitEnrichProcedureRecord = (
     procedures: Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>>,
-): PubRecordProcedureEnrichMap => {
+): PubRecordProcedureEnrichRecord => {
 
-    const map: PubRecordProcedureEnrichMap = new Map();
+    const record: PubRecordProcedureEnrichRecord = {};
 
     for (const procedure of procedures) {
 
         const enrich: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE> = recordInitEnrichProcedure(procedure);
 
-        map.set(enrich.procedureIdentifier, enrich);
+        record[enrich.procedureIdentifier] = enrich;
     }
-    return map;
+    return record;
 };
 
 export const recordInitEnrichProcedure = <T extends PUB_PROCEDURE_TYPE>(

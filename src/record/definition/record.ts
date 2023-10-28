@@ -11,9 +11,9 @@ import { PubRecordRealizationRecord } from "./realization";
 
 export type PubSerializedRecordSnapshot = {
 
-    readonly procedureEnrich: PubRecordProcedureEnrichRecord;
-    readonly connectionEnrich: PubRecordConnectionEnrichRecord;
-    readonly realizationMap: PubRecordRealizationRecord;
+    readonly procedureEnriches: PubRecordProcedureEnrichRecord;
+    readonly connectionEnriches: PubRecordConnectionEnrichRecord;
+    readonly realizations: PubRecordRealizationRecord;
 };
 
 export type PubSerializedRecord = {

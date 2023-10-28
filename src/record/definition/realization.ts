@@ -8,9 +8,8 @@ import { PUB_PROCEDURE_TYPE } from "../../procedure/definition/configuration";
 
 export type PubRealizationOutcome = Record<string, any>;
 
-export type PubRecordRealizationMap = Map<string, PubRecordRealization<PUB_PROCEDURE_TYPE>>;
-
-export type PubRecordRealizationRecord = Record<string, PubRecordRealization<PUB_PROCEDURE_TYPE>>;
+export type PubRecordRealizationRecord =
+    Record<string, PubRecordRealization<PUB_PROCEDURE_TYPE>>;
 
 export type PubRecordRealization<T extends PUB_PROCEDURE_TYPE> =
     PubRecordRealizationCommon &
@@ -49,5 +48,5 @@ export type PubRecordRealization_Map = {
     readonly outcome?: PubRealizationOutcome;
 
     readonly iterationCount: number;
-    readonly iterations: PubRecordRealizationMap[];
+    readonly iterations: PubRecordRealizationRecord[];
 };
