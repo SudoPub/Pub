@@ -6,33 +6,33 @@
 
 import { PubExecuteParameters } from "../../execute/definition/execute";
 
-export enum PUB_WORKFLOW_RECORD_TICK_TYPE {
+export enum PUB_ACTION_TYPE {
 
     ESPIAL_TRIGGERED = "ESPIAL_TRIGGERED",
     EXECUTE_PARAMETERS = "EXECUTE_PARAMETERS",
 }
 
-export type PubAuditHistory<T extends PUB_WORKFLOW_RECORD_TICK_TYPE> = {
+export type PubAction<T extends PUB_ACTION_TYPE> = {
 
     readonly identifier: string;
     readonly type: T;
 
-    readonly payload: PubAuditHistoryPayloadSwitch<T>;
+    readonly payload: PubActionPayloadSwitch<T>;
 
     readonly timestamp: Date;
 };
 
-export type PubAuditHistoryPayloadSwitch<T extends PUB_WORKFLOW_RECORD_TICK_TYPE> =
-    T extends PUB_WORKFLOW_RECORD_TICK_TYPE.ESPIAL_TRIGGERED ? PubAuditHistoryEspialTriggered :
-    T extends PUB_WORKFLOW_RECORD_TICK_TYPE.EXECUTE_PARAMETERS ? PubAuditHistoryExecuteParameters :
+export type PubActionPayloadSwitch<T extends PUB_ACTION_TYPE> =
+    T extends PUB_ACTION_TYPE.ESPIAL_TRIGGERED ? PubActionEspialTriggered :
+    T extends PUB_ACTION_TYPE.EXECUTE_PARAMETERS ? PubActionExecuteParameters :
     never;
 
-export type PubAuditHistoryEspialTriggered = {
+export type PubActionEspialTriggered = {
 
     readonly espial: string;
 };
 
-export type PubAuditHistoryExecuteParameters = {
+export type PubActionExecuteParameters = {
 
     readonly parameters: PubExecuteParameters;
 };
