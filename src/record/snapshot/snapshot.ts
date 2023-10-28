@@ -4,7 +4,7 @@
  * @description Snapshot
  */
 
-import { convertMapToRecord } from "../../util/map-to-record";
+import { convertMapToRecord } from "../../util/convert/map-to-record";
 import { PubWorkflowConfiguration } from "../../workflow/definition/configuration";
 import { PubRecordConnectionEnrichMap } from "../definition/connection-enrich";
 import { PubRecordProcedureEnrichMap } from "../definition/procedure-enrich";
