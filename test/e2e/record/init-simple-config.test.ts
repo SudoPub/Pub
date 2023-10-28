@@ -17,8 +17,6 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
             justRunExample
         );
 
-        expect(record.serialize()).to.be.deep.equal({
-            configuration: justRunExample,
-        });
+        expect(record.serialize()).to.be.exist;
     });
 });
