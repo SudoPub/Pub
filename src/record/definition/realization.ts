@@ -29,7 +29,6 @@ export type PubRecordRealizationSwitch<T extends PUB_PROCEDURE_TYPE> =
     T extends PUB_PROCEDURE_TYPE.MAP ? PubRecordRealization_Map :
     never;
 
-
 export type PubRecordRealization_Start = {
 
     readonly parameters: PubRealizationOutcome;
@@ -42,12 +41,13 @@ export type PubRecordRealization_End = {
 
 export type PubRecordRealization_Driver = {
 
-    readonly parameters: PubRealizationOutcome;
-    readonly outcome: PubRealizationOutcome;
+    readonly outcome?: PubRealizationOutcome;
 };
 
 export type PubRecordRealization_Map = {
 
-    readonly parameters: PubRealizationOutcome;
-    readonly outcome: PubRealizationOutcome;
+    readonly outcome?: PubRealizationOutcome;
+
+    readonly iterationCount: number;
+    readonly iterations: PubRecordRealizationMap[];
 };
