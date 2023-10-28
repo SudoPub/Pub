@@ -4,7 +4,7 @@
  * @description Find Procedure Waypoint
  */
 
-import { CONNECTION_WAYPOINT_TYPE, PubConnectionConfiguration } from "../../connection/definition/configuration";
+import { PUB_CONNECTION_WAYPOINT_TYPE, PubConnectionConfiguration } from "../../connection/definition/configuration";
 import { PubRecordEnrichProcedureTypeInvalidError } from "../../error/record/enrich/procedure-type-invalid";
 import { PUB_PROCEDURE_TYPE } from "../../procedure/definition/configuration";
 import { PubRecordProcedureEnrich } from "../definition/procedure-enrich";
@@ -32,17 +32,17 @@ export const findNextProcedureWaypoint = (
 };
 
 const findProcedureWaypoint = (
-    procedureWaypointType: CONNECTION_WAYPOINT_TYPE,
+    procedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE,
     enrichProcedure: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE>,
 ): string => {
 
     switch (procedureWaypointType) {
 
-        case CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START: {
+        case PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START: {
 
             return enrichProcedure.enterWaypoint;
         }
-        case CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END: {
+        case PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END: {
 
             const requiredTypes: PUB_PROCEDURE_TYPE[] = [
                 PUB_PROCEDURE_TYPE.START,
@@ -64,7 +64,7 @@ const findProcedureWaypoint = (
 
             return fixedTypeEnrichProcedure.exitWaypoint;
         }
-        case CONNECTION_WAYPOINT_TYPE.PROCEDURE_ITERATE_START: {
+        case PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_ITERATE_START: {
 
             const requiredTypes: PUB_PROCEDURE_TYPE[] = [
                 PUB_PROCEDURE_TYPE.MAP,
@@ -83,7 +83,7 @@ const findProcedureWaypoint = (
 
             return fixedTypeEnrichProcedure.iterationStartWaypoint;
         }
-        case CONNECTION_WAYPOINT_TYPE.PROCEDURE_ITERATE_END: {
+        case PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_ITERATE_END: {
 
             const requiredTypes: PUB_PROCEDURE_TYPE[] = [
                 PUB_PROCEDURE_TYPE.MAP,

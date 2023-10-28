@@ -5,8 +5,10 @@
  * @override Example
  */
 
+import { createStrictMapPattern, createStringPattern } from "@sudoo/pattern";
 import { PubWorkflowConfiguration } from "../../src";
 import { PUB_PROCEDURE_TYPE } from "../../src/procedure/definition/configuration";
+import { PUB_CONNECTION_WAYPOINT_TYPE } from "../../src/connection/definition/configuration";
 
 export const justRunExample: PubWorkflowConfiguration = {
 
@@ -15,6 +17,16 @@ export const justRunExample: PubWorkflowConfiguration = {
 
     startParametersPattern: {},
     procedures: [
+        {
+            identifier: "START",
+            type: PUB_PROCEDURE_TYPE.START,
+
+            payload: {
+                patterns: {
+                    hello: createStringPattern(),
+                },
+            },
+        },
         {
             identifier: "JUST_RUN",
             type: PUB_PROCEDURE_TYPE.DRIVER,
@@ -27,5 +39,18 @@ export const justRunExample: PubWorkflowConfiguration = {
             },
         },
     ],
-    connections: [],
+    connections: [
+        {
+            identifier: "START-JUST_RUN",
+
+            triggerProcedureIdentifier: "START",
+            triggerProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END,
+
+            nextProcedureIdentifier: "JUST_RUN",
+            nextProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START,
+
+            parametersMapping: {
+            },
+        },
+    ],
 };
