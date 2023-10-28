@@ -5,9 +5,9 @@
  * @override E2E Test
  */
 
-import { expect } from 'chai';
 import { PubRecord } from '../../../src';
 import { justRunExample } from '../../example/just-run';
+import { ExpectRecord } from '../../expect/expect-record';
 
 describe('Given (Record Init Simple Config) Use Case', (): void => {
 
@@ -17,6 +17,6 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
             justRunExample
         );
 
-        expect(record.serialize()).to.be.exist;
+        ExpectRecord.with(record).to.be.exist();
     });
 });
