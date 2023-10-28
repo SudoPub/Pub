@@ -13,13 +13,13 @@ export type PubRecordRealizationMap = Map<string, PubRecordRealization<PUB_PROCE
 export type PubRecordRealizationRecord = Record<string, PubRecordRealization<PUB_PROCEDURE_TYPE>>;
 
 export type PubRecordRealization<T extends PUB_PROCEDURE_TYPE> =
-    PubRecordRealizationCommon<T> &
+    PubRecordRealizationCommon &
     PubRecordRealizationSwitch<T>;
 
-export type PubRecordRealizationCommon<T extends PUB_PROCEDURE_TYPE> = {
+export type PubRecordRealizationCommon = {
 
-    readonly procedureIdentifier: string;
-    readonly procedureType: T;
+    readonly startTime: Date;
+    readonly endTime?: Date;
 };
 
 export type PubRecordRealizationSwitch<T extends PUB_PROCEDURE_TYPE> =
