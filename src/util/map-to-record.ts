@@ -11,6 +11,12 @@ export const convertMapToRecord = <T extends string | number | symbol, V>(
     const record: Partial<Record<T, V>> = {};
 
     for (const [key, value] of map) {
+
+        if (value instanceof Map) {
+            record[key] = convertMapToRecord(value);
+            continue;
+        }
+
         record[key] = value;
     }
 
