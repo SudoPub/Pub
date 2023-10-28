@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Definition
- * @description Audit History
+ * @description Action
  */
 
 import { PubExecuteParameters } from "../../execute/definition/execute";
