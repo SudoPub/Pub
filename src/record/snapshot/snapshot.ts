@@ -85,4 +85,11 @@ export class PubRecordSnapshot {
             realizations: this._realizations,
         };
     }
+
+    public clone(): PubRecordSnapshot {
+
+        return PubRecordSnapshot.fromSerializedSnapshot(
+            this.serialize(),
+        );
+    }
 }

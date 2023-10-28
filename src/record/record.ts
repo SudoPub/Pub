@@ -71,4 +71,11 @@ export class PubRecord {
             snapshot: this._snapshot.serialize(),
         };
     }
+
+    public clone(): PubRecord {
+
+        return PubRecord.fromSerializedRecord(
+            this.serialize(),
+        );
+    }
 }
