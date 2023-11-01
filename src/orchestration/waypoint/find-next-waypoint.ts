@@ -6,7 +6,7 @@
 
 import { PubRecord } from "../../record/record";
 
-export const findNextWaypoint = (record: PubRecord): any => {
+export const findNextWaypoint = (record: PubRecord): string => {
 
-    return record;
+    return record.identifier;
 };
