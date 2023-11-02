@@ -24,9 +24,10 @@ export class ExpectRecord {
         this._record = record;
     }
 
-    public toExist(): void {
+    public toExist(): this {
 
         expect(this._record).exist;
+        return this;
     }
 
     public getSnapshot(): ExpectRecordSnapshot {
@@ -39,7 +40,6 @@ export class ExpectRecord {
         console.log(
             JSON.stringify(this._record.serialize(), null, 2),
         );
-
         return this;
     }
 }

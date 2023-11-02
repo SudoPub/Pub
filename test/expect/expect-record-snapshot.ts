@@ -26,9 +26,10 @@ export class ExpectRecordSnapshot {
         this._snapshot = snapshot;
     }
 
-    public toExist(): void {
+    public toExist(): this {
 
         expect(this._snapshot).exist;
+        return this;
     }
 
     public findProcedureEnrichByIdentifier(
