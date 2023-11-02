@@ -16,10 +16,6 @@ export const findTriggerableProcedureEnriches = (
 
     const procedureEnriches: Array<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE>> =
         Object.values(record.snapshot.procedureEnriches)
-            .map(a => {
-                console.log(a, waypoint);
-                return a;
-            })
             .filter((procedureEnrich: PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE>) => {
                 return procedureEnrich.enterWaypoint === waypoint;
             });

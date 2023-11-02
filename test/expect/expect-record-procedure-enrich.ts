@@ -34,6 +34,14 @@ export class ExpectRecordProcedureEnrich {
         return this;
     }
 
+    public toHasEnterWaypoint(waypoint: string): this {
+
+        const enrich: any = this._procedureEnrich;
+
+        expect(enrich.enterWaypoint).to.be.equal(waypoint);
+        return this;
+    }
+
     public toHasExitWaypoint(waypoint: string): this {
 
         const enrich: any = this._procedureEnrich;

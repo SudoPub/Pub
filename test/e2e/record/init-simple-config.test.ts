@@ -50,5 +50,12 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
         const triggerableProcedures: string[] = findNextWaypoints(record, startExitWaypoint.getOrThrow());
 
         expect(triggerableProcedures).to.be.lengthOf(1);
+
+        ExpectRecord
+            .with(record)
+            .getSnapshot()
+            .findProcedureEnrichByIdentifier("JUST_RUN")
+            .toExist()
+            .toHasEnterWaypoint(triggerableProcedures[0]);
     });
 });
