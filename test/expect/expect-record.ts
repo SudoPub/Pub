@@ -7,6 +7,7 @@
 
 import { expect } from 'chai';
 import { PubRecord } from "../../src";
+import { ExpectRecordSnapshot } from './expect-record-snapshot';
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 export class ExpectRecord {
@@ -26,6 +27,11 @@ export class ExpectRecord {
     public toExist(): void {
 
         expect(this._record).exist;
+    }
+
+    public getSnapshot(): ExpectRecordSnapshot {
+
+        return ExpectRecordSnapshot.with(this._record.snapshot);
     }
 
     public verbose(): this {

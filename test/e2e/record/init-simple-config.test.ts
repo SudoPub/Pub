@@ -22,17 +22,20 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
         ExpectRecord.with(record).toExist();
     });
 
-    it.only('Should be able to find start exit waypoint', (): void => {
+    it('Should be able to find start exit waypoint', (): void => {
 
         const record: PubRecord = PubRecord.fromWorkflowConfiguration(
             justRunExample
         );
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const startExitWaypoint: Optional<string> = findStartExitWaypoint(record);
 
-        console.log(startExitWaypoint.getOrThrow());
-
-        ExpectRecord.with(record).verbose();
-        ExpectRecord.with(record).toExist();
+        ExpectRecord
+            .with(record)
+            .getSnapshot()
+            .findProcedureEnrichByIdentifier("START")
+            .toExist()
+            .toHasExitWaypoint(startExitWaypoint.getOrThrow());
     });
 });
