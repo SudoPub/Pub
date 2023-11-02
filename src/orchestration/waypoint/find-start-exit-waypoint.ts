@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Orchestration_Waypoint
- * @description Find Enter Waypoint
+ * @description Find Start Exit Waypoint
  */
 
 import { Optional } from "@sudoo/optional";
@@ -10,16 +10,19 @@ import { PubRecordProcedureEnrich } from "../../record/definition/procedure-enri
 import { PubRecord } from "../../record/record";
 import { findStartEnrichedProcedure } from "../procedure/find-start-procedure";
 
-export const findEnterWaypoint = (
+export const findStartExitWaypoint = (
     record: PubRecord,
-): string => {
+): Optional<string> => {
 
     const firstProcedure: Optional<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START>>
         = findStartEnrichedProcedure(record);
 
     if (firstProcedure.exists) {
-        return firstProcedure.getOrThrow().exitWaypoint;
+
+        return Optional.of(
+            firstProcedure.getOrThrow().exitWaypoint,
+        );
     }
 
-    return record.identifier;
+    return Optional.ofEmpty();
 };
