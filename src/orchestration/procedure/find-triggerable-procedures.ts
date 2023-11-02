@@ -8,6 +8,7 @@ import { PUB_PROCEDURE_TYPE } from "../../procedure/definition/configuration";
 import { PubRecordProcedureEnrich } from "../../record/definition/procedure-enrich";
 import { PubRecord } from "../../record/record";
 
+// TODO: implement this
 export const findTriggerableProcedureEnriches = (
     record: PubRecord,
     waypoint: string,
