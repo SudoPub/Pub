@@ -30,7 +30,13 @@ export class ExpectRecord {
         return this;
     }
 
-    public getSnapshot(): ExpectRecordSnapshot {
+    public toNotExist(): this {
+
+        expect(this._record).not.exist;
+        return this;
+    }
+
+    public findSnapshot(): ExpectRecordSnapshot {
 
         return ExpectRecordSnapshot.with(this._record.snapshot);
     }

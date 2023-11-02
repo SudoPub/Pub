@@ -32,6 +32,24 @@ export class ExpectRecordSnapshot {
         return this;
     }
 
+    public toNotExist(): this {
+
+        expect(this._snapshot).not.exist;
+        return this;
+    }
+
+    public toHasSizeOfProcedureEnrich(length: number): this {
+
+        expect(Object.keys(this._snapshot.procedureEnriches)).to.be.lengthOf(length);
+        return this;
+    }
+
+    public toHasSizeOfConnectionEnrich(length: number): this {
+
+        expect(Object.keys(this._snapshot.connectionEnriches)).to.be.lengthOf(length);
+        return this;
+    }
+
     public findProcedureEnrichByIdentifier(
         identifier: string,
     ): ExpectRecordProcedureEnrich {

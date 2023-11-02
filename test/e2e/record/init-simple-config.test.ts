@@ -34,7 +34,7 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
 
         ExpectRecord
             .with(record)
-            .getSnapshot()
+            .findSnapshot()
             .findProcedureEnrichByIdentifier("START")
             .toExist()
             .toHasExitWaypoint(startExitWaypoint.getOrThrow());
@@ -53,7 +53,7 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
 
         ExpectRecord
             .with(record)
-            .getSnapshot()
+            .findSnapshot()
             .findProcedureEnrichByIdentifier("JUST_RUN")
             .toExist()
             .toHasEnterWaypoint(triggerableProcedures[0]);

@@ -34,6 +34,24 @@ export class ExpectRecordProcedureEnrich {
         return this;
     }
 
+    public toNotExist(): this {
+
+        expect(this._procedureEnrich).not.exist;
+        return this;
+    }
+
+    public toHasIdentifier(identifier: string): this {
+
+        expect(this._procedureEnrich.procedureIdentifier).to.be.equal(identifier);
+        return this;
+    }
+
+    public toHasType(type: PUB_PROCEDURE_TYPE): this {
+
+        expect(this._procedureEnrich.procedureType).to.be.equal(type);
+        return this;
+    }
+
     public toHasEnterWaypoint(waypoint: string): this {
 
         const enrich: any = this._procedureEnrich;
