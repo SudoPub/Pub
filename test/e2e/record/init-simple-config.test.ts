@@ -17,6 +17,15 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
             justRunExample
         );
 
-        ExpectRecord.with(record).to.be.exist();
+        ExpectRecord.with(record).exist();
+    });
+
+    it('Should be able to find start exit waypoint', (): void => {
+
+        const record: PubRecord = PubRecord.fromWorkflowConfiguration(
+            justRunExample
+        );
+
+        ExpectRecord.with(record).exist();
     });
 });

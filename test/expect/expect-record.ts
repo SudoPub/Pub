@@ -23,13 +23,6 @@ export class ExpectRecord {
         this._record = record;
     }
 
-    public get to(): this {
-        return this;
-    }
-    public get be(): this {
-        return this;
-    }
-
     public exist(): void {
 
         expect(this._record).exist;
