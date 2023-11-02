@@ -23,8 +23,17 @@ export class ExpectRecord {
         this._record = record;
     }
 
-    public exist(): void {
+    public toExist(): void {
 
         expect(this._record).exist;
+    }
+
+    public verbose(): this {
+
+        console.log(
+            JSON.stringify(this._record.serialize(), null, 2),
+        );
+
+        return this;
     }
 }

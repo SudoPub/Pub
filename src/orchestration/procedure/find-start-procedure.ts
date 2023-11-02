@@ -13,7 +13,7 @@ export const findStartEnrichedProcedure = (
     record: PubRecord,
 ): Optional<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START>> => {
 
-    const startProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> =
+    const startProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>> =
         findStartProcedure(record);
 
     if (!startProcedure.exists) {
@@ -23,14 +23,14 @@ export const findStartEnrichedProcedure = (
     const startEnrichedProcedure: Optional<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START>> =
         Optional.of(record
             .snapshot
-            .procedureEnriches[startProcedure.getOrThrow().identifier]);
+            .procedureEnriches[startProcedure.getOrThrow().identifier]) as any as Optional<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START>>;
 
     return startEnrichedProcedure;
 };
 
 export const findStartProcedure = (
     record: PubRecord,
-): Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> => {
+): Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>> => {
 
     return Optional.of(record
         .cachedConfiguration
@@ -39,5 +39,5 @@ export const findStartProcedure = (
         .find((procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE>) => {
 
             return procedure.type === PUB_PROCEDURE_TYPE.START;
-        }));
+        })) as any as Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>>;
 };
