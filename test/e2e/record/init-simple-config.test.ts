@@ -16,7 +16,7 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
     it('Should be able to init just run configuration', (): void => {
 
         const record: PubRecord = PubRecord.fromWorkflowConfiguration(
-            justRunExample
+            justRunExample,
         );
 
         ExpectRecord.with(record).toExist();
@@ -25,7 +25,7 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
     it('Should be able to find start exit waypoint', (): void => {
 
         const record: PubRecord = PubRecord.fromWorkflowConfiguration(
-            justRunExample
+            justRunExample,
         );
 
         // eslint-disable-next-line @typescript-eslint/no-unused-vars

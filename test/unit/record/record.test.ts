@@ -14,7 +14,7 @@ describe('Given {PubRecord} Class', (): void => {
     it('Should be able to init just run configuration', (): void => {
 
         const record: PubRecord = PubRecord.fromWorkflowConfiguration(
-            justRunExample
+            justRunExample,
         );
 
         expect(record.serialize()).to.be.exist;
