@@ -6,12 +6,12 @@
 
 import { Optional } from "@sudoo/optional";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { PubRecordProcedureEnrichRecord } from "../../record/definition/procedure-enrich";
+import { PubRecordProcedureEnrich } from "../../record/definition/procedure-enrich";
 import { PubRecord } from "../../record/record";
 
 export const findStartEnrichedProcedure = (
     record: PubRecord,
-): Optional<PubRecordProcedureEnrichRecord> => {
+): Optional<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START>> => {
 
     const startProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> =
         findStartProcedure(record);
@@ -20,7 +20,7 @@ export const findStartEnrichedProcedure = (
         return Optional.ofEmpty();
     }
 
-    const startEnrichedProcedure: Optional<PubRecordProcedureEnrichRecord> =
+    const startEnrichedProcedure: Optional<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START>> =
         Optional.of(record
             .snapshot
             .procedureEnriches[startProcedure.getOrThrow().identifier]);
