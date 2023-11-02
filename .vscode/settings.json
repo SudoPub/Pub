@@ -4,6 +4,7 @@
         "sudoo",
         "sudopub",
         "triforce",
+        "Triggerable",
         "WMXPY"
     ],
     "eslint.options": {

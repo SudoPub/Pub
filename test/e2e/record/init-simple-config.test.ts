@@ -10,6 +10,9 @@ import { PubRecord } from '../../../src';
 import { findStartExitWaypoint } from '../../../src/orchestration/waypoint/find-start-exit-waypoint';
 import { justRunExample } from '../../example/just-run';
 import { ExpectRecord } from '../../expect/expect-record';
+import { PubRecordProcedureEnrich } from '../../../src/record/definition/procedure-enrich';
+import { PUB_PROCEDURE_TYPE } from '../../../src/procedure/definition/configuration';
+import { findTriggerableProcedureEnriches } from '../../../src/orchestration/procedure/find-triggerable-procedures';
 
 describe('Given (Record Init Simple Config) Use Case', (): void => {
 
@@ -28,7 +31,6 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
             justRunExample,
         );
 
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const startExitWaypoint: Optional<string> = findStartExitWaypoint(record);
 
         ExpectRecord
@@ -37,5 +39,17 @@ describe('Given (Record Init Simple Config) Use Case', (): void => {
             .findProcedureEnrichByIdentifier("START")
             .toExist()
             .toHasExitWaypoint(startExitWaypoint.getOrThrow());
+    });
+
+    it.only('Should be able to find start triggerable procedures', (): void => {
+
+        const record: PubRecord = PubRecord.fromWorkflowConfiguration(
+            justRunExample,
+        );
+
+        const startExitWaypoint: Optional<string> = findStartExitWaypoint(record);
+        const triggerableProcedures: Array<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE>> = findTriggerableProcedureEnriches(record, startExitWaypoint.getOrThrow());
+
+        console.log(triggerableProcedures);
     });
 });
