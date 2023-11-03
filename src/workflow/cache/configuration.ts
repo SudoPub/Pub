@@ -4,6 +4,7 @@
  * @description Configuration
  */
 
+import { Optional } from "@sudoo/optional";
 import { PubConnectionConfiguration } from "../../connection/definition/configuration";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubWorkflowConfiguration } from "../definition/configuration";
@@ -40,6 +41,17 @@ export class PubCachedWorkflowConfiguration {
 
     public get configuration(): PubWorkflowConfiguration {
         return this._configuration;
+    }
+
+    public getStartProcedure(): Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>> {
+
+        const startProcedure = Optional.ofUndefinable(
+            this._configuration.procedures.find((procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE>) => {
+                return procedure.type === PUB_PROCEDURE_TYPE.START;
+            }) as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START> | undefined,
+        );
+
+        return startProcedure;
     }
 
     public getProcedureByIdentifier(
