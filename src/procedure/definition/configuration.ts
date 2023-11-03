@@ -19,7 +19,7 @@ export enum PUB_PROCEDURE_TYPE {
     MAP = "MAP",
 }
 
-export type PubProcedureConfiguration<T extends PUB_PROCEDURE_TYPE> = {
+export type PubProcedureConfiguration<T extends PUB_PROCEDURE_TYPE = PUB_PROCEDURE_TYPE> = {
 
     readonly identifier: string;
     readonly type: T;

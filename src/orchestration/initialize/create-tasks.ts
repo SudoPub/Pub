@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Orchestration_Initialize
- * @description Initialize Tasks
+ * @description Create Tasks
  */
 
 import { Optional } from "@sudoo/optional";
