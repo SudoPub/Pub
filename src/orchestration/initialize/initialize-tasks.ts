@@ -17,5 +17,9 @@ export const initializeCreateTasks = (
     const startProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>>
         = configuration.getStartProcedure();
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const endProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>>
+        = configuration.getEndProcedure();
+
     return [];
 };

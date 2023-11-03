@@ -46,12 +46,29 @@ export class PubCachedWorkflowConfiguration {
     public getStartProcedure(): Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>> {
 
         const startProcedure = Optional.ofUndefinable(
-            this._configuration.procedures.find((procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE>) => {
-                return procedure.type === PUB_PROCEDURE_TYPE.START;
-            }) as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START> | undefined,
+            this._configuration.procedures.find(
+                (procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE>) => {
+
+                    return procedure.type === PUB_PROCEDURE_TYPE.START;
+                },
+            ) as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START> | undefined,
         );
 
         return startProcedure;
+    }
+
+    public getEndProcedure(): Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>> {
+
+        const endProcedure = Optional.ofUndefinable(
+            this._configuration.procedures.find(
+                (procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE>) => {
+
+                    return procedure.type === PUB_PROCEDURE_TYPE.END;
+                },
+            ) as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END> | undefined,
+        );
+
+        return endProcedure;
     }
 
     public getProcedureByIdentifier(
