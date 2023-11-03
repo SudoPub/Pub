@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
  * @namespace Orchestration_Initialize
- * @description Recursive Add Task
+ * @description Recursive Create Task
  */
 
 import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
@@ -9,7 +9,7 @@ import { PubTask } from "../../task/task";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
 import { findNextProcedures } from "../procedure/find-next-procedure";
 
-export const initializeRecursiveAddTask = (
+export const initializeRecursiveCreateTask = (
     configuration: PubCachedWorkflowConfiguration,
     currentProcedure: PubProcedureConfiguration,
     tasks: PubTask[],
