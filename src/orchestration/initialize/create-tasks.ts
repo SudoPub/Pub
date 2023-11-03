@@ -8,12 +8,12 @@ import { Optional } from "@sudoo/optional";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubTask } from "../../task/task";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
+import { initializeRecursiveCreateTask } from "./recursive-create-task";
 
 export const initializeCreateTasks = (
     configuration: PubCachedWorkflowConfiguration,
 ): PubTask[] => {
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const startProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>>
         = configuration.getStartProcedure();
 
@@ -21,5 +21,10 @@ export const initializeCreateTasks = (
     const endProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>>
         = configuration.getEndProcedure();
 
-    return [];
+    const tasks: PubTask[] = initializeRecursiveCreateTask(
+        configuration,
+        startProcedure.getOrThrow(),
+    );
+
+    return tasks;
 };

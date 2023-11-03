@@ -26,9 +26,15 @@ export const initializeRecursiveCreateTask = (
 
     return [
         ...nextTasks,
-        ...nextTasks.reduce((_previous: PubTask[], _nextTask: PubTask) => {
+        ...nextTasks.reduce((previous: PubTask[], nextTask: PubTask) => {
 
-            return [];
+            return [
+                ...previous,
+                ...initializeRecursiveCreateTask(
+                    configuration,
+                    configuration.getProcedureByIdentifier(nextTask.identifier).getOrThrow()
+                ),
+            ];
         }, []),
     ];
 };
