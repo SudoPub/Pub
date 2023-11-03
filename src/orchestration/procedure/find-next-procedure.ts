@@ -4,6 +4,7 @@
  * @description Find Next Procedure
  */
 
+import { Optional } from "@sudoo/optional";
 import { PUB_CONNECTION_WAYPOINT_TYPE } from "../../connection/definition/configuration";
 import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
@@ -30,9 +31,10 @@ export const findNextProcedures = (
         .map((connection) => {
             return configuration.getProcedureByIdentifier(connection.nextProcedureIdentifier);
         })
-        .filter((procedure): procedure is PubProcedureConfiguration => {
-            return Boolean(procedure);
-        });
+        .filter((procedure): procedure is Optional<PubProcedureConfiguration> => {
+            return procedure.exists;
+        })
+        .map((procedure) => procedure.getOrThrow());
 
     return nextProcedures;
 };

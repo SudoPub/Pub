@@ -21,7 +21,7 @@ export const findStartEnrichedProcedure = (
     }
 
     const startEnrichedProcedure: Optional<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START>> =
-        Optional.of(record
+        Optional.ofAny(record
             .snapshot
             .procedureEnriches[startProcedure.getOrThrow().identifier]) as any as Optional<PubRecordProcedureEnrich<PUB_PROCEDURE_TYPE.START>>;
 
@@ -32,7 +32,7 @@ export const findStartProcedure = (
     record: PubRecord,
 ): Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>> => {
 
-    return Optional.of(record
+    return Optional.ofAny(record
         .cachedConfiguration
         .configuration
         .procedures

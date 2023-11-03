@@ -4,6 +4,7 @@
  * @description Find Triggerable Procedures
  */
 
+import { Optional } from "@sudoo/optional";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubRecordProcedureEnrich } from "../../record/definition/procedure-enrich";
 import { PubRecord } from "../../record/record";
@@ -24,9 +25,12 @@ export const findTriggerableProcedures = (
             .map((procedureIdentifier: string) => {
                 return record.cachedConfiguration.getProcedureByIdentifier(procedureIdentifier);
             })
-            .filter((possibleProcedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE> | null) => {
-                return Boolean(possibleProcedure);
-            }) as Array<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>>;
+            .filter((possibleProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>>) => {
+                return possibleProcedure.exists;
+            })
+            .map((possibleProcedure) => {
+                return possibleProcedure.getOrThrow();
+            });
 
     return procedures;
 };

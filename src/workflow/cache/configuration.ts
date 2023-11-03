@@ -73,7 +73,7 @@ export class PubCachedWorkflowConfiguration {
 
     public getProcedureByIdentifier(
         identifier: string,
-    ): PubProcedureConfiguration<PUB_PROCEDURE_TYPE> | null {
+    ): Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE>> {
 
         if (!this._proceduresCache.has(identifier)) {
 
@@ -85,7 +85,7 @@ export class PubCachedWorkflowConfiguration {
             }
         }
 
-        return this._proceduresCache.get(identifier) as PubProcedureConfiguration<PUB_PROCEDURE_TYPE> ?? null;
+        return Optional.ofUndefinable(this._proceduresCache.get(identifier));
     }
 
     public getConnectionByIdentifier(

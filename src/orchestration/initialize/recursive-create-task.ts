@@ -12,7 +12,6 @@ import { findNextProcedures } from "../procedure/find-next-procedure";
 export const initializeRecursiveCreateTask = (
     configuration: PubCachedWorkflowConfiguration,
     currentProcedure: PubProcedureConfiguration,
-    tasks: PubTask[],
 ): PubTask[] => {
 
     const nextProcedures: PubProcedureConfiguration[] = findNextProcedures(
@@ -26,7 +25,10 @@ export const initializeRecursiveCreateTask = (
     });
 
     return [
-        ...tasks,
         ...nextTasks,
+        ...nextTasks.reduce((_previous: PubTask[], _nextTask: PubTask) => {
+
+            return [];
+        }, []),
     ];
 };

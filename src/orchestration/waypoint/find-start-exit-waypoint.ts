@@ -19,7 +19,7 @@ export const findStartExitWaypoint = (
 
     if (firstProcedure.exists) {
 
-        return Optional.of(
+        return Optional.ofAny(
             firstProcedure.getOrThrow().exitWaypoint,
         );
     }
