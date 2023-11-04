@@ -99,5 +99,48 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
                 .forTaskWithProcedureIdentifier("THIRD")
                 .toBeExecutable();
         });
+
+        it('Should be able to get fourth batch of executable tasks', (): void => {
+
+            applyActionOnTaskManager(
+                createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
+                    taskIdentifier: taskManager
+                        .getTasksByProcedureIdentifier("SECOND")[0]
+                        .taskIdentifier,
+                    output: {},
+                }),
+                taskManager,
+            );
+
+            ExpectTaskManager.with(taskManager)
+                .hasExecutableTaskLength(2);
+
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("END")
+                .toBeExecutable();
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("THIRD")
+                .toBeExecutable();
+        });
+
+        it('Should be able to get fifth batch of executable tasks', (): void => {
+
+            applyActionOnTaskManager(
+                createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
+                    taskIdentifier: taskManager
+                        .getTasksByProcedureIdentifier("THIRD")[0]
+                        .taskIdentifier,
+                    output: {},
+                }),
+                taskManager,
+            );
+
+            ExpectTaskManager.with(taskManager)
+                .hasExecutableTaskLength(1);
+
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("END")
+                .toBeExecutable();
+        });
     });
 });
