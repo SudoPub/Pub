@@ -6,13 +6,13 @@
 
 import { Optional } from "@sudoo/optional";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { PubTask } from "../../task/task";
+import { PubTaskBase } from "../../task/task-base";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
 import { initializeRecursiveCreateTask } from "./recursive-create-task";
 
 export const initializeCreateTasks = (
     configuration: PubCachedWorkflowConfiguration,
-): PubTask[] => {
+): PubTaskBase[] => {
 
     const startProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>>
         = configuration.getStartProcedure();
@@ -21,7 +21,7 @@ export const initializeCreateTasks = (
     const endProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>>
         = configuration.getEndProcedure();
 
-    const tasks: PubTask[] = initializeRecursiveCreateTask(
+    const tasks: PubTaskBase[] = initializeRecursiveCreateTask(
         configuration,
         startProcedure.getOrThrow(),
     );

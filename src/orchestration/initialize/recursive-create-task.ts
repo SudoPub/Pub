@@ -5,28 +5,29 @@
  */
 
 import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { PubTask } from "../../task/task";
+import { createPubTask } from "../../task/factory/create";
+import { PubTaskBase } from "../../task/task-base";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
 import { findNextProcedures } from "../procedure/find-next-procedure";
 
 export const initializeRecursiveCreateTask = (
     configuration: PubCachedWorkflowConfiguration,
     currentProcedure: PubProcedureConfiguration,
-): PubTask[] => {
+): PubTaskBase[] => {
 
     const nextProcedures: PubProcedureConfiguration[] = findNextProcedures(
         currentProcedure,
         configuration,
     );
 
-    const nextTasks: PubTask[] = nextProcedures.map((procedure: PubProcedureConfiguration) => {
+    const nextTasks: PubTaskBase[] = nextProcedures.map((procedure: PubProcedureConfiguration) => {
 
-        return PubTask.fromProcedure(procedure);
+        return createPubTask(procedure);
     });
 
     return [
         ...nextTasks,
-        ...nextTasks.reduce((previous: PubTask[], nextTask: PubTask) => {
+        ...nextTasks.reduce((previous: PubTaskBase[], nextTask: PubTaskBase) => {
 
             return [
                 ...previous,
