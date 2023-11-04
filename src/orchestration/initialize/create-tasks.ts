@@ -24,6 +24,7 @@ export const initializeCreateTasks = (
     const tasks: PubTaskBase[] = initializeRecursiveCreateTask(
         configuration,
         startProcedure.getOrThrow(),
+        Optional.ofEmpty(),
     );
 
     return tasks;
