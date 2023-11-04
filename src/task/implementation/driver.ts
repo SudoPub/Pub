@@ -5,10 +5,9 @@
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { IPubTask } from "../definition/task";
 import { PubTaskBase } from "../task-base";
 
-export class PubDriverTask extends PubTaskBase implements IPubTask {
+export class PubDriverTask extends PubTaskBase {
 
     public static fromProcedure(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>,

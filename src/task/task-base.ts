@@ -5,9 +5,8 @@
  */
 
 import { UUIDVersion1 } from "@sudoo/uuid";
-import { IPubTask } from "./definition/task";
 
-export abstract class PubTaskBase implements IPubTask {
+export abstract class PubTaskBase {
 
     protected readonly _taskIdentifier: string;
 
