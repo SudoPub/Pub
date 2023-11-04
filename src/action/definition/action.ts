@@ -4,7 +4,7 @@
  * @description Action
  */
 
-import { PubExecuteParameters } from "../../execute/definition/execute";
+import { PubExecuteParameters } from "../../task/definition/parameters";
 
 export enum PUB_ACTION_TYPE {
 

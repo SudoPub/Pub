@@ -1,7 +1,7 @@
 /**
  * @author WMXPY
- * @namespace Execute_Definition
- * @description Execute
+ * @namespace Task_Definition
+ * @description Parameters
  */
 
 export type PubExecuteParameters = Record<string, any>;
