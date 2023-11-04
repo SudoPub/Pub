@@ -8,7 +8,9 @@ import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, Ta
 
 export type PubSnapshotTask = {
 
-    readonly identifier: string;
+    readonly taskIdentifier: string;
+    readonly procedureIdentifier: string;
+
     readonly type: PUB_TASK_TYPE;
 
     readonly dependencies: string[];

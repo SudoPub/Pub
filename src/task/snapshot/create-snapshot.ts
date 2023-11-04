@@ -13,7 +13,9 @@ export const createTaskSnapshot = (
 
     return {
 
-        identifier: task.taskIdentifier,
+        taskIdentifier: task.taskIdentifier,
+        procedureIdentifier: task.procedureIdentifier,
+
         type: task.taskType,
 
         dependencies: task.dependencies,
