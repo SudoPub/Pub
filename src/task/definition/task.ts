@@ -17,3 +17,6 @@ export enum PUB_TASK_STATUS {
 }
 
 export type PubSerializedTask = Record<string, any>;
+
+export type TaskExecuteInput = Record<string, any>;
+export type TaskExecuteOutput = Record<string, any>;

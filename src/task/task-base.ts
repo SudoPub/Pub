@@ -4,8 +4,11 @@
  * @description Task Base
  */
 
+import { EmptyValueSymbol, SEmptyValue } from "@sudoo/symbol";
 import { UUIDVersion1 } from "@sudoo/uuid";
-import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask } from "./definition/task";
+import { PubTaskEnsureEmptyInputTypeError } from "../error/task/ensure/empty-input";
+import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-output";
+import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
 
 export abstract class PubTaskBase {
 
@@ -14,6 +17,9 @@ export abstract class PubTaskBase {
     private readonly _taskType: PUB_TASK_TYPE;
 
     private readonly _dependencies: Set<string>;
+
+    private readonly _executeInput: TaskExecuteInput | SEmptyValue;
+    private readonly _executeOutput: TaskExecuteOutput | SEmptyValue;
 
     public abstract procedureIdentifier: string;
 
@@ -27,6 +33,9 @@ export abstract class PubTaskBase {
         this._taskType = type;
 
         this._dependencies = new Set(dependencies);
+
+        this._executeInput = EmptyValueSymbol;
+        this._executeOutput = EmptyValueSymbol;
     }
 
     public get taskIdentifier(): string {
@@ -59,6 +68,26 @@ export abstract class PubTaskBase {
 
         this._dependencies.delete(dependency);
         return this;
+    }
+
+    public ensureInput(): TaskExecuteInput {
+
+        if (this._executeInput === EmptyValueSymbol) {
+            throw PubTaskEnsureEmptyInputTypeError.withTaskIdentifier(
+                this._taskIdentifier,
+            );
+        }
+        return this._executeInput;
+    }
+
+    public ensureOutput(): TaskExecuteOutput {
+
+        if (this._executeOutput === EmptyValueSymbol) {
+            throw PubTaskEnsureEmptyOutputTypeError.withTaskIdentifier(
+                this._taskIdentifier,
+            );
+        }
+        return this._executeOutput;
     }
 
     protected abstract serialize(): PubSerializedTask;
