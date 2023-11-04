@@ -12,7 +12,7 @@ import { PUB_TASK_TYPE } from '../../src/task/definition/task';
 export class ExpectTask {
 
     public static with(
-        task: PubTaskBase
+        task: PubTaskBase,
     ): ExpectTask {
 
         return new ExpectTask(task);
