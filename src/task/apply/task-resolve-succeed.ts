@@ -23,6 +23,7 @@ export const applyTaskResolveSucceedOnTaskManager = (
         );
 
     task.setTaskStatus(PUB_TASK_STATUS.RESOLVED);
+    task.setExecuteOutput(action.payload.output);
 
     const dependencies: PubTaskBase[] = taskManager.getTasksByDependency(task.taskIdentifier);
 

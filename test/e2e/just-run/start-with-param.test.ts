@@ -47,6 +47,10 @@ describe('Given (Just-Run Start With Param) Use Case', (): void => {
 
         ExpectTaskManager.with(taskManager)
             .forTaskWithProcedureIdentifier(justRunExampleStartProcedure.identifier)
-            .toHasStatus(PUB_TASK_STATUS.RESOLVED);
+            .toHasStatus(PUB_TASK_STATUS.RESOLVED)
+            .toNotHaveInput()
+            .toHasOutput({
+                hello: helloMessage,
+            });
     });
 });

@@ -77,4 +77,48 @@ export class ExpectTask {
         );
         return this;
     }
+
+    public toHasInput(input: Record<string, any>): this {
+
+        if (!this._task.getExecuteInput().exists) {
+            expect.fail('Expect to have input, but not');
+        }
+
+        expect(this._task
+            .getExecuteInput()
+            .getOrThrow())
+            .to.be.deep.equal(input);
+        return this;
+    }
+
+    public toNotHaveInput(): this {
+
+        if (this._task.getExecuteInput().exists) {
+            expect.fail(`Expect to not have input, but have ${JSON.stringify(this._task.getExecuteInput().getOrThrow())}`);
+        }
+
+        return this;
+    }
+
+    public toHasOutput(output: Record<string, any>): this {
+
+        if (!this._task.getExecuteOutput().exists) {
+            expect.fail('Expect to have output, but not');
+        }
+
+        expect(this._task
+            .getExecuteOutput()
+            .getOrThrow())
+            .to.be.deep.equal(output);
+        return this;
+    }
+
+    public toNotHaveOutput(): this {
+
+        if (this._task.getExecuteOutput().exists) {
+            expect.fail(`Expect to not have output, but have ${JSON.stringify(this._task.getExecuteOutput().getOrThrow())}`);
+        }
+
+        return this;
+    }
 }
