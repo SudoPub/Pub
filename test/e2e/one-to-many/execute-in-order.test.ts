@@ -6,12 +6,16 @@
  */
 
 import { expect } from 'chai';
+import { createPubAction } from '../../../src/action/create';
+import { PUB_ACTION_TYPE } from '../../../src/action/definition/action';
 import { initializeCreateTaskManager, initializeCreateTasks } from '../../../src/orchestration/initialize/create-tasks';
+import { applyActionOnTaskManager } from '../../../src/task/apply/apply';
 import { PubTaskBase } from '../../../src/task/task-base';
 import { PubTaskManager } from '../../../src/task/task-manager';
 import { PubCachedWorkflowConfiguration } from '../../../src/workflow/cache/configuration';
 import { oneToManyExample } from '../../example/one-to-many';
 import { ExpectTask } from '../../expect/expect-task';
+import { ExpectTaskManager } from '../../expect/expect-task-manager';
 
 describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
 
@@ -32,12 +36,68 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
         ExpectTask.with(tasks[4]).toBeTask();
     });
 
-    it('Should be able to get first available task', (): void => {
+    describe('Iteration - [Execute one by one]', (): void => {
 
         const taskManager: PubTaskManager = initializeCreateTaskManager(oneToManyConfiguration);
 
-        const executableTasks: PubTaskBase[] = taskManager.getExecutableTasks();
+        it('Should be able to get first batch of executable tasks', (): void => {
 
-        expect(executableTasks).to.be.lengthOf(1);
+            ExpectTaskManager.with(taskManager)
+                .hasExecutableTaskLength(1)
+                .forTaskWithProcedureIdentifier("INIT")
+                .toBeExecutable();
+        });
+
+        it('Should be able to get second batch of executable tasks', (): void => {
+
+            applyActionOnTaskManager(
+                createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
+                    taskIdentifier: taskManager
+                        .getTasksByProcedureIdentifier("INIT")[0]
+                        .taskIdentifier,
+                    output: {},
+                }),
+                taskManager,
+            );
+
+            ExpectTaskManager.with(taskManager)
+                .hasExecutableTaskLength(3);
+
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("FIRST")
+                .toBeExecutable();
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("SECOND")
+                .toBeExecutable();
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("THIRD")
+                .toBeExecutable();
+        });
+
+        it('Should be able to get third batch of executable tasks', (): void => {
+
+            applyActionOnTaskManager(
+                createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
+                    taskIdentifier: taskManager
+                        .getTasksByProcedureIdentifier("FIRST")[0]
+                        .taskIdentifier,
+                    output: {},
+                }),
+                taskManager,
+            );
+
+            ExpectTaskManager.with(taskManager)
+                .hasExecutableTaskLength(3);
+
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("END")
+                .toBeExecutable();
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("SECOND")
+                .toBeExecutable();
+            ExpectTaskManager.with(taskManager)
+                .forTaskWithProcedureIdentifier("THIRD")
+                .toBeExecutable();
+        });
     });
 });

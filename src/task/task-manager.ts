@@ -50,6 +50,15 @@ export class PubTaskManager {
         );
     }
 
+    public getTasksByProcedureIdentifier(procedureIdentifier: string): PubTaskBase[] {
+
+        return this._tasks.filter(
+            (task: PubTaskBase) => {
+                return task.procedureIdentifier === procedureIdentifier;
+            },
+        );
+    }
+
     public getExecutableTasks(): PubTaskBase[] {
 
         return this._tasks.filter(

@@ -9,6 +9,7 @@ import { expect } from 'chai';
 import { PubTaskBase } from "../../src/task/task-base";
 import { PUB_TASK_TYPE } from '../../src/task/definition/task';
 
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 export class ExpectTask {
 
     public static with(
@@ -36,6 +37,12 @@ export class ExpectTask {
     public toBeEqualToTask(task: PubTaskBase): this {
 
         expect(this._task.taskIdentifier).to.be.equal(task.taskIdentifier);
+        return this;
+    }
+
+    public toBeExecutable(): this {
+
+        expect(this._task.executable()).to.be.true;
         return this;
     }
 
