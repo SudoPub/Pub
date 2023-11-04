@@ -28,6 +28,12 @@ export abstract class PubTaskBase {
     public get taskIdentifier(): string {
         return this._taskIdentifier;
     }
+    public get taskType(): PUB_TASK_TYPE {
+        return this._taskType;
+    }
+    public get dependencies(): string[] {
+        return this._dependencies;
+    }
 
     protected abstract serialize(): PubSerializedTask;
 }
