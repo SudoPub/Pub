@@ -30,4 +30,12 @@ export class PubDriverTask extends PubTaskBase {
     public get procedureIdentifier(): string {
         return this._procedure.identifier;
     }
+
+    public serialize(): string {
+
+        return JSON.stringify({
+            taskIdentifier: this.taskIdentifier,
+            procedureIdentifier: this.procedureIdentifier,
+        });
+    }
 }

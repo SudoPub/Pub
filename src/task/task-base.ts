@@ -20,4 +20,6 @@ export abstract class PubTaskBase {
     public get taskIdentifier(): string {
         return this._taskIdentifier;
     }
+
+    public abstract serialize(): string;
 }

@@ -20,10 +20,12 @@ export const initializeRecursiveCreateTask = (
         configuration,
     );
 
-    const nextTasks: PubTaskBase[] = nextProcedures.map((procedure: PubProcedureConfiguration) => {
+    const nextTasks: PubTaskBase[] = nextProcedures.map(
+        (procedure: PubProcedureConfiguration) => {
 
-        return createPubTaskWithProcedure(procedure);
-    });
+            return createPubTaskWithProcedure(procedure);
+        },
+    );
 
     return [
         ...nextTasks,
