@@ -28,13 +28,11 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
 
         const tasks: PubTaskBase[] = initializeCreateTasks(oneToManyConfiguration);
 
-        expect(tasks).to.be.lengthOf(5);
+        expect(tasks).to.be.lengthOf(6);
 
-        ExpectTask.with(tasks[0]).toBeTask();
-        ExpectTask.with(tasks[1]).toBeTask();
-        ExpectTask.with(tasks[2]).toBeTask();
-        ExpectTask.with(tasks[3]).toBeTask();
-        ExpectTask.with(tasks[4]).toBeTask();
+        tasks.forEach((task: PubTaskBase) => {
+            ExpectTask.with(task).toBeTask();
+        });
     });
 
     describe('Iteration - [Execute one by one]', (): void => {
@@ -45,11 +43,29 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
 
             ExpectTaskManager.with(taskManager)
                 .hasExecutableTaskLength(1)
-                .forTaskWithProcedureIdentifier("INIT")
+                .forTaskWithProcedureIdentifier("START")
                 .toBeExecutable();
         });
 
         it('Should be able to get second batch of executable tasks', (): void => {
+
+            applyActionOnTaskManager(
+                createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
+                    taskIdentifier: taskManager
+                        .getTasksByProcedureIdentifier("START")[0]
+                        .taskIdentifier,
+                    output: {},
+                }),
+                taskManager,
+            );
+
+            ExpectTaskManager.with(taskManager)
+                .hasExecutableTaskLength(1)
+                .forTaskWithProcedureIdentifier("INIT")
+                .toBeExecutable();
+        });
+
+        it('Should be able to get third batch of executable tasks', (): void => {
 
             applyActionOnTaskManager(
                 createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
@@ -75,7 +91,7 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
                 .toBeExecutable();
         });
 
-        it('Should be able to get third batch of executable tasks', (): void => {
+        it('Should be able to get fourth batch of executable tasks', (): void => {
 
             applyActionOnTaskManager(
                 createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
@@ -101,7 +117,7 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
                 .toBeExecutable();
         });
 
-        it('Should be able to get fourth batch of executable tasks', (): void => {
+        it('Should be able to get fifth batch of executable tasks', (): void => {
 
             applyActionOnTaskManager(
                 createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
@@ -124,7 +140,7 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
                 .toBeExecutable();
         });
 
-        it('Should be able to get fifth batch of executable tasks', (): void => {
+        it('Should be able to get sixth batch of executable tasks', (): void => {
 
             applyActionOnTaskManager(
                 createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {

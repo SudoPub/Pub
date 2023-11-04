@@ -6,16 +6,16 @@
  */
 
 import { expect } from 'chai';
+import { createPubAction } from '../../../../src/action/create';
+import { PUB_ACTION_TYPE } from '../../../../src/action/definition/action';
 import { initializeCreateTaskManager } from '../../../../src/orchestration/initialize/create-tasks';
+import { applyActionOnTaskManager } from '../../../../src/task/apply/apply';
 import { PUB_TASK_TYPE } from '../../../../src/task/definition/task';
 import { PubTaskBase } from '../../../../src/task/task-base';
 import { PubTaskManager } from '../../../../src/task/task-manager';
 import { PubCachedWorkflowConfiguration } from '../../../../src/workflow/cache/configuration';
-import { justRunExample } from '../../../example/just-run';
+import { justRunExample, justRunExampleStartProcedure } from '../../../example/just-run';
 import { ExpectTask } from '../../../expect/expect-task';
-import { applyActionOnTaskManager } from '../../../../src/task/apply/apply';
-import { PUB_ACTION_TYPE } from '../../../../src/action/definition/action';
-import { createPubAction } from '../../../../src/action/create';
 
 describe('Given (Orchestration-Task Find Executable Tasks) Use Case', (): void => {
 
@@ -33,7 +33,7 @@ describe('Given (Orchestration-Task Find Executable Tasks) Use Case', (): void =
 
         ExpectTask.with(executableTasks[0])
             .toBeTask()
-            .toHasTaskType(PUB_TASK_TYPE.DRIVER);
+            .toHasTaskType(PUB_TASK_TYPE.START);
     });
 
     it('Should be able to find executable tasks with simple case after apply', (): void => {
@@ -42,7 +42,9 @@ describe('Given (Orchestration-Task Find Executable Tasks) Use Case', (): void =
 
         applyActionOnTaskManager(
             createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
-                taskIdentifier: taskManager.tasks[0].taskIdentifier,
+                taskIdentifier: taskManager.getTasksByProcedureIdentifier(
+                    justRunExampleStartProcedure.identifier,
+                )[0].taskIdentifier,
                 output: {},
             }),
             taskManager,
@@ -54,6 +56,7 @@ describe('Given (Orchestration-Task Find Executable Tasks) Use Case', (): void =
 
         ExpectTask.with(executableTasks[0])
             .toBeTask()
-            .toHasTaskType(PUB_TASK_TYPE.FINALIZE);
+            .toHasTaskType(PUB_TASK_TYPE.DRIVER)
+            .toHasProcedureIdentifier("JUST_RUN");
     });
 });

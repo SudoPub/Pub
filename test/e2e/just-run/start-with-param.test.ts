@@ -16,7 +16,7 @@ import { PubCachedWorkflowConfiguration } from '../../../src/workflow/cache/conf
 import { justRunExample, justRunExampleStartProcedure } from '../../example/just-run';
 import { ExpectTaskManager } from '../../expect/expect-task-manager';
 
-describe.only('Given (Just-Run Start With Param) Use Case', (): void => {
+describe('Given (Just-Run Start With Param) Use Case', (): void => {
 
     const chance: Chance.Chance = new Chance('e2e-just-run-start-with-param');
 

@@ -22,19 +22,21 @@ describe('Given (Orchestration-Task Create Tasks) Use Case', (): void => {
 
         const tasks: PubTaskBase[] = initializeCreateTasks(justRunConfiguration);
 
-        expect(tasks).to.be.lengthOf(2);
+        expect(tasks).to.be.lengthOf(3);
 
-        ExpectTask.with(tasks[0]).toBeTask();
-        ExpectTask.with(tasks[1]).toBeTask();
+        tasks.forEach((task: PubTaskBase) => {
+            ExpectTask.with(task).toBeTask();
+        });
     });
 
     it('Should be able to create tasks for just run configuration for correct dependencies', (): void => {
 
         const tasks: PubTaskBase[] = initializeCreateTasks(justRunConfiguration);
 
-        expect(tasks).to.be.lengthOf(2);
+        expect(tasks).to.be.lengthOf(3);
 
         ExpectTask.with(tasks[0]).toHasDependencyTasks([]);
         ExpectTask.with(tasks[1]).toHasDependencyTasks([tasks[0]]);
+        ExpectTask.with(tasks[2]).toHasDependencyTasks([tasks[1]]);
     });
 });

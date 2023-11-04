@@ -58,6 +58,12 @@ export class ExpectTask {
         return this;
     }
 
+    public toHasProcedureIdentifier(identifier: string): this {
+
+        expect(this._task.procedureIdentifier).to.be.equal(identifier);
+        return this;
+    }
+
     public toHasDependencyIdentifiers(dependencies: string[]): this {
 
         expect(this._task.dependencies).to.be.deep.equal(dependencies);
