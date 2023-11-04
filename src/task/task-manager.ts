@@ -41,6 +41,15 @@ export class PubTaskManager implements IPubTaskManager {
         return Optional.ofEmpty();
     }
 
+    public getTasksByDependency(dependencyIdentifier: string): PubTaskBase[] {
+
+        return this._tasks.filter(
+            (task: PubTaskBase) => {
+                return task.dependencies.includes(dependencyIdentifier);
+            },
+        );
+    }
+
     public getExecutableTasks(): PubTaskBase[] {
 
         return this._tasks.filter(

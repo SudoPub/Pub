@@ -14,6 +14,7 @@ export enum PUB_TASK_TYPE {
 export enum PUB_TASK_STATUS {
 
     QUEUED = "QUEUED",
+    RESOLVED = "RESOLVED",
 }
 
 export type PubSerializedTask = Record<string, any>;

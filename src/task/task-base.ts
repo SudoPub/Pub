@@ -13,13 +13,13 @@ import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, Ta
 export abstract class PubTaskBase {
 
     private readonly _taskIdentifier: string;
-    private readonly _taskStatus: PUB_TASK_STATUS;
     private readonly _taskType: PUB_TASK_TYPE;
 
     private readonly _dependencies: Set<string>;
 
-    private readonly _executeInput: TaskExecuteInput | SEmptyValue;
-    private readonly _executeOutput: TaskExecuteOutput | SEmptyValue;
+    private _taskStatus: PUB_TASK_STATUS;
+    private _executeInput: TaskExecuteInput | SEmptyValue;
+    private _executeOutput: TaskExecuteOutput | SEmptyValue;
 
     public abstract procedureIdentifier: string;
 
@@ -29,11 +29,11 @@ export abstract class PubTaskBase {
     ) {
 
         this._taskIdentifier = UUIDVersion1.generateString();
-        this._taskStatus = PUB_TASK_STATUS.QUEUED;
         this._taskType = type;
 
         this._dependencies = new Set(dependencies);
 
+        this._taskStatus = PUB_TASK_STATUS.QUEUED;
         this._executeInput = EmptyValueSymbol;
         this._executeOutput = EmptyValueSymbol;
     }
@@ -56,6 +56,12 @@ export abstract class PubTaskBase {
 
         return this._dependencies.size === 0
             && this._taskStatus === PUB_TASK_STATUS.QUEUED;
+    }
+
+    public setTaskStatus(status: PUB_TASK_STATUS): this {
+
+        this._taskStatus = status;
+        return this;
     }
 
     public addDependency(dependency: string): this {

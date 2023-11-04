@@ -6,10 +6,11 @@
 
 import { PUB_ACTION_TYPE, PubAction } from "../../action/definition/action";
 import { PubTaskTaskManagerGetTaskNotFoundError } from "../../error/task/task-manager/get-task-not-found";
+import { PUB_TASK_STATUS } from "../definition/task";
 import { IPubTaskManager } from "../definition/task-manager";
 import { PubTaskBase } from "../task-base";
 
-export const applyTaskResolveSucceed = (
+export const applyTaskResolveSucceedOnTaskManager = (
     action: PubAction<PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED>,
     taskManager: IPubTaskManager,
 ): void => {
@@ -21,5 +22,11 @@ export const applyTaskResolveSucceed = (
                 .withTaskIdentifier(action.payload.taskIdentifier),
         );
 
-    console.log(task);
+    task.setTaskStatus(PUB_TASK_STATUS.RESOLVED);
+
+    const dependencies: PubTaskBase[] = taskManager.getTasksByDependency(task.taskIdentifier);
+
+    for (const dependency of dependencies) {
+        dependency.removeDependency(task.taskIdentifier);
+    }
 };

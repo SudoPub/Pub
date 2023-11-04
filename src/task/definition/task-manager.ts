@@ -12,4 +12,5 @@ export interface IPubTaskManager {
     readonly tasks: PubTaskBase[];
 
     getTaskByIdentifier(identifier: string): Optional<PubTaskBase>;
+    getTasksByDependency(dependencyIdentifier: string): PubTaskBase[];
 }
