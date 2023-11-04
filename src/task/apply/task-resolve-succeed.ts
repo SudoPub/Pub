@@ -7,12 +7,12 @@
 import { PUB_ACTION_TYPE, PubAction } from "../../action/definition/action";
 import { PubTaskTaskManagerGetTaskNotFoundError } from "../../error/task/task-manager/get-task-not-found";
 import { PUB_TASK_STATUS } from "../definition/task";
-import { IPubTaskManager } from "../definition/task-manager";
 import { PubTaskBase } from "../task-base";
+import { PubTaskManager } from "../task-manager";
 
 export const applyTaskResolveSucceedOnTaskManager = (
     action: PubAction<PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED>,
-    taskManager: IPubTaskManager,
+    taskManager: PubTaskManager,
 ): void => {
 
     const task: PubTaskBase = taskManager

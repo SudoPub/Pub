@@ -5,12 +5,12 @@
  */
 
 import { PUB_ACTION_TYPE, PubAction } from "../../action/definition/action";
-import { IPubTaskManager } from "../definition/task-manager";
+import { PubTaskManager } from "../task-manager";
 import { applyTaskResolveSucceedOnTaskManager } from "./task-resolve-succeed";
 
 export const applyActionOnTaskManager = (
     action: PubAction,
-    manager: IPubTaskManager,
+    manager: PubTaskManager,
 ): void => {
 
     switch (action.type) {

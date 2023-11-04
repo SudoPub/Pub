@@ -6,10 +6,9 @@
 
 import { Optional } from "@sudoo/optional";
 import { PubAction } from "../action/definition/action";
-import { IPubTaskManager } from "./definition/task-manager";
 import { PubTaskBase } from "./task-base";
 
-export class PubTaskManager implements IPubTaskManager {
+export class PubTaskManager {
 
     public static withTasks(
         tasks: PubTaskBase[],
@@ -29,6 +28,14 @@ export class PubTaskManager implements IPubTaskManager {
 
     public get tasks(): PubTaskBase[] {
         return this._tasks;
+    }
+
+    public getTaskByIndex(index: number): Optional<PubTaskBase> {
+
+        if (index < 0 || index >= this._tasks.length) {
+            return Optional.ofEmpty();
+        }
+        return Optional.ofUndefinable(this._tasks[index]);
     }
 
     public getTaskByIdentifier(identifier: string): Optional<PubTaskBase> {
