@@ -30,14 +30,6 @@ export class PubTaskManager {
         return this._tasks;
     }
 
-    public getTaskByIndex(index: number): Optional<PubTaskBase> {
-
-        if (index < 0 || index >= this._tasks.length) {
-            return Optional.ofEmpty();
-        }
-        return Optional.ofUndefinable(this._tasks[index]);
-    }
-
     public getTaskByIdentifier(identifier: string): Optional<PubTaskBase> {
 
         for (const task of this._tasks) {
