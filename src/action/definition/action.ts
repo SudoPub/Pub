@@ -4,12 +4,12 @@
  * @description Action
  */
 
-import { PubExecuteParameters } from "../../task/definition/parameters";
+import { TaskExecuteOutput } from "../../task/definition/task";
 
 export enum PUB_ACTION_TYPE {
 
     ESPIAL_TRIGGERED = "ESPIAL_TRIGGERED",
-    EXECUTE_PARAMETERS = "EXECUTE_PARAMETERS",
+    TASK_RESOLVE_SUCCEED = "TASK_RESOLVE_SUCCEED",
 }
 
 export type PubAction<T extends PUB_ACTION_TYPE = PUB_ACTION_TYPE> = {
@@ -24,7 +24,7 @@ export type PubAction<T extends PUB_ACTION_TYPE = PUB_ACTION_TYPE> = {
 
 export type PubActionPayloadSwitch<T extends PUB_ACTION_TYPE> =
     T extends PUB_ACTION_TYPE.ESPIAL_TRIGGERED ? PubActionEspialTriggered :
-    T extends PUB_ACTION_TYPE.EXECUTE_PARAMETERS ? PubActionExecuteParameters :
+    T extends PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED ? PubAction_TaskResolveSucceed :
     never;
 
 export type PubActionEspialTriggered = {
@@ -32,7 +32,9 @@ export type PubActionEspialTriggered = {
     readonly espial: string;
 };
 
-export type PubActionExecuteParameters = {
+export type PubAction_TaskResolveSucceed = {
 
-    readonly parameters: PubExecuteParameters;
+    readonly taskIdentifier: string;
+
+    readonly output: TaskExecuteOutput;
 };

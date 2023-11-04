@@ -4,10 +4,12 @@
  * @description Task Manager
  */
 
+import { Optional } from "@sudoo/optional";
 import { PubAction } from "../action/definition/action";
+import { IPubTaskManager } from "./definition/task-manager";
 import { PubTaskBase } from "./task-base";
 
-export class PubTaskManager {
+export class PubTaskManager implements IPubTaskManager {
 
     public static withTasks(
         tasks: PubTaskBase[],
@@ -23,6 +25,20 @@ export class PubTaskManager {
     ) {
 
         this._tasks = tasks;
+    }
+
+    public get tasks(): PubTaskBase[] {
+        return this._tasks;
+    }
+
+    public getTaskByIdentifier(identifier: string): Optional<PubTaskBase> {
+
+        for (const task of this._tasks) {
+            if (task.taskIdentifier === identifier) {
+                return Optional.ofAny(task);
+            }
+        }
+        return Optional.ofEmpty();
     }
 
     public getExecutableTasks(): PubTaskBase[] {
