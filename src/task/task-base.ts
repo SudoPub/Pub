@@ -9,6 +9,7 @@ import { UUIDVersion1 } from "@sudoo/uuid";
 import { PubTaskEnsureEmptyInputTypeError } from "../error/task/ensure/empty-input";
 import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-output";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
+import { Optional } from "@sudoo/optional";
 
 export abstract class PubTaskBase {
 
@@ -76,6 +77,14 @@ export abstract class PubTaskBase {
         return this;
     }
 
+    public getExecuteInput(): Optional<TaskExecuteInput> {
+
+        if (this._executeInput === EmptyValueSymbol) {
+            return Optional.ofEmpty();
+        }
+        return Optional.ofAny(this._executeInput);
+    }
+
     public ensureInput(): TaskExecuteInput {
 
         if (this._executeInput === EmptyValueSymbol) {
@@ -84,6 +93,20 @@ export abstract class PubTaskBase {
             );
         }
         return this._executeInput;
+    }
+
+    public setExecuteInput(input: TaskExecuteInput): this {
+
+        this._executeInput = input;
+        return this;
+    }
+
+    public getExecuteOutput(): Optional<TaskExecuteOutput> {
+
+        if (this._executeOutput === EmptyValueSymbol) {
+            return Optional.ofEmpty();
+        }
+        return Optional.ofAny(this._executeOutput);
     }
 
     public ensureOutput(): TaskExecuteOutput {
@@ -96,5 +119,11 @@ export abstract class PubTaskBase {
         return this._executeOutput;
     }
 
-    protected abstract serialize(): PubSerializedTask;
+    public setExecuteOutput(output: TaskExecuteOutput): this {
+
+        this._executeOutput = output;
+        return this;
+    }
+
+    public abstract serialize(): PubSerializedTask;
 }

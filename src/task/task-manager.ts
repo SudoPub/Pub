@@ -5,8 +5,9 @@
  */
 
 import { Optional } from "@sudoo/optional";
-import { PubAction } from "../action/definition/action";
+import { PubSnapshot } from "../snapshot/snapshot";
 import { PubTaskBase } from "./task-base";
+import { createTaskSnapshot } from "./snapshot/create-snapshot";
 
 export class PubTaskManager {
 
@@ -58,8 +59,12 @@ export class PubTaskManager {
         );
     }
 
-    public applyAction(_action: PubAction): this {
+    public createSnapshot(): PubSnapshot {
 
-        return this;
+        return {
+            tasks: this._tasks.map((task: PubTaskBase) => {
+                return createTaskSnapshot(task);
+            }),
+        };
     }
 }

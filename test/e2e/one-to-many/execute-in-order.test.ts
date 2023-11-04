@@ -23,12 +23,13 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
 
         const tasks: PubTaskBase[] = initializeCreateTasks(oneToManyConfiguration);
 
-        expect(tasks).to.be.lengthOf(4);
+        expect(tasks).to.be.lengthOf(5);
 
         ExpectTask.with(tasks[0]).toBeTask();
         ExpectTask.with(tasks[1]).toBeTask();
         ExpectTask.with(tasks[2]).toBeTask();
         ExpectTask.with(tasks[3]).toBeTask();
+        ExpectTask.with(tasks[4]).toBeTask();
     });
 
     it('Should be able to get first available task', (): void => {

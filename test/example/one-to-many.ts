@@ -43,6 +43,17 @@ export const oneToManyExample: PubWorkflowConfiguration = {
     procedures: [
         oneToManyExampleStartProcedure,
         {
+            identifier: "INIT",
+            type: PUB_PROCEDURE_TYPE.DRIVER,
+
+            payload: {
+                driverName: "INIT",
+
+                parameterPatterns: {},
+                outcomePatterns: {},
+            },
+        },
+        {
             identifier: "FIRST",
             type: PUB_PROCEDURE_TYPE.DRIVER,
 
@@ -79,9 +90,21 @@ export const oneToManyExample: PubWorkflowConfiguration = {
     ],
     connections: [
         {
-            identifier: "START-FIRST",
+            identifier: "START-INIT",
 
             triggerProcedureIdentifier: "START",
+            triggerProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END,
+
+            nextProcedureIdentifier: "INIT",
+            nextProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START,
+
+            parametersMapping: {
+            },
+        },
+        {
+            identifier: "INIT-FIRST",
+
+            triggerProcedureIdentifier: "INIT",
             triggerProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END,
 
             nextProcedureIdentifier: "FIRST",
@@ -91,9 +114,9 @@ export const oneToManyExample: PubWorkflowConfiguration = {
             },
         },
         {
-            identifier: "START-SECOND",
+            identifier: "INIT-SECOND",
 
-            triggerProcedureIdentifier: "START",
+            triggerProcedureIdentifier: "INIT",
             triggerProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END,
 
             nextProcedureIdentifier: "SECOND",
@@ -103,9 +126,9 @@ export const oneToManyExample: PubWorkflowConfiguration = {
             },
         },
         {
-            identifier: "START-THIRD",
+            identifier: "INIT-THIRD",
 
-            triggerProcedureIdentifier: "START",
+            triggerProcedureIdentifier: "INIT",
             triggerProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END,
 
             nextProcedureIdentifier: "THIRD",

@@ -34,7 +34,7 @@ export class PubFinalizeTask extends PubTaskBase {
         return this._procedure.identifier;
     }
 
-    protected serialize(): PubSerializedTask {
+    public serialize(): PubSerializedTask {
 
         return {
             procedureIdentifier: this.procedureIdentifier,
