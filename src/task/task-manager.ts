@@ -5,7 +5,6 @@
  */
 
 import { PubAction } from "../action/definition/action";
-import { PUB_TASK_STATUS } from "./definition/task";
 import { PubTaskBase } from "./task-base";
 
 export class PubTaskManager {
@@ -30,8 +29,7 @@ export class PubTaskManager {
 
         return this._tasks.filter(
             (task: PubTaskBase) => {
-                return task.dependencies.length === 0
-                    && task.taskStatus === PUB_TASK_STATUS.QUEUED;
+                return task.executable();
             },
         );
     }

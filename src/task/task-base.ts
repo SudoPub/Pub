@@ -43,5 +43,23 @@ export abstract class PubTaskBase {
         return [...this._dependencies];
     }
 
+    public executable(): boolean {
+
+        return this._dependencies.size === 0
+            && this._taskStatus === PUB_TASK_STATUS.QUEUED;
+    }
+
+    public addDependency(dependency: string): this {
+
+        this._dependencies.add(dependency);
+        return this;
+    }
+
+    public removeDependency(dependency: string): this {
+
+        this._dependencies.delete(dependency);
+        return this;
+    }
+
     protected abstract serialize(): PubSerializedTask;
 }

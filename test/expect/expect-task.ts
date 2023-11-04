@@ -33,6 +33,12 @@ export class ExpectTask {
         return this;
     }
 
+    public toBeEqualToTask(task: PubTaskBase): this {
+
+        expect(this._task.taskIdentifier).to.be.equal(task.taskIdentifier);
+        return this;
+    }
+
     public toHasTaskType(type: PUB_TASK_TYPE): this {
 
         expect(this._task.taskType).to.be.equal(type);
