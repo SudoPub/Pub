@@ -5,7 +5,7 @@
  */
 
 import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { createPubTask } from "../../task/factory/create";
+import { createPubTaskWithProcedure } from "../../task/factory/create";
 import { PubTaskBase } from "../../task/task-base";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
 import { findNextProcedures } from "../procedure/find-next-procedure";
@@ -22,7 +22,7 @@ export const initializeRecursiveCreateTask = (
 
     const nextTasks: PubTaskBase[] = nextProcedures.map((procedure: PubProcedureConfiguration) => {
 
-        return createPubTask(procedure);
+        return createPubTaskWithProcedure(procedure);
     });
 
     return [
