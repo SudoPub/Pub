@@ -95,9 +95,12 @@ export abstract class PubTaskBase {
         return this._executeInput;
     }
 
-    public setExecuteInput(input: TaskExecuteInput): this {
+    public combineExecuteInput(input: TaskExecuteInput): this {
 
-        this._executeInput = input;
+        this._executeInput = {
+            ...(this._executeInput === EmptyValueSymbol ? {} : this._executeInput),
+            ...input,
+        };
         return this;
     }
 
@@ -119,9 +122,12 @@ export abstract class PubTaskBase {
         return this._executeOutput;
     }
 
-    public setExecuteOutput(output: TaskExecuteOutput): this {
+    public combineExecuteOutput(output: TaskExecuteOutput): this {
 
-        this._executeOutput = output;
+        this._executeOutput = {
+            ...(this._executeOutput === EmptyValueSymbol ? {} : this._executeOutput),
+            ...output,
+        };
         return this;
     }
 

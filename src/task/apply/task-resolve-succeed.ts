@@ -15,6 +15,7 @@ export const applyTaskResolveSucceedOnTaskManager = (
     taskManager: PubTaskManager,
 ): void => {
 
+    // Process Current Task
     const task: PubTaskBase = taskManager
         .getTaskByIdentifier(action.payload.taskIdentifier)
         .getOrThrow(
@@ -23,11 +24,14 @@ export const applyTaskResolveSucceedOnTaskManager = (
         );
 
     task.setTaskStatus(PUB_TASK_STATUS.RESOLVED);
-    task.setExecuteOutput(action.payload.output);
+    task.combineExecuteOutput(action.payload.output);
 
     const dependencies: PubTaskBase[] = taskManager.getTasksByDependency(task.taskIdentifier);
 
     for (const dependency of dependencies) {
+
+        dependency.combineExecuteInput(action.payload.output);
+
         dependency.removeDependency(task.taskIdentifier);
     }
 };
