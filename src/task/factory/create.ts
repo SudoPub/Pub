@@ -4,6 +4,7 @@
  * @description Create
  */
 
+import { PubTaskFactoryInvalidProcedureTypeError } from "../../error/task/factory/invalid-procedure-type";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubDriverTask } from "../implementation/driver";
 import { PubMapTask } from "../implementation/map";
@@ -25,5 +26,6 @@ export const createPubTaskWithProcedure = (
         );
     }
 
-    return null as any;
+
+    throw PubTaskFactoryInvalidProcedureTypeError.withProcedure(procedure);
 };
