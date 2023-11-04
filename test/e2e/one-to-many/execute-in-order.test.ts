@@ -19,9 +19,10 @@ import { ExpectTaskManager } from '../../expect/expect-task-manager';
 
 describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
 
-    const oneToManyConfiguration: PubCachedWorkflowConfiguration = PubCachedWorkflowConfiguration.fromWorkflowConfiguration(
-        oneToManyExample,
-    );
+    const oneToManyConfiguration: PubCachedWorkflowConfiguration =
+        PubCachedWorkflowConfiguration.fromWorkflowConfiguration(
+            oneToManyExample,
+        );
 
     it('Should be able to create tasks for one to many configuration', (): void => {
 

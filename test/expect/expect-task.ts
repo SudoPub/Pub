@@ -7,7 +7,7 @@
 
 import { expect } from 'chai';
 import { PubTaskBase } from "../../src/task/task-base";
-import { PUB_TASK_TYPE } from '../../src/task/definition/task';
+import { PUB_TASK_STATUS, PUB_TASK_TYPE } from '../../src/task/definition/task';
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 export class ExpectTask {
@@ -49,6 +49,12 @@ export class ExpectTask {
     public toHasTaskType(type: PUB_TASK_TYPE): this {
 
         expect(this._task.taskType).to.be.equal(type);
+        return this;
+    }
+
+    public toHasStatus(status: PUB_TASK_STATUS): this {
+
+        expect(this._task.taskStatus).to.be.equal(status);
         return this;
     }
 
