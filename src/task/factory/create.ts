@@ -9,6 +9,7 @@ import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/d
 import { PubDriverTask } from "../implementation/driver";
 import { PubFinalizeTask } from "../implementation/finalize";
 import { PubMapEspialTask } from "../implementation/map-espial";
+import { PubStartTask } from "../implementation/start";
 import { PubTaskBase } from "../task-base";
 
 export const createPubTaskWithProcedure = (
@@ -16,7 +17,12 @@ export const createPubTaskWithProcedure = (
     dependencies: string[],
 ): PubTaskBase => {
 
-    if (procedure.type === PUB_PROCEDURE_TYPE.DRIVER) {
+    if (procedure.type === PUB_PROCEDURE_TYPE.START) {
+
+        return PubStartTask.fromProcedure(
+            procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>,
+        );
+    } else if (procedure.type === PUB_PROCEDURE_TYPE.DRIVER) {
 
         return PubDriverTask.fromProcedure(
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>,

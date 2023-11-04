@@ -52,8 +52,6 @@ export class PubTaskManager {
 
     public getTasksByProcedureIdentifier(procedureIdentifier: string): PubTaskBase[] {
 
-        console.log(procedureIdentifier, this.createSnapshot());
-
         return this._tasks.filter(
             (task: PubTaskBase) => {
                 return task.procedureIdentifier === procedureIdentifier;

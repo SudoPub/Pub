@@ -6,9 +6,10 @@
 
 export enum PUB_TASK_TYPE {
 
-    MAP_ESPIAL = "MAP_ESPIAL",
     DRIVER = "DRIVER",
     FINALIZE = "FINALIZE",
+    MAP_ESPIAL = "MAP_ESPIAL",
+    START = "START",
 }
 
 export enum PUB_TASK_STATUS {
