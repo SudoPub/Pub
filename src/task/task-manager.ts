@@ -4,17 +4,23 @@
  * @description Task Manager
  */
 
+import { PubTaskBase } from "./task-base";
+
 export class PubTaskManager {
 
-    public static create(): PubTaskManager {
+    public static withTasks(
+        tasks: PubTaskBase[],
+    ): PubTaskManager {
 
-        return new PubTaskManager();
+        return new PubTaskManager(tasks);
     }
 
-    private readonly _tasks: Map<string, string>;
+    private readonly _tasks: PubTaskBase[];
 
-    private constructor() {
+    private constructor(
+        tasks: PubTaskBase[],
+    ) {
 
-        this._tasks = new Map<string, string>();
+        this._tasks = tasks;
     }
 }

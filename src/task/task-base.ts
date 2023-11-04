@@ -11,7 +11,7 @@ export abstract class PubTaskBase {
 
     protected readonly _taskIdentifier: string;
     protected readonly _taskType: PUB_TASK_TYPE;
-    protected readonly _dependencies: string[];
+    protected readonly _dependencies: Set<string>;
 
     public abstract procedureIdentifier: string;
 
@@ -22,7 +22,7 @@ export abstract class PubTaskBase {
 
         this._taskIdentifier = UUIDVersion1.generateString();
         this._taskType = type;
-        this._dependencies = dependencies;
+        this._dependencies = new Set(dependencies);
     }
 
     public get taskIdentifier(): string {
@@ -32,7 +32,7 @@ export abstract class PubTaskBase {
         return this._taskType;
     }
     public get dependencies(): string[] {
-        return this._dependencies;
+        return [...this._dependencies];
     }
 
     protected abstract serialize(): PubSerializedTask;
