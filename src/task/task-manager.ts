@@ -4,6 +4,7 @@
  * @description Task Manager
  */
 
+import { PubAction } from "../action/definition/action";
 import { PubTaskBase } from "./task-base";
 
 export class PubTaskManager {
@@ -22,5 +23,10 @@ export class PubTaskManager {
     ) {
 
         this._tasks = tasks;
+    }
+
+    public applyAction(_action: PubAction): this {
+
+        return this;
     }
 }

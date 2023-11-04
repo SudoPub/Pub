@@ -12,7 +12,7 @@ export enum PUB_ACTION_TYPE {
     EXECUTE_PARAMETERS = "EXECUTE_PARAMETERS",
 }
 
-export type PubAction<T extends PUB_ACTION_TYPE> = {
+export type PubAction<T extends PUB_ACTION_TYPE = PUB_ACTION_TYPE> = {
 
     readonly identifier: string;
     readonly type: T;
