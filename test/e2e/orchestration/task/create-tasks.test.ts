@@ -21,8 +21,6 @@ describe('Given (Orchestration-Task Create Tasks) Use Case', (): void => {
 
         const tasks: PubTaskBase[] = initializeCreateTasks(justRunConfiguration);
 
-        console.log(tasks);
-
-        expect(tasks).to.be.lengthOf(1);
+        expect(tasks).to.be.lengthOf(2);
     });
 });

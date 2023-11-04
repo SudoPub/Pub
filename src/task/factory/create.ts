@@ -7,6 +7,7 @@
 import { PubTaskFactoryInvalidProcedureTypeError } from "../../error/task/factory/invalid-procedure-type";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubDriverTask } from "../implementation/driver";
+import { PubFinalizeTask } from "../implementation/finalize";
 import { PubMapTask } from "../implementation/map";
 import { PubTaskBase } from "../task-base";
 
@@ -23,6 +24,11 @@ export const createPubTaskWithProcedure = (
 
         return PubMapTask.fromProcedure(
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
+        );
+    } else if (procedure.type === PUB_PROCEDURE_TYPE.END) {
+
+        return PubFinalizeTask.fromProcedure(
+            procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>,
         );
     }
 
