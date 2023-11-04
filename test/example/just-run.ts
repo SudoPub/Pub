@@ -52,5 +52,17 @@ export const justRunExample: PubWorkflowConfiguration = {
             parametersMapping: {
             },
         },
+        {
+            identifier: "JUST_RUN-END",
+
+            triggerProcedureIdentifier: "JUST_RUN",
+            triggerProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_END,
+
+            nextProcedureIdentifier: "END",
+            nextProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START,
+
+            parametersMapping: {
+            },
+        },
     ],
 };
