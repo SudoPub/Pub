@@ -6,5 +6,5 @@
 
 export interface IPubTask {
 
-    readonly identifier: string;
+    readonly taskIdentifier: string;
 }

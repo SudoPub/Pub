@@ -21,7 +21,7 @@ export const initializeRecursiveCreateTask = (
 
     const nextTasks: PubTask[] = nextProcedures.map((procedure: PubProcedureConfiguration) => {
 
-        return PubTask.fromIdentifier(procedure.identifier);
+        return PubTask.fromProcedure(procedure);
     });
 
     return [
@@ -32,7 +32,9 @@ export const initializeRecursiveCreateTask = (
                 ...previous,
                 ...initializeRecursiveCreateTask(
                     configuration,
-                    configuration.getProcedureByIdentifier(nextTask.identifier).getOrThrow()
+                    configuration.getProcedureByIdentifier(
+                        nextTask.procedureIdentifier,
+                    ).getOrThrow()
                 ),
             ];
         }, []),

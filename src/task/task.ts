@@ -4,23 +4,30 @@
  * @description Task
  */
 
+import { UUIDVersion1 } from "@sudoo/uuid";
+import { PubProcedureConfiguration } from "../procedure/definition/configuration";
 import { IPubTask } from "./definition/task";
 
 export class PubTask implements IPubTask {
 
-    public static fromIdentifier(identifier: string): PubTask {
+    public static fromProcedure(procedure: PubProcedureConfiguration): PubTask {
 
-        return new PubTask(identifier);
+        return new PubTask(procedure);
     }
 
-    private readonly _identifier: string;
+    private readonly _taskIdentifier: string;
+    private readonly _procedure: PubProcedureConfiguration;
 
-    private constructor(identifier: string) {
+    private constructor(procedure: PubProcedureConfiguration) {
 
-        this._identifier = identifier;
+        this._taskIdentifier = UUIDVersion1.generateString();
+        this._procedure = procedure;
     }
 
-    public get identifier(): string {
-        return this._identifier;
+    public get taskIdentifier(): string {
+        return this._taskIdentifier;
+    }
+    public get procedureIdentifier(): string {
+        return this._procedure.identifier;
     }
 }
