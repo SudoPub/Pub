@@ -26,6 +26,5 @@ export const createPubTaskWithProcedure = (
         );
     }
 
-
     throw PubTaskFactoryInvalidProcedureTypeError.withProcedure(procedure);
 };

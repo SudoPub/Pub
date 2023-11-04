@@ -8,7 +8,31 @@
 import { createStringPattern } from "@sudoo/pattern";
 import { PubWorkflowConfiguration } from "../../src";
 import { PUB_CONNECTION_WAYPOINT_TYPE } from "../../src/connection/definition/configuration";
-import { PUB_PROCEDURE_TYPE } from "../../src/procedure/definition/configuration";
+import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../src/procedure/definition/configuration";
+
+export const justRunExampleStartProcedure: PubProcedureConfiguration = {
+
+    identifier: "START",
+    type: PUB_PROCEDURE_TYPE.START,
+
+    payload: {
+        patterns: {
+            hello: createStringPattern(),
+        },
+    },
+};
+
+export const justRunExampleEndProcedure: PubProcedureConfiguration = {
+
+    identifier: "END",
+    type: PUB_PROCEDURE_TYPE.END,
+
+    payload: {
+        patterns: {
+            hello: createStringPattern(),
+        },
+    },
+};
 
 export const justRunExample: PubWorkflowConfiguration = {
 
@@ -17,16 +41,7 @@ export const justRunExample: PubWorkflowConfiguration = {
 
     startParametersPattern: {},
     procedures: [
-        {
-            identifier: "START",
-            type: PUB_PROCEDURE_TYPE.START,
-
-            payload: {
-                patterns: {
-                    hello: createStringPattern(),
-                },
-            },
-        },
+        justRunExampleStartProcedure,
         {
             identifier: "JUST_RUN",
             type: PUB_PROCEDURE_TYPE.DRIVER,
@@ -38,6 +53,7 @@ export const justRunExample: PubWorkflowConfiguration = {
                 outcomePatterns: {},
             },
         },
+        justRunExampleEndProcedure,
     ],
     connections: [
         {
