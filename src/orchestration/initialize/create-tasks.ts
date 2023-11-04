@@ -9,7 +9,7 @@ import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/d
 import { PubTaskBase } from "../../task/task-base";
 import { PubTaskManager } from "../../task/task-manager";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
-import { initializeRecursiveCreateTask } from "./recursive-create-task";
+import { initializeLoadRecursiveCreateTask } from "./recursive-create-task";
 
 export const initializeCreateTaskManager = (
     configuration: PubCachedWorkflowConfiguration,
@@ -27,15 +27,14 @@ export const initializeCreateTasks = (
     const startProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>>
         = configuration.getStartProcedure();
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const endProcedure: Optional<PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>>
-        = configuration.getEndProcedure();
+    const taskProcedureMap: Map<string, PubTaskBase> = new Map();
 
-    const tasks: PubTaskBase[] = initializeRecursiveCreateTask(
+    initializeLoadRecursiveCreateTask(
+        taskProcedureMap,
         configuration,
         startProcedure.getOrThrow(),
         Optional.ofEmpty(),
     );
 
-    return tasks;
+    return Array.from(taskProcedureMap.values());
 };

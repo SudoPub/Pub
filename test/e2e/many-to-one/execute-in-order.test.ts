@@ -42,8 +42,7 @@ describe('Given (Many-To-One Execute In Order) Use Case', (): void => {
         it('Should be able to get first batch of executable tasks', (): void => {
 
             ExpectTaskManager.with(taskManager)
-                .hasExecutableTaskLength(3)
-                .forTaskWithProcedureIdentifier("INIT");
+                .hasExecutableTaskLength(3);
 
             ExpectTaskManager.with(taskManager)
                 .forTaskWithProcedureIdentifier("FIRST")

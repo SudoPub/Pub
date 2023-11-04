@@ -11,41 +11,43 @@ import { PubTaskBase } from "../../task/task-base";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
 import { findNextProcedures } from "../procedure/find-next-procedure";
 
-export const initializeRecursiveCreateTask = (
+export const initializeLoadRecursiveCreateTask = (
+    taskProcedureMap: Map<string, PubTaskBase>,
     configuration: PubCachedWorkflowConfiguration,
     currentProcedure: PubProcedureConfiguration,
     currentTask: Optional<PubTaskBase>,
-): PubTaskBase[] => {
+): void => {
 
     const nextProcedures: PubProcedureConfiguration[] = findNextProcedures(
         currentProcedure,
         configuration,
     );
 
-    const nextTasks: PubTaskBase[] = nextProcedures.map(
-        (procedure: PubProcedureConfiguration) => {
+    for (const nextProcedure of nextProcedures) {
 
-            return createPubTaskWithProcedure(
-                procedure,
-                currentTask.exists ? [currentTask.getOrThrow().taskIdentifier] : [],
-            );
-        },
-    );
+        if (taskProcedureMap.has(nextProcedure.identifier)) {
 
-    return [
-        ...nextTasks,
-        ...nextTasks.reduce((previous: PubTaskBase[], nextTask: PubTaskBase) => {
+            const previousTask: PubTaskBase =
+                taskProcedureMap.get(nextProcedure.identifier) as PubTaskBase;
 
-            return [
-                ...previous,
-                ...initializeRecursiveCreateTask(
-                    configuration,
-                    configuration.getProcedureByIdentifier(
-                        nextTask.procedureIdentifier,
-                    ).getOrThrow(),
-                    Optional.ofAny(nextTask),
-                ),
-            ];
-        }, []),
-    ];
+            previousTask.addDependency(currentTask.getOrThrow().taskIdentifier);
+            continue;
+        }
+
+        const nextTask: PubTaskBase = createPubTaskWithProcedure(
+            nextProcedure,
+            currentTask.exists ? [currentTask.getOrThrow().taskIdentifier] : [],
+        );
+
+        taskProcedureMap.set(nextTask.procedureIdentifier, nextTask);
+
+        initializeLoadRecursiveCreateTask(
+            taskProcedureMap,
+            configuration,
+            configuration.getProcedureByIdentifier(
+                nextTask.procedureIdentifier,
+            ).getOrThrow(),
+            Optional.ofAny(nextTask),
+        );
+    }
 };
