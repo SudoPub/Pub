@@ -5,24 +5,27 @@
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
 import { PubTaskBase } from "../task-base";
 
 export class PubFinalizeTask extends PubTaskBase {
 
     public static fromProcedure(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>,
+        dependencies: string[],
     ): PubFinalizeTask {
 
-        return new PubFinalizeTask(procedure);
+        return new PubFinalizeTask(procedure, dependencies);
     }
 
     private readonly _procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>;
 
     protected constructor(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>,
+        dependencies: string[],
     ) {
 
-        super();
+        super(PUB_TASK_TYPE.FINALIZE, dependencies);
 
         this._procedure = procedure;
     }
@@ -31,11 +34,10 @@ export class PubFinalizeTask extends PubTaskBase {
         return this._procedure.identifier;
     }
 
-    public serialize(): string {
+    protected serialize(): PubSerializedTask {
 
-        return JSON.stringify({
-            taskIdentifier: this.taskIdentifier,
+        return {
             procedureIdentifier: this.procedureIdentifier,
-        });
+        };
     }
 }
