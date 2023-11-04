@@ -39,7 +39,6 @@ export const oneToManyExample: PubWorkflowConfiguration = {
     workflowName: "One To Many",
     workflowDescription: "One To Many Example for Test",
 
-    startParametersPattern: {},
     procedures: [
         oneToManyExampleStartProcedure,
         {

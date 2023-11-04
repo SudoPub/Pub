@@ -39,7 +39,6 @@ export const justRunExample: PubWorkflowConfiguration = {
     workflowName: "Just Run",
     workflowDescription: "Just Run Example for Test",
 
-    startParametersPattern: {},
     procedures: [
         justRunExampleStartProcedure,
         {
