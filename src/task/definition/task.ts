@@ -6,7 +6,7 @@
 
 export enum PUB_TASK_TYPE {
 
-    MAP = "MAP",
+    MAP_ESPIAL = "MAP_ESPIAL",
     DRIVER = "DRIVER",
     FINALIZE = "FINALIZE",
 }

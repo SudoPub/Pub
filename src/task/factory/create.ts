@@ -8,7 +8,7 @@ import { PubTaskFactoryInvalidProcedureTypeError } from "../../error/task/factor
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubDriverTask } from "../implementation/driver";
 import { PubFinalizeTask } from "../implementation/finalize";
-import { PubMapTask } from "../implementation/map";
+import { PubMapEspialTask } from "../implementation/map-espial";
 import { PubTaskBase } from "../task-base";
 
 export const createPubTaskWithProcedure = (
@@ -24,7 +24,7 @@ export const createPubTaskWithProcedure = (
         );
     } else if (procedure.type === PUB_PROCEDURE_TYPE.MAP) {
 
-        return PubMapTask.fromProcedure(
+        return PubMapEspialTask.fromProcedure(
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
             dependencies,
         );

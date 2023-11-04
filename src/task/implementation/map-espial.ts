@@ -1,21 +1,21 @@
 /**
  * @author WMXPY
  * @namespace Task_Implementation
- * @description Map
+ * @description Map Espial
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
 import { PubTaskBase } from "../task-base";
 
-export class PubMapTask extends PubTaskBase {
+export class PubMapEspialTask extends PubTaskBase {
 
     public static fromProcedure(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
         dependencies: string[],
-    ): PubMapTask {
+    ): PubMapEspialTask {
 
-        return new PubMapTask(procedure, dependencies);
+        return new PubMapEspialTask(procedure, dependencies);
     }
 
     private readonly _procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>;
@@ -25,7 +25,7 @@ export class PubMapTask extends PubTaskBase {
         dependencies: string[],
     ) {
 
-        super(PUB_TASK_TYPE.MAP, dependencies);
+        super(PUB_TASK_TYPE.MAP_ESPIAL, dependencies);
 
         this._procedure = procedure;
     }
