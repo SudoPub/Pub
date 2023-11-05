@@ -13,8 +13,8 @@ import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-ou
 import { PubProcedureConfiguration } from "../procedure/definition/configuration";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
 import { mapTaskDependencyOutput } from "./mapping/map-output";
-import { validateProcedureInput } from "./mapping/validate-procedure-input";
-import { validateProcedureOutput } from "./mapping/validate-procedure-output";
+import { validatePartialProcedureInput } from "./mapping/validate-partial-procedure-input";
+import { validatePartialProcedureOutput } from "./mapping/validate-partial-procedure-output";
 
 export abstract class PubTaskBase {
 
@@ -144,7 +144,7 @@ export abstract class PubTaskBase {
             ...input,
         };
 
-        if (!validateProcedureInput(this._procedure, combinedInput)) {
+        if (!validatePartialProcedureInput(this._procedure, combinedInput)) {
             return false;
         }
 
@@ -177,7 +177,7 @@ export abstract class PubTaskBase {
             ...output,
         };
 
-        if (!validateProcedureOutput(this._procedure, combinedOutput)) {
+        if (!validatePartialProcedureOutput(this._procedure, combinedOutput)) {
             return false;
         }
 

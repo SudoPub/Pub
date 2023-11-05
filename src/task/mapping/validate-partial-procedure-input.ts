@@ -1,14 +1,14 @@
 /**
  * @author WMXPY
  * @namespace Task_Mapping
- * @description Validate Procedure Input
+ * @description Validate Partial Procedure Input
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { TaskExecuteInput } from "../definition/task";
 import { validatePartialProcedurePattern } from "./validate-pattern";
 
-export const validateProcedureInput = (
+export const validatePartialProcedureInput = (
     procedure: PubProcedureConfiguration,
     input: TaskExecuteInput,
 ): boolean => {
