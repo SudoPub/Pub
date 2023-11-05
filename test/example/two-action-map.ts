@@ -5,7 +5,7 @@
  * @override Example
  */
 
-import { createListPattern, createNumberPattern, createStringPattern } from "@sudoo/pattern";
+import { createListPattern, createNumberPattern } from "@sudoo/pattern";
 import { PubWorkflowConfiguration } from "../../src";
 import { PUB_CONNECTION_WAYPOINT_TYPE } from "../../src/connection/definition/configuration";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration, PubProcedureConfiguration_Map } from "../../src/procedure/definition/configuration";
