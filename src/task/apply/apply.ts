@@ -11,7 +11,7 @@ import { applyTaskResolveSucceedOnTaskManager } from "./task-resolve-succeed";
 export const applyActionOnTaskManager = (
     action: PubAction,
     manager: PubTaskManager,
-): void => {
+): boolean => {
 
     switch (action.type) {
 
@@ -23,4 +23,5 @@ export const applyActionOnTaskManager = (
             );
         }
     }
+    return false;
 };

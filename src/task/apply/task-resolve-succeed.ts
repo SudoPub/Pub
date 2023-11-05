@@ -13,7 +13,7 @@ import { PubTaskManager } from "../task-manager";
 export const applyTaskResolveSucceedOnTaskManager = (
     action: PubAction<PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED>,
     taskManager: PubTaskManager,
-): void => {
+): boolean => {
 
     // Process Current Task
     const task: PubTaskBase = taskManager
@@ -23,8 +23,14 @@ export const applyTaskResolveSucceedOnTaskManager = (
                 .withTaskIdentifier(action.payload.taskIdentifier),
         );
 
+
+    const combineResult: boolean = task.combineExecuteOutput(action.payload.output);
+
+    if (!combineResult) {
+        return false;
+    }
+
     task.setTaskStatus(PUB_TASK_STATUS.RESOLVED);
-    task.combineExecuteOutput(action.payload.output);
 
     const dependencies: PubTaskBase[] = taskManager.getTasksByDependency(task.taskIdentifier);
 
@@ -35,4 +41,5 @@ export const applyTaskResolveSucceedOnTaskManager = (
             action.payload.output,
         );
     }
+    return true;
 };

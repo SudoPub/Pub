@@ -7,7 +7,7 @@
 import { Pattern } from "@sudoo/pattern";
 import { PubProcedurePattern } from "../../procedure/definition/configuration";
 import { TaskExecuteInput, TaskExecuteOutput } from "../definition/task";
-import { Verifier } from "@sudoo/verify";
+import { Verifier, VerifyResult } from "@sudoo/verify";
 
 export const validatePartialProcedurePattern = (
     pattern: PubProcedurePattern,
@@ -24,8 +24,9 @@ export const validatePartialProcedurePattern = (
         }
 
         const verifier: Verifier = Verifier.create(value);
+        const verifyResult: VerifyResult = verifier.verify(inputValue);
 
-        if (!verifier.verify(inputValue)) {
+        if (!verifyResult.succeed) {
             return false;
         }
     }
@@ -43,8 +44,9 @@ export const validateFullProcedurePattern = (
         const inputValue: any = input[key];
 
         const verifier: Verifier = Verifier.create(value);
+        const verifyResult: VerifyResult = verifier.verify(inputValue);
 
-        if (!verifier.verify(inputValue)) {
+        if (!verifyResult.succeed) {
             return false;
         }
     }

@@ -12,6 +12,7 @@ export const validateProcedureOutput = (
     procedure: PubProcedureConfiguration,
     output: TaskExecuteOutput,
 ): boolean => {
+
     switch (procedure.type) {
 
         case PUB_PROCEDURE_TYPE.START: {
