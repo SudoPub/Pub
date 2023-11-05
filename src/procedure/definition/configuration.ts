@@ -57,6 +57,10 @@ export type PubProcedureConfiguration_Driver = {
 export type PubProcedureConfiguration_Map = {
 
     readonly iterationParameter: string;
+    readonly iterationItemParameter: string;
+
+    readonly iterationOutcome: string;
+    readonly iterationItemOutcome: string;
 
     readonly parameterPatterns: PubProcedurePattern;
     readonly outcomePatterns: PubProcedurePattern;
