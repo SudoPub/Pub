@@ -30,8 +30,9 @@ export const applyTaskResolveSucceedOnTaskManager = (
 
     for (const dependency of dependencies) {
 
-        dependency.combineExecuteInput(action.payload.output);
-
-        dependency.removeDependency(task.taskIdentifier);
+        dependency.resolveDependency(
+            task.taskIdentifier,
+            action.payload.output,
+        );
     }
 };

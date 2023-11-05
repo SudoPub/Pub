@@ -12,20 +12,18 @@ export class PubFinalizeTask extends PubTaskBase {
 
     public static fromProcedure(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>,
-        dependencies: string[],
     ): PubFinalizeTask {
 
-        return new PubFinalizeTask(procedure, dependencies);
+        return new PubFinalizeTask(procedure);
     }
 
     private readonly _procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>;
 
     protected constructor(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>,
-        dependencies: string[],
     ) {
 
-        super(PUB_TASK_TYPE.FINALIZE, dependencies);
+        super(PUB_TASK_TYPE.FINALIZE);
 
         this._procedure = procedure;
     }

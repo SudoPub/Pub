@@ -13,6 +13,8 @@ export enum PUB_CONNECTION_WAYPOINT_TYPE {
     PROCEDURE_ITERATE_END = "PROCEDURE_ITERATE_END",
 }
 
+export type PubConnectionParameterMapping = Record<string, string>;
+
 export type PubConnectionConfiguration = {
 
     readonly identifier: string;
@@ -23,5 +25,5 @@ export type PubConnectionConfiguration = {
     readonly nextProcedureIdentifier: string;
     readonly nextProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE;
 
-    readonly parametersMapping: Record<string, string>;
+    readonly parametersMapping: PubConnectionParameterMapping;
 };

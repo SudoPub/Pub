@@ -12,20 +12,18 @@ export class PubMapEspialTask extends PubTaskBase {
 
     public static fromProcedure(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
-        dependencies: string[],
     ): PubMapEspialTask {
 
-        return new PubMapEspialTask(procedure, dependencies);
+        return new PubMapEspialTask(procedure);
     }
 
     private readonly _procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>;
 
     protected constructor(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
-        dependencies: string[],
     ) {
 
-        super(PUB_TASK_TYPE.MAP_ESPIAL, dependencies);
+        super(PUB_TASK_TYPE.MAP_ESPIAL);
 
         this._procedure = procedure;
     }

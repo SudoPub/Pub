@@ -9,7 +9,7 @@ import { PubProcedureConfiguration } from "../../procedure/definition/configurat
 import { createPubTaskWithProcedure } from "../../task/factory/create";
 import { PubTaskBase } from "../../task/task-base";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
-import { findNextProcedures } from "../procedure/find-next-procedure";
+import { FindNextOperationItem, findNextOperations } from "../procedure/find-next-operation";
 
 export const initializeLoadRecursiveCreateTask = (
     taskProcedureMap: Map<string, PubTaskBase>,
@@ -18,26 +18,35 @@ export const initializeLoadRecursiveCreateTask = (
     currentTask: Optional<PubTaskBase>,
 ): void => {
 
-    const nextProcedures: PubProcedureConfiguration[] = findNextProcedures(
+    const nextOperations: FindNextOperationItem[] = findNextOperations(
         currentProcedure,
         configuration,
     );
 
-    for (const nextProcedure of nextProcedures) {
+    operation: for (const nextOperation of nextOperations) {
 
-        if (taskProcedureMap.has(nextProcedure.identifier)) {
+        if (taskProcedureMap.has(nextOperation.procedure.identifier)) {
 
             const previousTask: PubTaskBase =
-                taskProcedureMap.get(nextProcedure.identifier) as PubTaskBase;
+                taskProcedureMap.get(nextOperation.procedure.identifier) as PubTaskBase;
 
-            previousTask.addDependency(currentTask.getOrThrow().taskIdentifier);
-            continue;
+            previousTask.addDependency(
+                currentTask.getOrThrow().taskIdentifier,
+                nextOperation.connection.parametersMapping,
+            );
+            continue operation;
         }
 
         const nextTask: PubTaskBase = createPubTaskWithProcedure(
-            nextProcedure,
-            currentTask.exists ? [currentTask.getOrThrow().taskIdentifier] : [],
+            nextOperation.procedure,
         );
+
+        if (currentTask.exists) {
+            nextTask.addDependency(
+                currentTask.getOrThrow().taskIdentifier,
+                nextOperation.connection.parametersMapping,
+            );
+        }
 
         taskProcedureMap.set(nextTask.procedureIdentifier, nextTask);
 

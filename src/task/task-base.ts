@@ -4,19 +4,21 @@
  * @description Task Base
  */
 
+import { Optional } from "@sudoo/optional";
 import { EmptyValueSymbol, SEmptyValue } from "@sudoo/symbol";
 import { UUIDVersion1 } from "@sudoo/uuid";
+import { PubConnectionParameterMapping } from "../connection/definition/configuration";
 import { PubTaskEnsureEmptyInputTypeError } from "../error/task/ensure/empty-input";
 import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-output";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
-import { Optional } from "@sudoo/optional";
+import { mapTaskDependencyOutput } from "./mapping/map-output";
 
 export abstract class PubTaskBase {
 
     private readonly _taskIdentifier: string;
     private readonly _taskType: PUB_TASK_TYPE;
 
-    private readonly _dependencies: Set<string>;
+    private readonly _dependencies: Map<string, PubConnectionParameterMapping[]>;
 
     private _taskStatus: PUB_TASK_STATUS;
     private _executeInput: TaskExecuteInput | SEmptyValue;
@@ -26,13 +28,12 @@ export abstract class PubTaskBase {
 
     protected constructor(
         type: PUB_TASK_TYPE,
-        dependencies: string[],
     ) {
 
         this._taskIdentifier = UUIDVersion1.generateString();
         this._taskType = type;
 
-        this._dependencies = new Set(dependencies);
+        this._dependencies = new Map();
 
         this._taskStatus = PUB_TASK_STATUS.QUEUED;
         this._executeInput = EmptyValueSymbol;
@@ -50,7 +51,7 @@ export abstract class PubTaskBase {
     }
 
     public get dependencies(): string[] {
-        return [...this._dependencies];
+        return Array.from(this._dependencies.keys());
     }
 
     public executable(): boolean {
@@ -65,13 +66,44 @@ export abstract class PubTaskBase {
         return this;
     }
 
-    public addDependency(dependency: string): this {
+    public addDependency(
+        dependency: string,
+        parametersMapping: PubConnectionParameterMapping,
+    ): this {
 
-        this._dependencies.add(dependency);
+        if (this._dependencies.has(dependency)) {
+
+            const dependencies: PubConnectionParameterMapping[] =
+                this._dependencies.get(dependency) as PubConnectionParameterMapping[];
+
+            this._dependencies.set(dependency, [
+                ...dependencies,
+                parametersMapping,
+            ]);
+            return this;
+        }
+
+        this._dependencies.set(dependency, [parametersMapping]);
         return this;
     }
 
-    public removeDependency(dependency: string): this {
+    public resolveDependency(
+        dependency: string,
+        output: TaskExecuteOutput,
+    ): this {
+
+        if (!this._dependencies.has(dependency)) {
+            return this;
+        }
+
+        const mappings: PubConnectionParameterMapping[] =
+            this._dependencies.get(dependency) as PubConnectionParameterMapping[];
+
+        for (const mapping of mappings) {
+            this.combineExecuteInput(
+                mapTaskDependencyOutput(mapping, output),
+            );
+        }
 
         this._dependencies.delete(dependency);
         return this;

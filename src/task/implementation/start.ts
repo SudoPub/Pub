@@ -23,7 +23,7 @@ export class PubStartTask extends PubTaskBase {
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>,
     ) {
 
-        super(PUB_TASK_TYPE.START, []);
+        super(PUB_TASK_TYPE.START);
 
         this._procedure = procedure;
     }

@@ -14,7 +14,6 @@ import { PubTaskBase } from "../task-base";
 
 export const createPubTaskWithProcedure = (
     procedure: PubProcedureConfiguration,
-    dependencies: string[],
 ): PubTaskBase => {
 
     if (procedure.type === PUB_PROCEDURE_TYPE.START) {
@@ -26,19 +25,16 @@ export const createPubTaskWithProcedure = (
 
         return PubDriverTask.fromProcedure(
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>,
-            dependencies,
         );
     } else if (procedure.type === PUB_PROCEDURE_TYPE.MAP) {
 
         return PubMapEspialTask.fromProcedure(
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
-            dependencies,
         );
     } else if (procedure.type === PUB_PROCEDURE_TYPE.END) {
 
         return PubFinalizeTask.fromProcedure(
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>,
-            dependencies,
         );
     }
 
