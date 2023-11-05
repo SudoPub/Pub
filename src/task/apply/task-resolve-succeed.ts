@@ -32,11 +32,11 @@ export const applyTaskResolveSucceedOnTaskManager = (
 
     task.setTaskStatus(PUB_TASK_STATUS.RESOLVED);
 
-    const dependencies: PubTaskBase[] = taskManager.getTasksByDependency(task.taskIdentifier);
+    const dependents: PubTaskBase[] = taskManager.getTasksByDependency(task.taskIdentifier);
 
-    for (const dependency of dependencies) {
+    for (const dependent of dependents) {
 
-        dependency.resolveDependency(
+        dependent.resolveDependency(
             task.taskIdentifier,
             action.payload.output,
         );

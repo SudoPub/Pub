@@ -13,6 +13,8 @@ import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-ou
 import { PubProcedureConfiguration } from "../procedure/definition/configuration";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
 import { mapTaskDependencyOutput } from "./mapping/map-output";
+import { validateFullProcedureInput } from "./mapping/validate-full-procedure-input";
+import { validateFullProcedureOutput } from "./mapping/validate-full-procedure-output";
 import { validatePartialProcedureInput } from "./mapping/validate-partial-procedure-input";
 import { validatePartialProcedureOutput } from "./mapping/validate-partial-procedure-output";
 
@@ -152,6 +154,14 @@ export abstract class PubTaskBase {
         return true;
     }
 
+    public validateFullExecuteInput(): boolean {
+
+        return validateFullProcedureInput(
+            this._procedure,
+            this._executeInput === EmptyValueSymbol ? {} : this._executeInput,
+        );
+    }
+
     public getExecuteOutput(): Optional<TaskExecuteOutput> {
 
         if (this._executeOutput === EmptyValueSymbol) {
@@ -183,6 +193,14 @@ export abstract class PubTaskBase {
 
         this._executeOutput = combinedOutput;
         return true;
+    }
+
+    public validateFullExecuteOutput(): boolean {
+
+        return validateFullProcedureOutput(
+            this._procedure,
+            this._executeOutput === EmptyValueSymbol ? {} : this._executeOutput,
+        );
     }
 
     public abstract serialize(): PubSerializedTask;
