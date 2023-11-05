@@ -60,7 +60,7 @@ export class ExpectTask {
 
     public toHasProcedureIdentifier(identifier: string): this {
 
-        expect(this._task.procedureIdentifier).to.be.equal(identifier);
+        expect(this._task.procedure.identifier).to.be.equal(identifier);
         return this;
     }
 

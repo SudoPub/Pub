@@ -54,7 +54,7 @@ export class PubTaskManager {
 
         return this._tasks.filter(
             (task: PubTaskBase) => {
-                return task.procedureIdentifier === procedureIdentifier;
+                return task.procedure.identifier === procedureIdentifier;
             },
         );
     }

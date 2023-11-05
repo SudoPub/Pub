@@ -17,15 +17,11 @@ export class PubDriverTask extends PubTaskBase {
         return new PubDriverTask(procedure);
     }
 
-    private readonly _procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>;
-
     protected constructor(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>,
     ) {
 
-        super(PUB_TASK_TYPE.DRIVER);
-
-        this._procedure = procedure;
+        super(PUB_TASK_TYPE.DRIVER, procedure);
     }
 
     public get procedureIdentifier(): string {

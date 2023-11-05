@@ -17,15 +17,11 @@ export class PubFinalizeTask extends PubTaskBase {
         return new PubFinalizeTask(procedure);
     }
 
-    private readonly _procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>;
-
     protected constructor(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>,
     ) {
 
-        super(PUB_TASK_TYPE.FINALIZE);
-
-        this._procedure = procedure;
+        super(PUB_TASK_TYPE.FINALIZE, procedure);
     }
 
     public get procedureIdentifier(): string {

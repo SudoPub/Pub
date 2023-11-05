@@ -48,13 +48,13 @@ export const initializeLoadRecursiveCreateTask = (
             );
         }
 
-        taskProcedureMap.set(nextTask.procedureIdentifier, nextTask);
+        taskProcedureMap.set(nextTask.procedure.identifier, nextTask);
 
         initializeLoadRecursiveCreateTask(
             taskProcedureMap,
             configuration,
             configuration.getProcedureByIdentifier(
-                nextTask.procedureIdentifier,
+                nextTask.procedure.identifier,
             ).getOrThrow(),
             Optional.ofAny(nextTask),
         );

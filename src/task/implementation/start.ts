@@ -17,15 +17,11 @@ export class PubStartTask extends PubTaskBase {
         return new PubStartTask(procedure);
     }
 
-    private readonly _procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>;
-
     protected constructor(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>,
     ) {
 
-        super(PUB_TASK_TYPE.START);
-
-        this._procedure = procedure;
+        super(PUB_TASK_TYPE.START, procedure);
     }
 
     public get procedureIdentifier(): string {
@@ -34,8 +30,6 @@ export class PubStartTask extends PubTaskBase {
 
     public serialize(): PubSerializedTask {
 
-        return {
-            procedureIdentifier: this.procedureIdentifier,
-        };
+        return {};
     }
 }

@@ -17,15 +17,11 @@ export class PubMapEspialTask extends PubTaskBase {
         return new PubMapEspialTask(procedure);
     }
 
-    private readonly _procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>;
-
     protected constructor(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
     ) {
 
-        super(PUB_TASK_TYPE.MAP_ESPIAL);
-
-        this._procedure = procedure;
+        super(PUB_TASK_TYPE.MAP_ESPIAL, procedure);
     }
 
     public get procedureIdentifier(): string {

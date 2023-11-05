@@ -48,7 +48,9 @@ export const justRunExample: PubWorkflowConfiguration = {
             payload: {
                 driverName: "JUST_RUN",
 
-                parameterPatterns: {},
+                parameterPatterns: {
+                    world: createStringPattern(),
+                },
                 outcomePatterns: {},
             },
         },

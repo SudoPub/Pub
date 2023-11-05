@@ -12,8 +12,11 @@ import { PubTaskEnsureEmptyInputTypeError } from "../error/task/ensure/empty-inp
 import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-output";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
 import { mapTaskDependencyOutput } from "./mapping/map-output";
+import { PubProcedureConfiguration } from "../procedure/definition/configuration";
 
 export abstract class PubTaskBase {
+
+    protected readonly _procedure: PubProcedureConfiguration;
 
     private readonly _taskIdentifier: string;
     private readonly _taskType: PUB_TASK_TYPE;
@@ -24,10 +27,9 @@ export abstract class PubTaskBase {
     private _executeInput: TaskExecuteInput | SEmptyValue;
     private _executeOutput: TaskExecuteOutput | SEmptyValue;
 
-    public abstract procedureIdentifier: string;
-
     protected constructor(
         type: PUB_TASK_TYPE,
+        procedure: PubProcedureConfiguration,
     ) {
 
         this._taskIdentifier = UUIDVersion1.generateString();
@@ -38,6 +40,12 @@ export abstract class PubTaskBase {
         this._taskStatus = PUB_TASK_STATUS.QUEUED;
         this._executeInput = EmptyValueSymbol;
         this._executeOutput = EmptyValueSymbol;
+
+        this._procedure = procedure;
+    }
+
+    public get procedure(): PubProcedureConfiguration {
+        return this._procedure;
     }
 
     public get taskIdentifier(): string {
