@@ -67,6 +67,7 @@ export const justRunExample: PubWorkflowConfiguration = {
             nextProcedureWaypointType: PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START,
 
             parametersMapping: {
+                hello: "world",
             },
         },
         {

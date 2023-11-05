@@ -45,7 +45,7 @@ describe('Given (Many-To-One Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(1);
 
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier("START")
+                .forSingleTaskWithProcedureIdentifier("START")
                 .toBeExecutable();
         });
 
@@ -65,13 +65,13 @@ describe('Given (Many-To-One Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(3);
 
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier("FIRST")
+                .forSingleTaskWithProcedureIdentifier("FIRST")
                 .toBeExecutable();
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier("SECOND")
+                .forSingleTaskWithProcedureIdentifier("SECOND")
                 .toBeExecutable();
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier("THIRD")
+                .forSingleTaskWithProcedureIdentifier("THIRD")
                 .toBeExecutable();
         });
 
@@ -91,10 +91,10 @@ describe('Given (Many-To-One Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(2);
 
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier("SECOND")
+                .forSingleTaskWithProcedureIdentifier("SECOND")
                 .toBeExecutable();
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier("THIRD")
+                .forSingleTaskWithProcedureIdentifier("THIRD")
                 .toBeExecutable();
         });
 
@@ -114,7 +114,7 @@ describe('Given (Many-To-One Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(1);
 
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier("THIRD")
+                .forSingleTaskWithProcedureIdentifier("THIRD")
                 .toBeExecutable();
         });
 
@@ -134,7 +134,7 @@ describe('Given (Many-To-One Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(1);
 
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier("END")
+                .forSingleTaskWithProcedureIdentifier("END")
                 .toBeExecutable();
         });
     });

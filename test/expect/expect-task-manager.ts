@@ -46,7 +46,7 @@ export class ExpectTaskManager {
         return ExpectTask.with(task.getOrThrow());
     }
 
-    public forTaskWithProcedureIdentifier(identifier: string): ExpectTask {
+    public forSingleTaskWithProcedureIdentifier(identifier: string): ExpectTask {
 
         const tasks = this._taskManager.getTasksByProcedureIdentifier(identifier);
 

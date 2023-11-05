@@ -92,7 +92,7 @@ describe('Given (Just-Run Param Validate) Use Case', (): void => {
             expect(applyResult).to.be.true;
 
             ExpectTaskManager.with(taskManager)
-                .forTaskWithProcedureIdentifier(justRunExampleStartProcedure.identifier)
+                .forSingleTaskWithProcedureIdentifier(justRunExampleStartProcedure.identifier)
                 .toHasStatus(PUB_TASK_STATUS.RESOLVED)
                 .toNotHaveInput()
                 .toHasOutput({

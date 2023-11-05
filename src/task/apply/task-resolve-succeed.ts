@@ -23,7 +23,6 @@ export const applyTaskResolveSucceedOnTaskManager = (
                 .withTaskIdentifier(action.payload.taskIdentifier),
         );
 
-
     const combineResult: boolean = task.combineExecuteOutput(action.payload.output);
 
     if (!combineResult) {
