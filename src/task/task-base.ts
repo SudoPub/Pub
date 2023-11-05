@@ -13,6 +13,8 @@ import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-ou
 import { PubProcedureConfiguration } from "../procedure/definition/configuration";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
 import { mapTaskDependencyOutput } from "./mapping/map-output";
+import { validateProcedureInput } from "./mapping/validate-procedure-input";
+import { validateProcedureOutput } from "./mapping/validate-procedure-output";
 
 export abstract class PubTaskBase {
 
@@ -142,6 +144,10 @@ export abstract class PubTaskBase {
             ...input,
         };
 
+        if (!validateProcedureInput(this._procedure, combinedInput)) {
+            return false;
+        }
+
         this._executeInput = combinedInput;
         return true;
     }
@@ -170,6 +176,10 @@ export abstract class PubTaskBase {
             ...(this._executeOutput === EmptyValueSymbol ? {} : this._executeOutput),
             ...output,
         };
+
+        if (!validateProcedureOutput(this._procedure, combinedOutput)) {
+            return false;
+        }
 
         this._executeOutput = combinedOutput;
         return true;
