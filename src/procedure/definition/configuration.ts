@@ -19,6 +19,8 @@ export enum PUB_PROCEDURE_TYPE {
     MAP = "MAP",
 }
 
+export type PubProcedurePattern = Record<string, Pattern>;
+
 export type PubProcedureConfiguration<T extends PUB_PROCEDURE_TYPE = PUB_PROCEDURE_TYPE> = {
 
     readonly identifier: string;
@@ -36,26 +38,26 @@ export type PubProcedureConfigurationPayloadSwitch<T extends PUB_PROCEDURE_TYPE>
 
 export type PubProcedureConfiguration_Start = {
 
-    readonly patterns: Record<string, Pattern>;
+    readonly patterns: PubProcedurePattern;
 };
 
 export type PubProcedureConfiguration_End = {
 
-    readonly patterns: Record<string, Pattern>;
+    readonly patterns: PubProcedurePattern;
 };
 
 export type PubProcedureConfiguration_Driver = {
 
     readonly driverName: string;
 
-    readonly parameterPatterns: Record<string, Pattern>;
-    readonly outcomePatterns: Record<string, Pattern>;
+    readonly parameterPatterns: PubProcedurePattern;
+    readonly outcomePatterns: PubProcedurePattern;
 };
 
 export type PubProcedureConfiguration_Map = {
 
     readonly mapName: string;
 
-    readonly parameterPatterns: Record<string, Pattern>;
-    readonly outcomePatterns: Record<string, Pattern>;
+    readonly parameterPatterns: PubProcedurePattern;
+    readonly outcomePatterns: PubProcedurePattern;
 };

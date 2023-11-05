@@ -10,9 +10,9 @@ import { UUIDVersion1 } from "@sudoo/uuid";
 import { PubConnectionParameterMapping } from "../connection/definition/configuration";
 import { PubTaskEnsureEmptyInputTypeError } from "../error/task/ensure/empty-input";
 import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-output";
+import { PubProcedureConfiguration } from "../procedure/definition/configuration";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
 import { mapTaskDependencyOutput } from "./mapping/map-output";
-import { PubProcedureConfiguration } from "../procedure/definition/configuration";
 
 export abstract class PubTaskBase {
 
@@ -135,13 +135,15 @@ export abstract class PubTaskBase {
         return this._executeInput;
     }
 
-    public combineExecuteInput(input: TaskExecuteInput): this {
+    public combineExecuteInput(input: TaskExecuteInput): boolean {
 
-        this._executeInput = {
+        const combinedInput: TaskExecuteInput = {
             ...(this._executeInput === EmptyValueSymbol ? {} : this._executeInput),
             ...input,
         };
-        return this;
+
+        this._executeInput = combinedInput;
+        return true;
     }
 
     public getExecuteOutput(): Optional<TaskExecuteOutput> {
@@ -162,13 +164,15 @@ export abstract class PubTaskBase {
         return this._executeOutput;
     }
 
-    public combineExecuteOutput(output: TaskExecuteOutput): this {
+    public combineExecuteOutput(output: TaskExecuteOutput): boolean {
 
-        this._executeOutput = {
+        const combinedOutput: TaskExecuteOutput = {
             ...(this._executeOutput === EmptyValueSymbol ? {} : this._executeOutput),
             ...output,
         };
-        return this;
+
+        this._executeOutput = combinedOutput;
+        return true;
     }
 
     public abstract serialize(): PubSerializedTask;
