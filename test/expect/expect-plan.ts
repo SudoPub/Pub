@@ -6,7 +6,7 @@
  */
 
 import { expect } from 'chai';
-import { PUB_PLAN_TYPE, PubPlan } from '../../src';
+import { PUB_PLAN_TYPE, PubPlan, PubPlanPayloadSwitch } from '../../src';
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 export class ExpectPlan {
@@ -31,5 +31,13 @@ export class ExpectPlan {
 
         expect(this._plan.type).to.be.equal(type);
         return this;
+    }
+
+    public assertPlanPayloadWithType<T extends PUB_PLAN_TYPE>(
+        type: T
+    ): PubPlanPayloadSwitch<T> {
+
+        expect(this._plan.type).to.be.equal(type);
+        return this._plan.payload as PubPlanPayloadSwitch<T>;
     }
 }

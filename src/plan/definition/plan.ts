@@ -18,6 +18,7 @@ export type PubPlan<T extends PUB_PLAN_TYPE> = {
     readonly identifier: string;
     readonly type: T;
 
+    readonly taskIdentifier: string;
     readonly payload: PubPlanPayloadSwitch<T>;
 
     readonly timestamp: Date;

@@ -19,6 +19,7 @@ export const planForNextOnStartTask = (
     return [
         createPubPlan(
             PUB_PLAN_TYPE.INITIAL_START,
+            task,
             {
                 procedure: task.procedure,
             },

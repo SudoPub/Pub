@@ -19,6 +19,7 @@ export const planForNextOnDriverTask = (
     return [
         createPubPlan(
             PUB_PLAN_TYPE.EXECUTE_DRIVER,
+            task,
             {
                 procedure: task.procedure,
                 input: task.getExecuteInput().getOrThrow(),
