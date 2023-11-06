@@ -6,7 +6,8 @@
 
 import { PUB_ACTION_TYPE, PubAction } from "../../action/definition/action";
 import { PubTaskTaskManagerGetTaskNotFoundError } from "../../error/task/task-manager/get-task-not-found";
-import { PUB_TASK_STATUS, PUB_TASK_TYPE } from "../definition/task";
+import { PUB_TASK_STATUS } from "../definition/task";
+import { resolveResolvableTask } from "../resolve/resolve";
 import { PubTaskBase } from "../task-base";
 import { PubTaskManager } from "../task-manager";
 
@@ -29,11 +30,6 @@ export const applyTaskResolveSucceedOnTaskManager = (
         return false;
     }
 
-    if (task.taskType === PUB_TASK_TYPE.MAP_ESPIAL) {
-
-        console.log('map espial succeed');
-    }
-
     task.setTaskStatus(PUB_TASK_STATUS.RESOLVED);
 
     const dependents: PubTaskBase[] = taskManager.getTasksByDependency(task.taskIdentifier);
@@ -45,5 +41,15 @@ export const applyTaskResolveSucceedOnTaskManager = (
             action.payload.output,
         );
     }
+
+    const resolvableTasks: PubTaskBase[] = taskManager.getResolvableTasks();
+
+    for (const resolvableTask of resolvableTasks) {
+        const result: boolean = resolveResolvableTask(resolvableTask, taskManager);
+        if (!result) {
+            return false;
+        }
+    }
+
     return true;
 };

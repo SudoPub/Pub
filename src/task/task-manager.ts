@@ -68,6 +68,15 @@ export class PubTaskManager {
         );
     }
 
+    public getResolvableTasks(): PubTaskBase[] {
+
+        return this._tasks.filter(
+            (task: PubTaskBase) => {
+                return task.resolvable();
+            },
+        );
+    }
+
     public createSnapshot(): PubSnapshot {
 
         return {

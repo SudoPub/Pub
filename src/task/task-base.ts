@@ -73,6 +73,12 @@ export abstract class PubTaskBase {
             && this._taskStatus === PUB_TASK_STATUS.QUEUED;
     }
 
+    public resolvable(): boolean {
+
+        return this._dependencies.size === 0
+            && this._taskStatus === PUB_TASK_STATUS.AWAIT_DEPENDENCY;
+    }
+
     public setTaskStatus(status: PUB_TASK_STATUS): this {
 
         this._taskStatus = status;
