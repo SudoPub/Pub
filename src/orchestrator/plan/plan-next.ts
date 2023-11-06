@@ -28,17 +28,6 @@ export const planForNext = (
     const nextPlans: Array<PubPlan<PUB_PLAN_TYPE>> = [];
     task: for (const nextExecutableTask of nextExecutableTasks) {
 
-        if (nextExecutableTask.taskType === PUB_TASK_TYPE.START) {
-
-            nextPlans.push(
-                ...planForNextOnStartTask(
-                    configuration,
-                    taskManager,
-                    nextExecutableTask as PubStartTask,
-                ),
-            );
-            continue task;
-        }
         if (nextExecutableTask.taskType === PUB_TASK_TYPE.DRIVER) {
 
             nextPlans.push(
@@ -46,6 +35,17 @@ export const planForNext = (
                     configuration,
                     taskManager,
                     nextExecutableTask as PubDriverTask,
+                ),
+            );
+            continue task;
+        }
+        if (nextExecutableTask.taskType === PUB_TASK_TYPE.START) {
+
+            nextPlans.push(
+                ...planForNextOnStartTask(
+                    configuration,
+                    taskManager,
+                    nextExecutableTask as PubStartTask,
                 ),
             );
             continue task;
