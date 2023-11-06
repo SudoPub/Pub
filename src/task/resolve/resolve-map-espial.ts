@@ -24,13 +24,10 @@ export const resolveMapEspialTask = (
         .getExecuteInput()
         .getOrDefault({});
 
-    if (!Array.isArray(
-        executeInput[procedure.payload.iterationParameter]
-    )) {
+    const executeParameters: string = executeInput[procedure.payload.iterationParameter];
+    if (!Array.isArray(executeParameters)) {
         return false;
     }
-
-    console.log(executeInput[procedure.payload.iterationParameter]);
 
     const iterationProcedures: PubAction_MapEspialSucceed_Iteration[] = taskManager
         .workflowConfiguration
@@ -62,16 +59,27 @@ export const resolveMapEspialTask = (
             };
         });
 
-    const applyResult: boolean = applyActionOnTaskManager(
-        createPubAction(PUB_ACTION_TYPE.MAP_ESPIAL_SUCCEED, {
+    let applyResult: boolean = true;
 
-            taskIdentifier: task.taskIdentifier,
+    for (const executeParameter of executeParameters) {
 
-            iterations: iterationProcedures,
-            input: task.getExecuteInput().getOrThrow(),
-        }),
-        taskManager,
-    );
+        const iterationApplyResult = applyActionOnTaskManager(
+            createPubAction(PUB_ACTION_TYPE.MAP_ESPIAL_SUCCEED, {
 
+                taskIdentifier: task.taskIdentifier,
+
+                iterations: iterationProcedures,
+                input: {
+                    [task.procedure.payload.iterationItemParameter]: executeParameter,
+                },
+            }),
+            taskManager,
+        );
+
+        if (!iterationApplyResult) {
+            applyResult = false;
+            break;
+        }
+    }
     return applyResult;
 };

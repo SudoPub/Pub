@@ -25,7 +25,7 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
 
     const taskManager: PubTaskManager = initializeCreateTaskManager(twoActionMapConfiguration);
 
-    it.only('Should be able to map variable from start to first', (): void => {
+    it('Should be able to map variable from start to first', (): void => {
 
         const applyResult: boolean = applyActionOnTaskManager(
             createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
@@ -85,13 +85,13 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
         ExpectTaskManager.with(taskManager)
             .hasExecutableTaskLength(1)
             .withTaskFinder()
-            .thatWithProcedureIdentifier("MAP")
-            .toHasLengthOf(2)
-            .thatWithTaskStatus(PUB_TASK_STATUS.RESOLVED)
+            .thatWithProcedureIdentifier("PLUS")
+            .thatWithTaskStatus(PUB_TASK_STATUS.QUEUED)
             .asSingleTask()
-            .toHasTaskType(PUB_TASK_TYPE.MAP_ESPIAL)
+            .toHasTaskType(PUB_TASK_TYPE.DRIVER)
+            .toBeExecutable()
             .toHasInput({
-                iteration: [0],
+                value: 5,
             });
     });
 });
