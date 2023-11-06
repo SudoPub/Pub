@@ -30,6 +30,8 @@ export const resolveMapEspialTask = (
         return false;
     }
 
+    console.log(executeInput[procedure.payload.iterationParameter]);
+
     const iterationProcedures: PubAction_MapEspialSucceed_Iteration[] = taskManager
         .workflowConfiguration
         .configuration
@@ -50,6 +52,7 @@ export const resolveMapEspialTask = (
                     connection.nextProcedureIdentifier,
                 ),
                 connection,
+                input: task.getExecuteInput().getOrThrow(),
             };
         })
         .map((iteration) => {
@@ -65,6 +68,7 @@ export const resolveMapEspialTask = (
             taskIdentifier: task.taskIdentifier,
 
             iterations: iterationProcedures,
+            input: task.getExecuteInput().getOrThrow(),
         }),
         taskManager,
     );

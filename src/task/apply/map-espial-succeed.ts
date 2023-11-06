@@ -27,6 +27,7 @@ export const applyMapEspialSucceedOnTaskManager = (
 
         const tasks: PubTaskBase[] = mapEspialInsertCreateTasks(
             taskManager.workflowConfiguration,
+            action.payload.input,
             iteration,
             mapFinalizeTask,
         );

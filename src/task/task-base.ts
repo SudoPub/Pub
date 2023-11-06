@@ -183,6 +183,17 @@ export abstract class PubTaskBase {
         return true;
     }
 
+    public combineInputWithMapping(
+        input: TaskExecuteInput,
+        mapping: PubConnectionParameterMapping,
+    ): this {
+
+        this.combineExecuteInput(
+            mapTaskDependencyOutput(mapping, input),
+        );
+        return this;
+    }
+
     public validateFullExecuteInput(): boolean {
 
         return validateFullProcedureInput(

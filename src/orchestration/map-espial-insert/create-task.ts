@@ -11,9 +11,11 @@ import { PubMapFinalizeTask } from "../../task/implementation/map-finalize";
 import { PubTaskBase } from "../../task/task-base";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
 import { mapEspialInsertRecursiveCreateTask } from "./recursive-create-task";
+import { TaskExecuteInput } from "../../task/definition/task";
 
 export const mapEspialInsertCreateTasks = (
     configuration: PubCachedWorkflowConfiguration,
+    input: TaskExecuteInput,
     firstIteration: PubAction_MapEspialSucceed_Iteration,
     mapFinalizeTask: PubMapFinalizeTask,
 ): PubTaskBase[] => {
@@ -22,6 +24,11 @@ export const mapEspialInsertCreateTasks = (
 
     const startTask = createPubTaskWithProcedure(
         firstIteration.procedure,
+    );
+
+    startTask.combineInputWithMapping(
+        input,
+        firstIteration.connection.parametersMapping,
     );
 
     taskProcedureMap.set(
