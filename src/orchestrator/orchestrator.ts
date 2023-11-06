@@ -6,10 +6,12 @@
 
 import { PUB_ACTION_TYPE, PubAction } from "../action/definition/action";
 import { initializeCreateTaskManager } from "../orchestration/initialize/create-tasks";
+import { PUB_PLAN_TYPE, PubPlan } from "../plan/definition/plan";
 import { applyActionOnTaskManager } from "../task/apply/apply";
 import { PubTaskManager } from "../task/task-manager";
 import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
 import { PubWorkflowConfiguration } from "../workflow/definition/configuration";
+import { planForNext } from "./plan/plan-next";
 
 export class PubOrchestrator {
 
@@ -39,5 +41,10 @@ export class PubOrchestrator {
 
         const applyResult: boolean = applyActionOnTaskManager(action, this._taskManager);
         return applyResult;
+    }
+
+    public planNext(): Array<PubPlan<PUB_PLAN_TYPE>> {
+
+        return planForNext(this._configuration, this._taskManager);
     }
 }
