@@ -8,27 +8,35 @@ import { Optional } from "@sudoo/optional";
 import { PubSnapshot } from "../snapshot/snapshot";
 import { PubTaskBase } from "./task-base";
 import { createTaskSnapshot } from "./snapshot/create-snapshot";
+import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
 
 export class PubTaskManager {
 
     public static withTasks(
         tasks: PubTaskBase[],
+        workflowConfiguration: PubCachedWorkflowConfiguration,
     ): PubTaskManager {
 
-        return new PubTaskManager(tasks);
+        return new PubTaskManager(tasks, workflowConfiguration);
     }
 
     private readonly _tasks: PubTaskBase[];
+    private readonly _workflowConfiguration: PubCachedWorkflowConfiguration;
 
     private constructor(
         tasks: PubTaskBase[],
+        workflowConfiguration: PubCachedWorkflowConfiguration,
     ) {
 
         this._tasks = tasks;
+        this._workflowConfiguration = workflowConfiguration;
     }
 
     public get tasks(): PubTaskBase[] {
         return this._tasks;
+    }
+    public get workflowConfiguration(): PubCachedWorkflowConfiguration {
+        return this._workflowConfiguration;
     }
 
     public getTaskByIdentifier(identifier: string): Optional<PubTaskBase> {

@@ -18,7 +18,7 @@ export const initializeCreateTaskManager = (
 
     const tasks: PubTaskBase[] = initializeCreateTasks(configuration);
 
-    return PubTaskManager.withTasks(tasks);
+    return PubTaskManager.withTasks(tasks, configuration);
 };
 
 export const initializeCreateTasks = (
