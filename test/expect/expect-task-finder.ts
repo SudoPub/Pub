@@ -55,6 +55,12 @@ export class ExpectTaskFinder {
         return this;
     }
 
+    public toHasLengthOf(length: number): this {
+
+        expect(this._tasks).to.be.lengthOf(length);
+        return this;
+    }
+
     public asSingleTask(): ExpectTask {
 
         if (this._tasks.length === 0) {

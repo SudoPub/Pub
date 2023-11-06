@@ -47,6 +47,7 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
             .hasExecutableTaskLength(1)
             .withTaskFinder()
             .thatWithProcedureIdentifier("MAP")
+            .toHasLengthOf(2)
             .thatWithTaskStatus(PUB_TASK_STATUS.RESOLVED)
             .asSingleTask()
             .toHasInput({
