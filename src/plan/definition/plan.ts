@@ -15,7 +15,7 @@ export enum PUB_PLAN_TYPE {
 
 export type PubPlan<T extends PUB_PLAN_TYPE> = {
 
-    readonly identifier: string;
+    readonly planIdentifier: string;
     readonly type: T;
 
     readonly taskIdentifier: string;

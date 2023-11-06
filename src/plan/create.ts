@@ -17,7 +17,7 @@ export const createPubPlan = <T extends PUB_PLAN_TYPE>(
     const identifier: string = UUIDVersion1.generateString();
 
     return {
-        identifier,
+        planIdentifier: identifier,
         taskIdentifier: task.taskIdentifier,
         type,
         payload,
