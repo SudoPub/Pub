@@ -18,6 +18,10 @@ describe('Given (Just-Run Orchestrator Full Cycle) Use Case', (): void => {
 
         const nextPlans: Array<PubPlan<PUB_PLAN_TYPE>> = orchestrator.planNext();
 
+        console.log(nextPlans);
+
         expect(nextPlans).to.be.lengthOf(1);
+
+        expect(nextPlans[0].type).to.be.equal(PUB_PLAN_TYPE.INITIAL_START);
     });
 });
