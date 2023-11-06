@@ -34,7 +34,7 @@ export const twoActionMapEndProcedure: PubProcedureConfiguration = {
     },
 };
 
-export const twoActionMap: PubWorkflowConfiguration = {
+export const twoActionMapExample: PubWorkflowConfiguration = {
 
     workflowName: "Two Action Map",
     workflowDescription: "Two Action Map for testing",

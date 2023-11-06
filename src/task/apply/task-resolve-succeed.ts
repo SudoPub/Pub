@@ -6,7 +6,7 @@
 
 import { PUB_ACTION_TYPE, PubAction } from "../../action/definition/action";
 import { PubTaskTaskManagerGetTaskNotFoundError } from "../../error/task/task-manager/get-task-not-found";
-import { PUB_TASK_STATUS } from "../definition/task";
+import { PUB_TASK_STATUS, PUB_TASK_TYPE } from "../definition/task";
 import { PubTaskBase } from "../task-base";
 import { PubTaskManager } from "../task-manager";
 
@@ -27,6 +27,11 @@ export const applyTaskResolveSucceedOnTaskManager = (
 
     if (!combineResult) {
         return false;
+    }
+
+    if (task.taskType === PUB_TASK_TYPE.MAP_ESPIAL) {
+
+        console.log('map espial succeed');
     }
 
     task.setTaskStatus(PUB_TASK_STATUS.RESOLVED);
