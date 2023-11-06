@@ -4,9 +4,9 @@
  * @description Resolve Map Espial
  */
 
-import { Optional } from "@sudoo/optional";
 import { createPubAction } from "../../action/create";
 import { PUB_ACTION_TYPE } from "../../action/definition/action";
+import { PubAction_MapEspialSucceed_Iteration } from "../../action/definition/map-espial-succeed";
 import { PUB_CONNECTION_WAYPOINT_TYPE, PubConnectionConfiguration } from "../../connection/definition/configuration";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { applyActionOnTaskManager } from "../apply/apply";
@@ -30,7 +30,7 @@ export const resolveMapEspialTask = (
         return false;
     }
 
-    const iterationProcedures: PubProcedureConfiguration[] = taskManager
+    const iterationProcedures: PubAction_MapEspialSucceed_Iteration[] = taskManager
         .workflowConfiguration
         .configuration
         .connections
@@ -45,12 +45,18 @@ export const resolveMapEspialTask = (
                 PUB_CONNECTION_WAYPOINT_TYPE.PROCEDURE_SELF_START;
         })
         .map((connection: PubConnectionConfiguration) => {
-            return taskManager.workflowConfiguration.getProcedureByIdentifier(
-                connection.nextProcedureIdentifier,
-            );
+            return {
+                procedure: taskManager.workflowConfiguration.getProcedureByIdentifier(
+                    connection.nextProcedureIdentifier,
+                ),
+                connection,
+            };
         })
-        .map((nextProcedure: Optional<PubProcedureConfiguration>) => {
-            return nextProcedure.getOrThrow();
+        .map((iteration) => {
+            return {
+                connection: iteration.connection,
+                procedure: iteration.procedure.getOrThrow(),
+            };
         });
 
     const applyResult: boolean = applyActionOnTaskManager(
@@ -58,7 +64,7 @@ export const resolveMapEspialTask = (
 
             taskIdentifier: task.taskIdentifier,
 
-            procedures: iterationProcedures,
+            iterations: iterationProcedures,
         }),
         taskManager,
     );

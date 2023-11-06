@@ -23,9 +23,9 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
             twoActionMapExample,
         );
 
-    it('Should be able to map variable from start to first', (): void => {
+    const taskManager: PubTaskManager = initializeCreateTaskManager(twoActionMapConfiguration);
 
-        const taskManager: PubTaskManager = initializeCreateTaskManager(twoActionMapConfiguration);
+    it.only('Should be able to map variable from start to first', (): void => {
 
         const applyResult: boolean = applyActionOnTaskManager(
             createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
@@ -36,6 +36,45 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
                     .taskIdentifier,
                 output: {
                     initial: [0],
+                },
+            }),
+            taskManager,
+        );
+
+        expect(applyResult).to.be.true;
+
+        ExpectTaskManager.with(taskManager)
+            .hasExecutableTaskLength(1)
+            .withTaskFinder()
+            .thatWithProcedureIdentifier("MAP")
+            .toHasLengthOf(2)
+            .thatWithTaskStatus(PUB_TASK_STATUS.RESOLVED)
+            .asSingleTask()
+            .toHasTaskType(PUB_TASK_TYPE.MAP_ESPIAL)
+            .toHasInput({
+                iteration: [0],
+            });
+
+        ExpectTaskManager.with(taskManager)
+            .withTaskFinder()
+            .thatWithProcedureIdentifier("TIMES")
+            .asSingleTask()
+            .toHasInput({
+                value: 0,
+            });
+    });
+
+    it('Should be able to resolve first iteration item', (): void => {
+
+        const applyResult: boolean = applyActionOnTaskManager(
+            createPubAction(PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED, {
+                taskIdentifier: taskManager
+                    .getTasksByProcedureIdentifier(
+                        "TIMES",
+                    )[0]
+                    .taskIdentifier,
+                output: {
+                    value: 5,
                 },
             }),
             taskManager,

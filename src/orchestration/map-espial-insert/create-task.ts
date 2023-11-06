@@ -5,7 +5,7 @@
  */
 
 import { Optional } from "@sudoo/optional";
-import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PubAction_MapEspialSucceed_Iteration } from "../../action/definition/map-espial-succeed";
 import { createPubTaskWithProcedure } from "../../task/factory/create";
 import { PubMapFinalizeTask } from "../../task/implementation/map-finalize";
 import { PubTaskBase } from "../../task/task-base";
@@ -14,14 +14,14 @@ import { mapEspialInsertRecursiveCreateTask } from "./recursive-create-task";
 
 export const mapEspialInsertCreateTasks = (
     configuration: PubCachedWorkflowConfiguration,
-    firstProcedure: PubProcedureConfiguration,
+    firstIteration: PubAction_MapEspialSucceed_Iteration,
     mapFinalizeTask: PubMapFinalizeTask,
 ): PubTaskBase[] => {
 
     const taskProcedureMap: Map<string, PubTaskBase> = new Map();
 
     const startTask = createPubTaskWithProcedure(
-        firstProcedure,
+        firstIteration.procedure,
     );
 
     taskProcedureMap.set(
@@ -32,7 +32,7 @@ export const mapEspialInsertCreateTasks = (
     mapEspialInsertRecursiveCreateTask(
         taskProcedureMap,
         configuration,
-        firstProcedure,
+        firstIteration.procedure,
         Optional.ofAny(startTask),
         mapFinalizeTask,
     );

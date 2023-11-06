@@ -23,11 +23,11 @@ export const applyMapEspialSucceedOnTaskManager = (
 
     const mapFinalizeTask: PubMapFinalizeTask = mapEspialTask.convertToFinalize();
 
-    for (const procedure of action.payload.procedures) {
+    for (const iteration of action.payload.iterations) {
 
         const tasks: PubTaskBase[] = mapEspialInsertCreateTasks(
             taskManager.workflowConfiguration,
-            procedure,
+            iteration,
             mapFinalizeTask,
         );
 

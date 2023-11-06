@@ -4,8 +4,8 @@
  * @description Action
  */
 
-import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { TaskExecuteOutput } from "../../task/definition/task";
+import { PubAction_MapEspialSucceed } from "./map-espial-succeed";
 
 export enum PUB_ACTION_TYPE {
 
@@ -27,13 +27,6 @@ export type PubActionPayloadSwitch<T extends PUB_ACTION_TYPE> =
     T extends PUB_ACTION_TYPE.MAP_ESPIAL_SUCCEED ? PubAction_MapEspialSucceed :
     T extends PUB_ACTION_TYPE.TASK_RESOLVE_SUCCEED ? PubAction_TaskResolveSucceed :
     never;
-
-export type PubAction_MapEspialSucceed = {
-
-    readonly taskIdentifier: string;
-
-    readonly procedures: PubProcedureConfiguration[];
-};
 
 export type PubAction_TaskResolveSucceed = {
 
