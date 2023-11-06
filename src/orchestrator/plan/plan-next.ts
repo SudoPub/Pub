@@ -24,8 +24,18 @@ export const planForNext = (
     }
 
     const nextPlans: Array<PubPlan<PUB_PLAN_TYPE>> = [];
-    for (const nextExecutableTask of nextExecutableTasks) {
+    task: for (const nextExecutableTask of nextExecutableTasks) {
 
+        if (nextExecutableTask.taskType === PUB_TASK_TYPE.START) {
+
+            nextPlans.push(createPubPlan(
+                PUB_PLAN_TYPE.INITIAL_START,
+                {
+                    procedure: nextExecutableTask.procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>,
+                },
+            ));
+            continue task;
+        }
         if (nextExecutableTask.taskType === PUB_TASK_TYPE.DRIVER) {
 
             nextPlans.push(createPubPlan(
@@ -35,8 +45,8 @@ export const planForNext = (
                     input: nextExecutableTask.getExecuteInput().getOrThrow(),
                 },
             ));
+            continue task;
         }
     }
-
     return [];
 };
