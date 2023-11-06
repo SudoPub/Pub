@@ -9,6 +9,7 @@ import { expect, } from 'chai';
 import { PubTaskBase } from '../../src/task/task-base';
 import { PubTaskManager } from '../../src/task/task-manager';
 import { ExpectTask } from './expect-task';
+import { ExpectTaskFinder } from './expect-task-finder';
 
 export class ExpectTaskManager {
 
@@ -71,5 +72,10 @@ export class ExpectTaskManager {
         return tasks.map((task: PubTaskBase) => {
             return ExpectTask.with(task);
         });
+    }
+
+    public withTaskFinder(): ExpectTaskFinder {
+
+        return ExpectTaskFinder.with(this._taskManager.tasks);
     }
 }

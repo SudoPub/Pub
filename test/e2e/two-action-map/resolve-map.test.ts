@@ -10,6 +10,7 @@ import { createPubAction } from '../../../src/action/create';
 import { PUB_ACTION_TYPE } from '../../../src/action/definition/action';
 import { initializeCreateTaskManager } from '../../../src/orchestration/initialize/create-tasks';
 import { applyActionOnTaskManager } from '../../../src/task/apply/apply';
+import { PUB_TASK_STATUS } from '../../../src/task/definition/task';
 import { PubTaskManager } from '../../../src/task/task-manager';
 import { PubCachedWorkflowConfiguration } from '../../../src/workflow/cache/configuration';
 import { twoActionMapExample, twoActionMapStartProcedure } from '../../example/two-action-map';
@@ -43,6 +44,13 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
         expect(applyResult).to.be.true;
 
         ExpectTaskManager.with(taskManager)
-            .hasExecutableTaskLength(1);
+            .hasExecutableTaskLength(1)
+            .withTaskFinder()
+            .thatWithProcedureIdentifier("MAP")
+            .thatWithTaskStatus(PUB_TASK_STATUS.RESOLVED)
+            .asSingleTask()
+            .toHasInput({
+                iteration: [0],
+            });
     });
 });
