@@ -87,7 +87,7 @@ export abstract class PubTaskBase {
 
     public addDependency(
         dependency: string,
-        parametersMapping: PubConnectionParameterMapping,
+        parametersMappings: PubConnectionParameterMapping[],
     ): this {
 
         if (this._dependencies.has(dependency)) {
@@ -97,18 +97,18 @@ export abstract class PubTaskBase {
 
             this._dependencies.set(dependency, [
                 ...dependencies,
-                parametersMapping,
+                ...parametersMappings,
             ]);
             return this;
         }
 
-        this._dependencies.set(dependency, [parametersMapping]);
+        this._dependencies.set(dependency, parametersMappings);
         return this;
     }
 
     public resolveDependency(
         dependency: string,
-        output: TaskExecuteOutput,
+        output?: TaskExecuteOutput,
     ): this {
 
         if (!this._dependencies.has(dependency)) {
@@ -118,10 +118,32 @@ export abstract class PubTaskBase {
         const mappings: PubConnectionParameterMapping[] =
             this._dependencies.get(dependency) as PubConnectionParameterMapping[];
 
-        for (const mapping of mappings) {
-            this.combineExecuteInput(
-                mapTaskDependencyOutput(mapping, output),
-            );
+        if (typeof output !== 'undefined') {
+            for (const mapping of mappings) {
+                this.combineExecuteInput(
+                    mapTaskDependencyOutput(mapping, output),
+                );
+            }
+        }
+
+        this._dependencies.delete(dependency);
+        return this;
+    }
+
+    public reconnectDependency(
+        dependency: string,
+        newDependencies: string[],
+    ): this {
+
+        if (!this._dependencies.has(dependency)) {
+            return this;
+        }
+
+        const mappings: PubConnectionParameterMapping[] =
+            this._dependencies.get(dependency) as PubConnectionParameterMapping[];
+
+        for (const newDependency of newDependencies) {
+            this.addDependency(newDependency, mappings);
         }
 
         this._dependencies.delete(dependency);

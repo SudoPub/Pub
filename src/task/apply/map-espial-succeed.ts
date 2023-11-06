@@ -6,6 +6,7 @@
 
 import { PUB_ACTION_TYPE, PubAction } from "../../action/definition/action";
 import { mapEspialInsertCreateTasks } from "../../orchestration/map-espial-insert/create-task";
+import { PUB_TASK_STATUS } from "../definition/task";
 import { PubMapEspialTask } from "../implementation/map-espial";
 import { PubMapFinalizeTask } from "../implementation/map-finalize";
 import { PubTaskBase } from "../task-base";
@@ -34,5 +35,17 @@ export const applyMapEspialSucceedOnTaskManager = (
     }
 
     taskManager.insertTasks([mapFinalizeTask]);
+
+    mapEspialTask.setTaskStatus(PUB_TASK_STATUS.RESOLVED);
+
+    const dependents: PubTaskBase[] = taskManager.getTasksByDependency(mapEspialTask.taskIdentifier);
+
+    for (const dependent of dependents) {
+
+        dependent.reconnectDependency(
+            mapEspialTask.taskIdentifier,
+            [mapFinalizeTask.taskIdentifier],
+        );
+    }
     return true;
 };

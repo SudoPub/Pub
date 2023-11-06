@@ -28,7 +28,7 @@ export const mapEspialInsertRecursiveCreateTask = (
     if (nextOperations.length === 0) {
         mapFinalizeTask.addDependency(
             currentTask.getOrThrow().taskIdentifier,
-            {},
+            [],
         );
         return;
     }
@@ -42,7 +42,7 @@ export const mapEspialInsertRecursiveCreateTask = (
 
             previousTask.addDependency(
                 currentTask.getOrThrow().taskIdentifier,
-                nextOperation.connection.parametersMapping,
+                [nextOperation.connection.parametersMapping],
             );
             continue operation;
         }
@@ -54,7 +54,7 @@ export const mapEspialInsertRecursiveCreateTask = (
         if (currentTask.exists) {
             nextTask.addDependency(
                 currentTask.getOrThrow().taskIdentifier,
-                nextOperation.connection.parametersMapping,
+                [nextOperation.connection.parametersMapping],
             );
         }
 

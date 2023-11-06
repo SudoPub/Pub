@@ -42,9 +42,7 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
 
         expect(applyResult).to.be.true;
 
-        console.log(taskManager.createSnapshot());
-
         ExpectTaskManager.with(taskManager)
-            .forTasksWithProcedureIdentifier("MAP");
+            .hasExecutableTaskLength(1);
     });
 });

@@ -32,7 +32,7 @@ export const initializeLoadRecursiveCreateTask = (
 
             previousTask.addDependency(
                 currentTask.getOrThrow().taskIdentifier,
-                nextOperation.connection.parametersMapping,
+                [nextOperation.connection.parametersMapping],
             );
             continue operation;
         }
@@ -44,7 +44,7 @@ export const initializeLoadRecursiveCreateTask = (
         if (currentTask.exists) {
             nextTask.addDependency(
                 currentTask.getOrThrow().taskIdentifier,
-                nextOperation.connection.parametersMapping,
+                [nextOperation.connection.parametersMapping],
             );
         }
 
