@@ -5,14 +5,14 @@
  */
 
 import { Optional } from "@sudoo/optional";
+import { createPubAction } from "../../action/create";
+import { PUB_ACTION_TYPE } from "../../action/definition/action";
 import { PUB_CONNECTION_WAYPOINT_TYPE, PubConnectionConfiguration } from "../../connection/definition/configuration";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { applyActionOnTaskManager } from "../apply/apply";
 import { TaskExecuteInput } from "../definition/task";
 import { PubMapEspialTask } from "../implementation/map-espial";
 import { PubTaskManager } from "../task-manager";
-import { applyActionOnTaskManager } from "../apply/apply";
-import { createPubAction } from "../../action/create";
-import { PUB_ACTION_TYPE } from "../../action/definition/action";
 
 export const resolveMapEspialTask = (
     task: PubMapEspialTask,
@@ -53,16 +53,15 @@ export const resolveMapEspialTask = (
             return nextProcedure.getOrThrow();
         });
 
-    console.log(iterationProcedures);
+    const applyResult: boolean = applyActionOnTaskManager(
+        createPubAction(PUB_ACTION_TYPE.MAP_ESPIAL_SUCCEED, {
 
-    applyActionOnTaskManager(
-        createPubAction(PUB_ACTION_TYPE.INSERT_TASK_FROM_PROCEDURES, {
+            taskIdentifier: task.taskIdentifier,
 
-            reason: 'Map Espial',
             procedures: iterationProcedures,
         }),
         taskManager,
     );
 
-    return true;
+    return applyResult;
 };

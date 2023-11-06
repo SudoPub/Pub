@@ -6,7 +6,7 @@
 
 import { PUB_ACTION_TYPE, PubAction } from "../../action/definition/action";
 import { PubTaskManager } from "../task-manager";
-import { applyInsertTaskFromProceduresOnTaskManager } from "./insert-task-from-procedures";
+import { applyMapEspialSucceedOnTaskManager } from "./map-espial-succeed";
 import { applyTaskResolveSucceedOnTaskManager } from "./task-resolve-succeed";
 
 export const applyActionOnTaskManager = (
@@ -16,10 +16,10 @@ export const applyActionOnTaskManager = (
 
     switch (action.type) {
 
-        case PUB_ACTION_TYPE.INSERT_TASK_FROM_PROCEDURES: {
+        case PUB_ACTION_TYPE.MAP_ESPIAL_SUCCEED: {
 
-            return applyInsertTaskFromProceduresOnTaskManager(
-                action as PubAction<PUB_ACTION_TYPE.INSERT_TASK_FROM_PROCEDURES>,
+            return applyMapEspialSucceedOnTaskManager(
+                action as PubAction<PUB_ACTION_TYPE.MAP_ESPIAL_SUCCEED>,
                 manager,
             );
         }

@@ -1,21 +1,20 @@
 /**
  * @author WMXPY
  * @namespace Task_Implementation
- * @description Map Espial
+ * @description Map Finalize
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
 import { PubTaskBase } from "../task-base";
-import { PubMapFinalizeTask } from "./map-finalize";
 
-export class PubMapEspialTask extends PubTaskBase {
+export class PubMapFinalizeTask extends PubTaskBase {
 
     public static fromProcedure(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
-    ): PubMapEspialTask {
+    ): PubMapFinalizeTask {
 
-        return new PubMapEspialTask(procedure);
+        return new PubMapFinalizeTask(procedure);
     }
 
     protected constructor(
@@ -23,7 +22,7 @@ export class PubMapEspialTask extends PubTaskBase {
     ) {
 
         super(
-            PUB_TASK_TYPE.MAP_ESPIAL,
+            PUB_TASK_TYPE.MAP_FINALIZE,
             PUB_TASK_STATUS.AWAIT_DEPENDENCY,
             procedure,
         );
@@ -35,11 +34,6 @@ export class PubMapEspialTask extends PubTaskBase {
 
     public get procedureIdentifier(): string {
         return this._procedure.identifier;
-    }
-
-    public convertToFinalize(): PubMapFinalizeTask {
-
-        return PubMapFinalizeTask.fromProcedure(this.procedure);
     }
 
     public serialize(): PubSerializedTask {

@@ -39,6 +39,12 @@ export class PubTaskManager {
         return this._workflowConfiguration;
     }
 
+    public insertTasks(tasks: PubTaskBase[]): this {
+
+        this._tasks.push(...tasks);
+        return this;
+    }
+
     public getTaskByIdentifier(identifier: string): Optional<PubTaskBase> {
 
         for (const task of this._tasks) {

@@ -5,9 +5,10 @@
  * @override Expect
  */
 
+import { expect, } from 'chai';
+import { PubTaskBase } from '../../src/task/task-base';
 import { PubTaskManager } from '../../src/task/task-manager';
 import { ExpectTask } from './expect-task';
-import { expect, } from 'chai';
 
 export class ExpectTaskManager {
 
@@ -61,5 +62,14 @@ export class ExpectTaskManager {
         }
 
         return ExpectTask.with(tasks[0]);
+    }
+
+    public forTasksWithProcedureIdentifier(identifier: string): ExpectTask[] {
+
+        const tasks = this._taskManager.getTasksByProcedureIdentifier(identifier);
+
+        return tasks.map((task: PubTaskBase) => {
+            return ExpectTask.with(task);
+        });
     }
 }
