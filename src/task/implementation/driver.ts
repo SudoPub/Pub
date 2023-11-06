@@ -24,6 +24,10 @@ export class PubDriverTask extends PubTaskBase {
         super(PUB_TASK_TYPE.DRIVER, procedure);
     }
 
+    public get procedure(): PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER> {
+        return this._procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>;
+    }
+
     public get procedureIdentifier(): string {
         return this._procedure.identifier;
     }

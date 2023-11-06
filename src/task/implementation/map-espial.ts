@@ -24,6 +24,10 @@ export class PubMapEspialTask extends PubTaskBase {
         super(PUB_TASK_TYPE.MAP_ESPIAL, procedure);
     }
 
+    public get procedure(): PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP> {
+        return this._procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>;
+    }
+
     public get procedureIdentifier(): string {
         return this._procedure.identifier;
     }

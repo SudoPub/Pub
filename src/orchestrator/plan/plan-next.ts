@@ -4,13 +4,15 @@
  * @description Plan Next
  */
 
-import { createPubPlan } from "../../plan/create";
 import { PUB_PLAN_TYPE, PubPlan } from "../../plan/definition/plan";
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PUB_TASK_TYPE } from "../../task/definition/task";
+import { PubDriverTask } from "../../task/implementation/driver";
+import { PubStartTask } from "../../task/implementation/start";
 import { PubTaskBase } from "../../task/task-base";
 import { PubTaskManager } from "../../task/task-manager";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
+import { planForNextOnDriverTask } from "./task/driver";
+import { planForNextOnStartTask } from "./task/start";
 
 export const planForNext = (
     configuration: PubCachedWorkflowConfiguration,
@@ -28,23 +30,24 @@ export const planForNext = (
 
         if (nextExecutableTask.taskType === PUB_TASK_TYPE.START) {
 
-            nextPlans.push(createPubPlan(
-                PUB_PLAN_TYPE.INITIAL_START,
-                {
-                    procedure: nextExecutableTask.procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>,
-                },
-            ));
+            nextPlans.push(
+                ...planForNextOnStartTask(
+                    configuration,
+                    taskManager,
+                    nextExecutableTask as PubStartTask,
+                ),
+            );
             continue task;
         }
         if (nextExecutableTask.taskType === PUB_TASK_TYPE.DRIVER) {
 
-            nextPlans.push(createPubPlan(
-                PUB_PLAN_TYPE.EXECUTE_DRIVER,
-                {
-                    procedure: nextExecutableTask.procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>,
-                    input: nextExecutableTask.getExecuteInput().getOrThrow(),
-                },
-            ));
+            nextPlans.push(
+                ...planForNextOnDriverTask(
+                    configuration,
+                    taskManager,
+                    nextExecutableTask as PubDriverTask,
+                ),
+            );
             continue task;
         }
     }

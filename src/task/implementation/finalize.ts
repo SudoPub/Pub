@@ -24,6 +24,10 @@ export class PubFinalizeTask extends PubTaskBase {
         super(PUB_TASK_TYPE.FINALIZE, procedure);
     }
 
+    public get procedure(): PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END> {
+        return this._procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>;
+    }
+
     public get procedureIdentifier(): string {
         return this._procedure.identifier;
     }
