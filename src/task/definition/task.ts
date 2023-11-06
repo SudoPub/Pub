@@ -15,6 +15,7 @@ export enum PUB_TASK_TYPE {
 export enum PUB_TASK_STATUS {
 
     QUEUED = "QUEUED",
+    AWAIT_DEPENDENCY = "AWAIT_DEPENDENCY",
     RESOLVED = "RESOLVED",
 }
 

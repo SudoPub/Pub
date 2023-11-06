@@ -5,7 +5,7 @@
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
+import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
 import { PubTaskBase } from "../task-base";
 
 export class PubStartTask extends PubTaskBase {
@@ -21,7 +21,11 @@ export class PubStartTask extends PubTaskBase {
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>,
     ) {
 
-        super(PUB_TASK_TYPE.START, procedure);
+        super(
+            PUB_TASK_TYPE.START,
+            PUB_TASK_STATUS.QUEUED,
+            procedure,
+        );
     }
 
     public get procedure(): PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START> {

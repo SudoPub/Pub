@@ -42,7 +42,10 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
 
         expect(applyResult).to.be.true;
 
+        console.log(taskManager.getExecutableTasks());
+
         ExpectTaskManager.with(taskManager)
+            .hasExecutableTaskLength(1)
             .forSingleTaskWithProcedureIdentifier("MAP")
             .toHasInput({
                 iteration: [0],

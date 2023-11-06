@@ -5,7 +5,7 @@
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
+import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
 import { PubTaskBase } from "../task-base";
 
 export class PubMapEspialTask extends PubTaskBase {
@@ -21,7 +21,11 @@ export class PubMapEspialTask extends PubTaskBase {
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
     ) {
 
-        super(PUB_TASK_TYPE.MAP_ESPIAL, procedure);
+        super(
+            PUB_TASK_TYPE.MAP_ESPIAL,
+            PUB_TASK_STATUS.AWAIT_DEPENDENCY,
+            procedure,
+        );
     }
 
     public get procedure(): PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP> {

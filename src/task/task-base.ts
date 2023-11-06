@@ -33,6 +33,7 @@ export abstract class PubTaskBase {
 
     protected constructor(
         type: PUB_TASK_TYPE,
+        initialStatus: PUB_TASK_STATUS,
         procedure: PubProcedureConfiguration,
     ) {
 
@@ -41,7 +42,7 @@ export abstract class PubTaskBase {
 
         this._dependencies = new Map();
 
-        this._taskStatus = PUB_TASK_STATUS.QUEUED;
+        this._taskStatus = initialStatus;
         this._executeInput = EmptyValueSymbol;
         this._executeOutput = EmptyValueSymbol;
 

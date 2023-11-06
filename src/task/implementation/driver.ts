@@ -5,7 +5,7 @@
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
+import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
 import { PubTaskBase } from "../task-base";
 
 export class PubDriverTask extends PubTaskBase {
@@ -21,7 +21,11 @@ export class PubDriverTask extends PubTaskBase {
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>,
     ) {
 
-        super(PUB_TASK_TYPE.DRIVER, procedure);
+        super(
+            PUB_TASK_TYPE.DRIVER,
+            PUB_TASK_STATUS.QUEUED,
+            procedure,
+        );
     }
 
     public get procedure(): PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER> {
