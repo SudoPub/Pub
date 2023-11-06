@@ -10,7 +10,7 @@ import { createPubAction } from '../../../src/action/create';
 import { PUB_ACTION_TYPE } from '../../../src/action/definition/action';
 import { initializeCreateTaskManager } from '../../../src/orchestration/initialize/create-tasks';
 import { applyActionOnTaskManager } from '../../../src/task/apply/apply';
-import { PUB_TASK_STATUS } from '../../../src/task/definition/task';
+import { PUB_TASK_STATUS, PUB_TASK_TYPE } from '../../../src/task/definition/task';
 import { PubTaskManager } from '../../../src/task/task-manager';
 import { PubCachedWorkflowConfiguration } from '../../../src/workflow/cache/configuration';
 import { twoActionMapExample, twoActionMapStartProcedure } from '../../example/two-action-map';
@@ -50,6 +50,7 @@ describe('Given (Two-Action-Map Resolve Map) Use Case', (): void => {
             .toHasLengthOf(2)
             .thatWithTaskStatus(PUB_TASK_STATUS.RESOLVED)
             .asSingleTask()
+            .toHasTaskType(PUB_TASK_TYPE.MAP_ESPIAL)
             .toHasInput({
                 iteration: [0],
             });
