@@ -48,7 +48,9 @@ describe('Given (Just-Run Param Mapping) Use Case', (): void => {
         expect(applyResult).to.be.true;
 
         ExpectTaskManager.with(taskManager)
-            .forSingleTaskWithProcedureIdentifier("JUST_RUN")
+            .withTaskFinder()
+            .thatWithProcedureIdentifier("JUST_RUN")
+            .asSingleTask()
             .toHasInput({
                 world: helloMessage,
             });

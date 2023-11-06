@@ -43,7 +43,9 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
 
             ExpectTaskManager.with(taskManager)
                 .hasExecutableTaskLength(1)
-                .forSingleTaskWithProcedureIdentifier("START")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("START")
+                .asSingleTask()
                 .toBeExecutable();
         });
 
@@ -61,7 +63,9 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
 
             ExpectTaskManager.with(taskManager)
                 .hasExecutableTaskLength(1)
-                .forSingleTaskWithProcedureIdentifier("INIT")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("INIT")
+                .asSingleTask()
                 .toBeExecutable();
         });
 
@@ -81,13 +85,19 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(3);
 
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("FIRST")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("FIRST")
+                .asSingleTask()
                 .toBeExecutable();
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("SECOND")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("SECOND")
+                .asSingleTask()
                 .toBeExecutable();
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("THIRD")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("THIRD")
+                .asSingleTask()
                 .toBeExecutable();
         });
 
@@ -107,13 +117,19 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(3);
 
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("END")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("END")
+                .asSingleTask()
                 .toBeExecutable();
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("SECOND")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("SECOND")
+                .asSingleTask()
                 .toBeExecutable();
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("THIRD")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("THIRD")
+                .asSingleTask()
                 .toBeExecutable();
         });
 
@@ -133,10 +149,14 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(2);
 
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("END")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("END")
+                .asSingleTask()
                 .toBeExecutable();
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("THIRD")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("THIRD")
+                .asSingleTask()
                 .toBeExecutable();
         });
 
@@ -156,7 +176,9 @@ describe('Given (One-To-Many Execute In Order) Use Case', (): void => {
                 .hasExecutableTaskLength(1);
 
             ExpectTaskManager.with(taskManager)
-                .forSingleTaskWithProcedureIdentifier("END")
+                .withTaskFinder()
+                .thatWithProcedureIdentifier("END")
+                .asSingleTask()
                 .toBeExecutable();
         });
     });
