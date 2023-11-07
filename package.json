@@ -22,7 +22,8 @@
     "@sudoo/pattern": "^1.10.0",
     "@sudoo/symbol": "^1.2.0",
     "@sudoo/uuid": "^1.1.0",
-    "@sudoo/verify": "^1.19.0"
+    "@sudoo/verify": "^1.19.0",
+    "@sudopub/essential": "^1.0.0"
   },
   "devDependencies": {
     "@sudoo/triforce": "^3.11.0",
