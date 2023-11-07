@@ -25,22 +25,26 @@ export const createPubTaskFromSnapshotTask = (
 
     if (procedure.type === PUB_PROCEDURE_TYPE.START) {
 
-        return PubStartTask.fromProcedure(
+        return PubStartTask.fromSnapshotTask(
+            snapshotTask,
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.START>,
         );
     } else if (procedure.type === PUB_PROCEDURE_TYPE.DRIVER) {
 
-        return PubDriverTask.fromProcedure(
+        return PubDriverTask.fromSnapshotTask(
+            snapshotTask,
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.DRIVER>,
         );
     } else if (procedure.type === PUB_PROCEDURE_TYPE.MAP) {
 
-        return PubMapEspialTask.fromProcedure(
+        return PubMapEspialTask.fromSnapshotTask(
+            snapshotTask,
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
         );
     } else if (procedure.type === PUB_PROCEDURE_TYPE.END) {
 
-        return PubFinalizeTask.fromProcedure(
+        return PubFinalizeTask.fromSnapshotTask(
+            snapshotTask,
             procedure as PubProcedureConfiguration<PUB_PROCEDURE_TYPE.END>,
         );
     }

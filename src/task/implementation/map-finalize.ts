@@ -5,6 +5,7 @@
  */
 
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PubSnapshotTask } from "../../snapshot/task";
 import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
 import { PubTaskBase } from "../task-base";
 
@@ -14,16 +15,26 @@ export class PubMapFinalizeTask extends PubTaskBase {
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
     ): PubMapFinalizeTask {
 
-        return new PubMapFinalizeTask(procedure);
+        return new PubMapFinalizeTask(procedure, PUB_TASK_STATUS.AWAIT_DEPENDENCY);
+    }
+
+    public static fromSnapshotTask(
+        snapshotTask: PubSnapshotTask,
+        procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
+    ): PubMapFinalizeTask {
+
+        return new PubMapFinalizeTask(procedure, snapshotTask.status)
+            .deserialize(snapshotTask);
     }
 
     protected constructor(
         procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE.MAP>,
+        initialStatus: PUB_TASK_STATUS,
     ) {
 
         super(
             PUB_TASK_TYPE.MAP_FINALIZE,
-            PUB_TASK_STATUS.AWAIT_DEPENDENCY,
+            initialStatus,
             procedure,
         );
     }
