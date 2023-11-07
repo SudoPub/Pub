@@ -9,6 +9,7 @@ import { PubSnapshot } from "../snapshot/snapshot";
 import { PubTaskBase } from "./task-base";
 import { createTaskSnapshot } from "./snapshot/create-snapshot";
 import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
+import { createPubTaskFromSnapshotTask } from "./factory/from-snapshot-task";
 
 export class PubTaskManager {
 
@@ -26,9 +27,11 @@ export class PubTaskManager {
     ): PubTaskManager {
 
         const tasks: PubTaskBase[] = snapshot.tasks.map((taskSnapshot) => {
-            return PubTaskBase.fromSnapshot(taskSnapshot, workflowConfiguration);
+            return createPubTaskFromSnapshotTask(
+                taskSnapshot,
+                workflowConfiguration,
+            );
         });
-
         return new PubTaskManager(tasks, workflowConfiguration);
     }
 
