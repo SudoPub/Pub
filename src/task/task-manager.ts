@@ -94,6 +94,9 @@ export class PubTaskManager {
     public createSnapshot(): PubSnapshot {
 
         return {
+
+            configuration: this._workflowConfiguration.configuration,
+
             tasks: this._tasks.map((task: PubTaskBase) => {
                 return createTaskSnapshot(task);
             }),
