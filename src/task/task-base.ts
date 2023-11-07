@@ -244,4 +244,5 @@ export abstract class PubTaskBase {
     }
 
     public abstract serialize(): PubSerializedTask;
+    public abstract deserialize(serialized: PubSerializedTask): this;
 }

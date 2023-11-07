@@ -42,4 +42,8 @@ export class PubMapFinalizeTask extends PubTaskBase {
             procedureIdentifier: this.procedureIdentifier,
         };
     }
+
+    public deserialize(_serialized: PubSerializedTask): this {
+        return this;
+    }
 }

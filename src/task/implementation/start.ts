@@ -40,4 +40,8 @@ export class PubStartTask extends PubTaskBase {
 
         return {};
     }
+
+    public deserialize(_serialized: PubSerializedTask): this {
+        return this;
+    }
 }

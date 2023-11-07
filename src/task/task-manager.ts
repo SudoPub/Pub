@@ -20,6 +20,18 @@ export class PubTaskManager {
         return new PubTaskManager(tasks, workflowConfiguration);
     }
 
+    public static withSnapshot(
+        snapshot: PubSnapshot,
+        workflowConfiguration: PubCachedWorkflowConfiguration,
+    ): PubTaskManager {
+
+        const tasks: PubTaskBase[] = snapshot.tasks.map((taskSnapshot) => {
+            return PubTaskBase.fromSnapshot(taskSnapshot, workflowConfiguration);
+        });
+
+        return new PubTaskManager(tasks, workflowConfiguration);
+    }
+
     private readonly _tasks: PubTaskBase[];
     private readonly _workflowConfiguration: PubCachedWorkflowConfiguration;
 
