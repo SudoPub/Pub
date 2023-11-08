@@ -4,9 +4,8 @@
  * @description Insert Task From Procedures
  */
 
-import { PUB_ACTION_TYPE, PubAction } from "@sudopub/essential";
+import { PUB_ACTION_TYPE, PUB_TASK_STATUS, PubAction } from "@sudopub/essential";
 import { mapEspialInsertCreateTasks } from "../../orchestration/map-espial-insert/create-task";
-import { PUB_TASK_STATUS } from "../definition/task";
 import { PubMapEspialTask } from "../implementation/map-espial";
 import { PubMapFinalizeTask } from "../implementation/map-finalize";
 import { PubTaskBase } from "../task-base";

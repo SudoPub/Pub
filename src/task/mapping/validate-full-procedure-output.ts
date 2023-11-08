@@ -4,8 +4,7 @@
  * @description Validate Full Procedure Output
  */
 
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { TaskExecuteOutput } from "../definition/task";
+import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration, TaskExecuteOutput } from "@sudopub/essential";
 import { validateFullProcedurePattern } from "./validate-pattern";
 
 export const validateFullProcedureOutput = (

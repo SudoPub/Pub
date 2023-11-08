@@ -5,7 +5,7 @@
  */
 
 import { Optional } from "@sudoo/optional";
-import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PubProcedureConfiguration } from "@sudopub/essential";
 import { createPubTaskWithProcedure } from "../../task/factory/create";
 import { PubTaskBase } from "../../task/task-base";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";

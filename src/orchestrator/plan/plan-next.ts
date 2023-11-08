@@ -4,8 +4,7 @@
  * @description Plan Next
  */
 
-import { PUB_PLAN_TYPE, PubPlan } from "@sudopub/essential";
-import { PUB_TASK_TYPE } from "../../task/definition/task";
+import { PUB_PLAN_TYPE, PUB_TASK_TYPE, PubPlan } from "@sudopub/essential";
 import { PubDriverTask } from "../../task/implementation/driver";
 import { PubStartTask } from "../../task/implementation/start";
 import { PubTaskBase } from "../../task/task-base";

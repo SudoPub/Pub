@@ -5,9 +5,8 @@
  */
 
 import { Pattern } from "@sudoo/pattern";
-import { PubProcedurePattern } from "../../procedure/definition/configuration";
-import { TaskExecuteInput, TaskExecuteOutput } from "../definition/task";
 import { Verifier, VerifyResult } from "@sudoo/verify";
+import { PubProcedurePattern, TaskExecuteInput, TaskExecuteOutput } from "@sudopub/essential";
 
 export const validatePartialProcedurePattern = (
     pattern: PubProcedurePattern,

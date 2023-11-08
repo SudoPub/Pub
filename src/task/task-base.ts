@@ -7,11 +7,9 @@
 import { Optional } from "@sudoo/optional";
 import { EmptyValueSymbol, SEmptyValue } from "@sudoo/symbol";
 import { UUIDVersion1 } from "@sudoo/uuid";
-import { PubConnectionParameterMapping } from "../connection/definition/configuration";
+import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubConnectionParameterMapping, PubProcedureConfiguration, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "@sudopub/essential";
 import { PubTaskEnsureEmptyInputTypeError } from "../error/task/ensure/empty-input";
 import { PubTaskEnsureEmptyOutputTypeError } from "../error/task/ensure/empty-output";
-import { PubProcedureConfiguration } from "../procedure/definition/configuration";
-import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask, TaskExecuteInput, TaskExecuteOutput } from "./definition/task";
 import { mapTaskDependencyOutput } from "./mapping/map-output";
 import { validateFullProcedureInput } from "./mapping/validate-full-procedure-input";
 import { validateFullProcedureOutput } from "./mapping/validate-full-procedure-output";

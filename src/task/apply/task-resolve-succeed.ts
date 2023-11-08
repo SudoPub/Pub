@@ -4,9 +4,8 @@
  * @description Task Resolve Succeed
  */
 
-import { PUB_ACTION_TYPE, PubAction } from "@sudopub/essential";
+import { PUB_ACTION_TYPE, PUB_TASK_STATUS, PubAction } from "@sudopub/essential";
 import { PubTaskTaskManagerGetTaskNotFoundError } from "../../error/task/task-manager/get-task-not-found";
-import { PUB_TASK_STATUS } from "../definition/task";
 import { resolveResolvableTask } from "../resolve/resolve";
 import { PubTaskBase } from "../task-base";
 import { PubTaskManager } from "../task-manager";

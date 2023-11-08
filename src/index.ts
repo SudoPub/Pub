@@ -5,7 +5,6 @@
  */
 
 export * from "./orchestrator/orchestrator";
-export * from "./workflow/definition/configuration";
-export * from "./workflow/definition/outcome-mapping";
-export * from "./workflow/definition/record-mapping";
+export * from "./task/task-base";
+export * from "./task/task-manager";
 

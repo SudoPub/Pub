@@ -5,8 +5,7 @@
  */
 
 import { Optional } from "@sudoo/optional";
-import { PUB_CONNECTION_WAYPOINT_TYPE } from "../../connection/definition/configuration";
-import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PUB_CONNECTION_WAYPOINT_TYPE, PubProcedureConfiguration } from "@sudopub/essential";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
 
 export const findNextProcedures = (

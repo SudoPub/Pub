@@ -4,7 +4,7 @@
  * @description Create Snapshot
  */
 
-import { PubSnapshotTask } from "../../snapshot/task";
+import { PubSnapshotTask } from "@sudopub/essential";
 import { PubTaskBase } from "../task-base";
 
 export const createTaskSnapshot = (

@@ -4,7 +4,7 @@
  * @description Compare Procedure
  */
 
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "@sudopub/essential";
 
 export const compareProcedureWithType = <T extends PUB_PROCEDURE_TYPE>(
     procedure: PubProcedureConfiguration<PUB_PROCEDURE_TYPE>,

@@ -4,7 +4,7 @@
  * @description Validate
  */
 
-import { PubWorkflowConfiguration } from "../definition/configuration";
+import { PubWorkflowConfiguration } from "@sudopub/essential";
 
 export const validateWorkflowConfiguration = (configuration: PubWorkflowConfiguration): boolean => {
 

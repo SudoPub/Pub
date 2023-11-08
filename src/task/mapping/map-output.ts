@@ -4,8 +4,7 @@
  * @description Map Output
  */
 
-import { PubConnectionParameterMapping } from "../../connection/definition/configuration";
-import { TaskExecuteOutput } from "../definition/task";
+import { PubConnectionParameterMapping, TaskExecuteOutput } from "@sudopub/essential";
 
 export const mapTaskDependencyOutput = (
     mapping: PubConnectionParameterMapping,

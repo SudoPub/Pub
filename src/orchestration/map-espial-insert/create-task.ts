@@ -5,8 +5,7 @@
  */
 
 import { Optional } from "@sudoo/optional";
-import { PubAction_MapEspialSucceed_Iteration } from "@sudopub/essential";
-import { TaskExecuteInput } from "../../task/definition/task";
+import { PubAction_MapEspialSucceed_Iteration, TaskExecuteInput } from "@sudopub/essential";
 import { createPubTaskWithProcedure } from "../../task/factory/create";
 import { PubMapFinalizeTask } from "../../task/implementation/map-finalize";
 import { PubTaskBase } from "../../task/task-base";

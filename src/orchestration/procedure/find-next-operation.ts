@@ -4,8 +4,7 @@
  * @description Find Next Operation
  */
 
-import { PUB_CONNECTION_WAYPOINT_TYPE, PubConnectionConfiguration } from "../../connection/definition/configuration";
-import { PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PUB_CONNECTION_WAYPOINT_TYPE, PubConnectionConfiguration, PubProcedureConfiguration } from "@sudopub/essential";
 import { PubCachedWorkflowConfiguration } from "../../workflow/cache/configuration";
 
 export type FindNextOperationItem = {

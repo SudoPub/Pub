@@ -4,9 +4,7 @@
  * @description Start
  */
 
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { PubSnapshotTask } from "../../snapshot/task";
-import { PUB_TASK_STATUS, PUB_TASK_TYPE, PubSerializedTask } from "../definition/task";
+import { PUB_PROCEDURE_TYPE, PUB_TASK_STATUS, PUB_TASK_TYPE, PubProcedureConfiguration, PubSerializedTask, PubSnapshotTask } from "@sudopub/essential";
 import { PubTaskBase } from "../task-base";
 
 export class PubStartTask extends PubTaskBase {

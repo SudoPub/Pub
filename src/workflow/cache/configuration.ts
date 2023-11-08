@@ -5,9 +5,7 @@
  */
 
 import { Optional } from "@sudoo/optional";
-import { PubConnectionConfiguration } from "../../connection/definition/configuration";
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
-import { PubWorkflowConfiguration } from "../definition/configuration";
+import { PUB_PROCEDURE_TYPE, PubConnectionConfiguration, PubProcedureConfiguration, PubWorkflowConfiguration } from "@sudopub/essential";
 
 export class PubCachedWorkflowConfiguration {
 

@@ -4,7 +4,7 @@
  * @description Resolve
  */
 
-import { PUB_TASK_TYPE } from "../definition/task";
+import { PUB_TASK_TYPE } from "@sudopub/essential";
 import { PubMapEspialTask } from "../implementation/map-espial";
 import { PubTaskBase } from "../task-base";
 import { PubTaskManager } from "../task-manager";

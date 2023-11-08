@@ -4,7 +4,7 @@
  * @description Invalid Procedure Type
  */
 
-import { PubProcedureConfiguration } from "../../../procedure/definition/configuration";
+import { PubProcedureConfiguration } from "@sudopub/essential";
 import { PubTaskFactoryError } from "./factory-error";
 
 export class PubTaskFactoryInvalidProcedureTypeError extends PubTaskFactoryError {

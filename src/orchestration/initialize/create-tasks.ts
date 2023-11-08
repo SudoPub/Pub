@@ -5,7 +5,7 @@
  */
 
 import { Optional } from "@sudoo/optional";
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
+import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "@sudopub/essential";
 import { PubStartTask } from "../../task/implementation/start";
 import { PubTaskBase } from "../../task/task-base";
 import { PubTaskManager } from "../../task/task-manager";

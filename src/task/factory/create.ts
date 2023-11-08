@@ -4,8 +4,8 @@
  * @description Create
  */
 
+import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "@sudopub/essential";
 import { PubTaskFactoryInvalidProcedureTypeError } from "../../error/task/factory/invalid-procedure-type";
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { PubDriverTask } from "../implementation/driver";
 import { PubFinalizeTask } from "../implementation/finalize";
 import { PubMapEspialTask } from "../implementation/map-espial";

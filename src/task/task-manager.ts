@@ -5,11 +5,11 @@
  */
 
 import { Optional } from "@sudoo/optional";
-import { PubSnapshot } from "../snapshot/snapshot";
-import { PubTaskBase } from "./task-base";
-import { createTaskSnapshot } from "./snapshot/create-snapshot";
+import { PubSnapshot } from "@sudopub/essential";
 import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";
 import { createPubTaskFromSnapshotTask } from "./factory/from-snapshot-task";
+import { createTaskSnapshot } from "./snapshot/create-snapshot";
+import { PubTaskBase } from "./task-base";
 
 export class PubTaskManager {
 
