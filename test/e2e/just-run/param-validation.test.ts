@@ -5,10 +5,9 @@
  * @override E2E Test
  */
 
+import { PUB_ACTION_TYPE, createPubAction } from '@sudopub/essential';
 import { expect } from 'chai';
 import * as Chance from 'chance';
-import { createPubAction } from '../../../src/action/create';
-import { PUB_ACTION_TYPE } from '../../../src/action/definition/action';
 import { initializeCreateTaskManager } from '../../../src/orchestration/initialize/create-tasks';
 import { applyActionOnTaskManager } from '../../../src/task/apply/apply';
 import { PUB_TASK_STATUS } from '../../../src/task/definition/task';

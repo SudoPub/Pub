@@ -4,9 +4,8 @@
  * @description Orchestrator
  */
 
-import { PUB_ACTION_TYPE, PubAction } from "../action/definition/action";
+import { PUB_ACTION_TYPE, PUB_PLAN_TYPE, PubAction, PubPlan } from "@sudopub/essential";
 import { initializeCreateTaskManager } from "../orchestration/initialize/create-tasks";
-import { PUB_PLAN_TYPE, PubPlan } from "../plan/definition/plan";
 import { applyActionOnTaskManager } from "../task/apply/apply";
 import { PubTaskManager } from "../task/task-manager";
 import { PubCachedWorkflowConfiguration } from "../workflow/cache/configuration";

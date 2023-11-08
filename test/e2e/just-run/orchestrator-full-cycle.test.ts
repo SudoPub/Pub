@@ -5,11 +5,10 @@
  * @override E2E Test
  */
 
+import { PUB_ACTION_TYPE, PUB_PLAN_TYPE, PubPlan, createPubAction } from '@sudopub/essential';
 import { expect } from 'chai';
 import * as Chance from 'chance';
-import { PUB_PLAN_TYPE, PubOrchestrator, PubPlan } from '../../../src';
-import { createPubAction } from '../../../src/action/create';
-import { PUB_ACTION_TYPE } from '../../../src/action/definition/action';
+import { PubOrchestrator } from '../../../src';
 import { justRunExample, justRunExampleStartProcedure } from '../../example/just-run';
 import { ExpectPlan } from '../../expect/expect-plan';
 

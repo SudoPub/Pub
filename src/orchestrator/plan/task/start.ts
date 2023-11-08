@@ -4,8 +4,7 @@
  * @description Start
  */
 
-import { createPubPlan } from "../../../plan/create";
-import { PUB_PLAN_TYPE, PubPlan } from "../../../plan/definition/plan";
+import { PUB_PLAN_TYPE, PubPlan, createPubPlan } from "@sudopub/essential";
 import { PubStartTask } from "../../../task/implementation/start";
 import { PubTaskManager } from "../../../task/task-manager";
 import { PubCachedWorkflowConfiguration } from "../../../workflow/cache/configuration";
@@ -19,7 +18,7 @@ export const planForNextOnStartTask = (
     return [
         createPubPlan(
             PUB_PLAN_TYPE.INITIAL_START,
-            task,
+            task.taskIdentifier,
             {
                 procedure: task.procedure,
             },

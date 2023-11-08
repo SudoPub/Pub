@@ -5,8 +5,8 @@
  * @override Expect
  */
 
+import { PUB_PLAN_TYPE, PubPlan, PubPlanPayloadSwitch } from '@sudopub/essential';
 import { expect } from 'chai';
-import { PUB_PLAN_TYPE, PubPlan, PubPlanPayloadSwitch } from '../../src';
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 export class ExpectPlan {

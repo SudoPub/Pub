@@ -4,8 +4,7 @@
  * @description Driver
  */
 
-import { createPubPlan } from "../../../plan/create";
-import { PUB_PLAN_TYPE, PubPlan } from "../../../plan/definition/plan";
+import { PUB_PLAN_TYPE, PubPlan, createPubPlan } from "@sudopub/essential";
 import { PubDriverTask } from "../../../task/implementation/driver";
 import { PubTaskManager } from "../../../task/task-manager";
 import { PubCachedWorkflowConfiguration } from "../../../workflow/cache/configuration";
@@ -19,7 +18,7 @@ export const planForNextOnDriverTask = (
     return [
         createPubPlan(
             PUB_PLAN_TYPE.EXECUTE_DRIVER,
-            task,
+            task.taskIdentifier,
             {
                 procedure: task.procedure,
                 input: task.getExecuteInput().getOrThrow(),

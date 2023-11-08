@@ -4,9 +4,7 @@
  * @description Resolve Map Espial
  */
 
-import { createPubAction } from "../../action/create";
-import { PUB_ACTION_TYPE } from "../../action/definition/action";
-import { PubAction_MapEspialSucceed_Iteration } from "../../action/definition/map-espial-succeed";
+import { PUB_ACTION_TYPE, PubAction_MapEspialSucceed_Iteration, createPubAction } from "@sudopub/essential";
 import { PUB_CONNECTION_WAYPOINT_TYPE, PubConnectionConfiguration } from "../../connection/definition/configuration";
 import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../procedure/definition/configuration";
 import { applyActionOnTaskManager } from "../apply/apply";

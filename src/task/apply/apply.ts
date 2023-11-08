@@ -4,7 +4,7 @@
  * @description Apply
  */
 
-import { PUB_ACTION_TYPE, PubAction } from "../../action/definition/action";
+import { PUB_ACTION_TYPE, PubAction } from "@sudopub/essential";
 import { PubTaskManager } from "../task-manager";
 import { applyMapEspialSucceedOnTaskManager } from "./map-espial-succeed";
 import { applyTaskResolveSucceedOnTaskManager } from "./task-resolve-succeed";

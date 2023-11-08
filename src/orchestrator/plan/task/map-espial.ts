@@ -4,7 +4,7 @@
  * @description Map Espial
  */
 
-import { PUB_PLAN_TYPE, PubPlan } from "../../../plan/definition/plan";
+import { PUB_PLAN_TYPE, PubPlan } from "@sudopub/essential";
 import { PubMapEspialTask } from "../../../task/implementation/map-espial";
 import { PubTaskManager } from "../../../task/task-manager";
 import { PubCachedWorkflowConfiguration } from "../../../workflow/cache/configuration";
