@@ -5,13 +5,12 @@
  * @override E2E Test
  */
 
-import { PUB_ACTION_TYPE, createPubAction } from '@sudopub/essential';
+import { PUB_ACTION_TYPE, PUB_TASK_STATUS, createPubAction } from '@sudopub/essential';
 import { expect } from 'chai';
 import * as Chance from 'chance';
+import { PubTaskManager } from '../../../src';
 import { initializeCreateTaskManager } from '../../../src/orchestration/initialize/create-tasks';
 import { applyActionOnTaskManager } from '../../../src/task/apply/apply';
-import { PUB_TASK_STATUS } from '../../../src/task/definition/task';
-import { PubTaskManager } from '../../../src/task/task-manager';
 import { PubCachedWorkflowConfiguration } from '../../../src/workflow/cache/configuration';
 import { justRunExample, justRunExampleStartProcedure } from '../../example/just-run';
 import { ExpectTaskManager } from '../../expect/expect-task-manager';

@@ -6,9 +6,7 @@
  */
 
 import { createStringPattern } from "@sudoo/pattern";
-import { PubWorkflowConfiguration } from "../../src";
-import { PUB_CONNECTION_WAYPOINT_TYPE } from "../../src/connection/definition/configuration";
-import { PUB_PROCEDURE_TYPE, PubProcedureConfiguration } from "../../src/procedure/definition/configuration";
+import { PUB_CONNECTION_WAYPOINT_TYPE, PUB_PROCEDURE_TYPE, PubProcedureConfiguration, PubWorkflowConfiguration } from "@sudopub/essential";
 
 export const justRunExampleStartProcedure: PubProcedureConfiguration = {
 

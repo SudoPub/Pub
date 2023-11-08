@@ -5,10 +5,10 @@
  * @override Expect
  */
 
+import { PUB_TASK_STATUS } from '@sudopub/essential';
 import { expect, } from 'chai';
 import { PubTaskBase } from '../../src/task/task-base';
 import { ExpectTask } from './expect-task';
-import { PUB_TASK_STATUS } from '../../src/task/definition/task';
 
 export class ExpectTaskFinder {
 

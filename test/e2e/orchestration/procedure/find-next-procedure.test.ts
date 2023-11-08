@@ -5,9 +5,9 @@
  * @override E2E Test
  */
 
+import { PubProcedureConfiguration } from '@sudopub/essential';
 import { expect } from 'chai';
 import { findNextProcedures } from '../../../../src/orchestration/procedure/find-next-procedure';
-import { PubProcedureConfiguration } from '../../../../src/procedure/definition/configuration';
 import { PubCachedWorkflowConfiguration } from '../../../../src/workflow/cache/configuration';
 import { justRunExample, justRunExampleStartProcedure } from '../../../example/just-run';
 

@@ -5,7 +5,7 @@
  * @override Expect
  */
 
-import { expect, } from 'chai';
+import { expect } from 'chai';
 import { PubTaskManager } from '../../src/task/task-manager';
 import { ExpectTaskFinder } from './expect-task-finder';
 

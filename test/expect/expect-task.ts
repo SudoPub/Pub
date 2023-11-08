@@ -5,9 +5,9 @@
  * @override Expect
  */
 
+import { PUB_TASK_STATUS, PUB_TASK_TYPE } from '@sudopub/essential';
 import { expect } from 'chai';
-import { PubTaskBase } from "../../src/task/task-base";
-import { PUB_TASK_STATUS, PUB_TASK_TYPE } from '../../src/task/definition/task';
+import { PubTaskBase } from "../../src";
 
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 export class ExpectTask {
