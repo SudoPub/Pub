@@ -9,13 +9,13 @@ An orchestration system that is suitable for any size, infrastructure, and prefe
 
 ## Install
 
-Install with [yarn](https://yarnpkg.com/):
+Install with [yarn](https://yarnpkg.com/)
 ```sh
 yarn add @sudopub/pub
 yarn add @sudopub/essential # Peer dependency
 ```
 
-Install with [npm](https://www.npmjs.com/):
+Install with [npm](https://www.npmjs.com/)
 ```sh
 npm install @sudopub/pub --save
 npm install @sudopub/essential --save # Peer dependency
