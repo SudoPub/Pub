@@ -27,7 +27,7 @@
     "@sudoo/verify": "^1.19.0"
   },
   "devDependencies": {
-    "@sudoo/triforce": "^3.11.0",
+    "@sudoo/triforce": "^3.12.0",
     "@sudopub/essential": "^1.1.0",
     "ts-node": "^10.9.2"
   },
